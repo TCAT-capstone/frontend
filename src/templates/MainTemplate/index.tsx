@@ -1,10 +1,14 @@
 import React from 'react';
 
+import Header from '@components/common/Header';
+
+import { Layout } from './style';
+
 const MainTemplate: React.FC = () => {
   return (
-    <div>
-      <h2>메인 페이지</h2>
-    </div>
+    <Layout>
+      <Header isLoggedIn={false} />
+    </Layout>
   );
 };
 
