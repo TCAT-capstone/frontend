@@ -8,6 +8,11 @@ const GlobalStyle = createGlobalStyle`
     color: ${ColorCode.BLACK};
     font-family: 'Pretendard';
   }
+  button {
+    cursor: pointer;
+    outline: none;
+    border: none;
+  }
   a {
     text-decoration: none;
     color: ${ColorCode.BLACK};
