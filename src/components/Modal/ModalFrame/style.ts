@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
 
-interface ContentContainerProps {
+interface ContainerProps {
   w: number;
   h: number;
 }
@@ -16,19 +16,11 @@ export const Background = styled.div`
   backdrop-filter: blur(0.25rem);
 `;
 
-export const Container = styled.div`
+export const Container = styled.div<ContainerProps>`
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const ContentContainer = styled.div<ContentContainerProps>`
-  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: ${(props) => `${props.w}rem`};
   height: ${(props) => `${props.h}rem`};
   background-color: ${ColorCode.WHITE};
