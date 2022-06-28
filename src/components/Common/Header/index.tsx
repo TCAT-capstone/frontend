@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 import logoImg from '@images/logo.png';
 import searchImg from '@images/search.svg';
-import ProfileIcon from '@components/common/ProfileIcon';
-import BasicButton from '@components/common/BasicButton';
+import ProfileIcon from '@components/Common/ProfileIcon';
+import BasicButton from '@components/Common/BasicButton';
 
 import { Container, ButtonContainer, SearchWrapper } from './style';
 
