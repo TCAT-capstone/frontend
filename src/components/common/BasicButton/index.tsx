@@ -7,7 +7,7 @@ export interface Props {
   handler: () => void;
 }
 
-const Button: React.FC<Props> = ({ text, handler }) => {
+const BasicButton: React.FC<Props> = ({ text, handler }) => {
   return (
     <Container type="button" onClick={handler}>
       {text}
@@ -15,4 +15,4 @@ const Button: React.FC<Props> = ({ text, handler }) => {
   );
 };
 
-export default Button;
+export default BasicButton;
