@@ -12,6 +12,9 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     outline: none;
     border: none;
+    background-color: transparent;
+    padding: 0;
+    font-family: 'Pretendard';
   }
   a {
     text-decoration: none;
