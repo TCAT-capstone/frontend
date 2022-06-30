@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
 
-export const Container = styled.div`
-  width: 2.2rem;
-  height: 2.2rem;
+interface ImageProps {
+  size: number;
+}
+
+export const Image = styled.img<ImageProps>`
+  width: ${(props) => `${props.size}rem`};
+  height: ${(props) => `${props.size}rem`};
   border-radius: 50%;
   background-color: ${ColorCode.GRAY1};
 `;
