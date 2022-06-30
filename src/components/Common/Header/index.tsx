@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import logoImg from '@images/logo.png';
@@ -16,6 +16,7 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ isLoggedIn }) => {
+  const ProfileContainerRef = useRef<HTMLDivElement>(null);
   const [onLoginModal, setOnLoginModal] = useState(false);
   const [onProfileDropdown, setOnProfileDropdown] = useState(false);
 
@@ -35,6 +36,19 @@ const Header: React.FC<Props> = ({ isLoggedIn }) => {
     setOnProfileDropdown((prev) => !prev);
   };
 
+  const handleClickOutside = ({ target }: { target: any }) => {
+    if (onProfileDropdown && ProfileContainerRef.current && !ProfileContainerRef.current.contains(target)) {
+      handleProfileDropdownClose();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('click', handleClickOutside);
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  });
+
   return (
     <Container>
       <Link to="/">
@@ -45,7 +59,7 @@ const Header: React.FC<Props> = ({ isLoggedIn }) => {
           <img src={searchImg} alt="검색" />
         </SearchButton>
         {isLoggedIn ? (
-          <ProfileContainer>
+          <ProfileContainer ref={ProfileContainerRef}>
             <ProfileButton onClick={handleProfileDropdownToggle}>
               <ProfileIcon size={2.2} />
             </ProfileButton>
