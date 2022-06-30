@@ -32,6 +32,9 @@ export const ProfileContainer = styled.div`
   display: flex;
   padding-bottom: 1rem;
   border-bottom: 0.5px solid ${ColorCode.GRAY2};
+  span {
+    width: 5.4rem;
+  }
 `;
 
 export const ProfileLinkContainer = styled.div`
@@ -45,8 +48,10 @@ export const LinkContainer = styled.div`
   margin-top: 1rem;
   button {
     display: block;
+    width: 100%;
   }
   span {
     margin-bottom: 0.625rem;
+    text-align: left;
   }
 `;
