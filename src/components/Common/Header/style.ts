@@ -12,9 +12,21 @@ export const ButtonContainer = styled.div`
   align-items: center;
 `;
 
-export const SearchWrapper = styled.div`
+export const SearchButton = styled.button`
   display: flex;
   align-items: center;
   margin-right: 1.2rem;
-  cursor: pointer;
+  :hover {
+    opacity: 0.7;
+  }
+`;
+
+export const ProfileContainer = styled.div`
+  position: relative;
+`;
+
+export const ProfileButton = styled.button`
+  :hover {
+    opacity: 0.8;
+  }
 `;
