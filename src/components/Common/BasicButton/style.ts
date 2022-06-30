@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
 
-export const Container = styled.button`
+export const Button = styled.button`
   background-color: ${ColorCode.PRIMARY};
   color: ${ColorCode.WHITE};
   padding: 0.5rem 1rem;

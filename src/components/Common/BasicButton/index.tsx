@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container } from './style';
+import { Button } from './style';
 
 interface Props {
   text: string;
@@ -9,9 +9,9 @@ interface Props {
 
 const BasicButton: React.FC<Props> = ({ text, handler }) => {
   return (
-    <Container type="button" onClick={handler}>
+    <Button type="button" onClick={handler}>
       {text}
-    </Container>
+    </Button>
   );
 };
 
