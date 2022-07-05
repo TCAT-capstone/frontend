@@ -11,14 +11,12 @@ import ProfileDropdown from './ProfileDropdown';
 
 import { Container, ButtonContainer, SearchButton, ProfileContainer, ProfileButton } from './style';
 
-interface Props {
-  isLoggedIn: boolean;
-}
-
-const Header: React.FC<Props> = ({ isLoggedIn }) => {
+const Header: React.FC = () => {
   const ProfileContainerRef = useRef<HTMLDivElement>(null);
   const [onLoginModal, setOnLoginModal] = useState(false);
   const [onProfileDropdown, setOnProfileDropdown] = useState(false);
+
+  const isLoggedIn = true;
 
   const handleLoginModalOpen = () => {
     setOnLoginModal(true);
