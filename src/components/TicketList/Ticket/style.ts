@@ -10,7 +10,7 @@ export const Container = styled.div<ContainerProps>`
   height: 11.65rem;
   background-color: ${(props) => (props.backgroundColor === 'purple' ? ColorCode.PURPLE1 : ColorCode.WHITE)};
   border-radius: 0.5rem;
-  margin: 1rem 2.1rem;
+  margin: 1.3rem 2.1rem;
   transition: 0.3s;
   a {
     display: flex;
