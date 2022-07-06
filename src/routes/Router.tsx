@@ -7,6 +7,7 @@ const Router: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/feed" element={<MainPage />} />
       </Routes>
     </BrowserRouter>
   );
