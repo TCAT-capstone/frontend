@@ -12,6 +12,7 @@ export const Container = styled.div`
   background-color: ${ColorCode.WHITE};
   filter: drop-shadow(2px 10px 40px rgba(59, 70, 74, 0.2));
   box-sizing: border-box;
+  z-index: 10;
 
   b {
     font-size: 0.875rem;
