@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React from 'react';
 
 import Layout from '@styles/Layout';
 import Tab from '@components/Common/Tab';
@@ -7,15 +6,11 @@ import TicketList from '@components/TicketList';
 
 import { TabWrapper } from './style';
 
-const MainTemplate: React.FC = () => {
-  const location = useLocation();
-  const [isTrend, setIsTrend] = useState(true);
+interface Props {
+  isTrend: boolean;
+}
 
-  useEffect(() => {
-    if (location.pathname === '/feed') setIsTrend(false);
-    else setIsTrend(true);
-  }, [location]);
-
+const MainTemplate: React.FC<Props> = ({ isTrend }) => {
   return (
     <Layout>
       <TabWrapper>
