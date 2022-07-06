@@ -3,8 +3,8 @@ import { css, CSSObject, SimpleInterpolation } from 'styled-components';
 type DeviceType = 'small' | 'medium' | 'large';
 
 const sizes: Record<DeviceType, number> = {
-  small: 1050,
-  medium: 1100,
+  small: 375,
+  medium: 1060,
   large: 1610,
 };
 

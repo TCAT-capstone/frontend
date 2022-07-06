@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Layout from '@styles/Layout';
-import Ticket from '@components/Ticket';
+import TicketList from '@components/TicketList';
 
 const MainTemplate: React.FC = () => {
   return (
     <Layout>
-      <Ticket />
+      <TicketList />
     </Layout>
   );
 };

@@ -1,11 +1,14 @@
 import styled from 'styled-components';
+import { media } from '@styles/media';
 
 export const Container = styled.header`
   height: 5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem;
+  ${media.medium`
+    padding: 0 1rem;
+  `}
 `;
 
 export const ButtonContainer = styled.div`

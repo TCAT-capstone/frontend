@@ -5,12 +5,9 @@ export const Container = styled.div`
   margin: 0 auto;
   width: 100rem;
   ${media.large`
-    width: 66rem;
+    width: 65.2rem;
   `}
   ${media.medium`
-    width: 66rem;
-  `}
-  ${media.small`
     width: 100%;
   `}
 `;
