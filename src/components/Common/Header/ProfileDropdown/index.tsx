@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import ProfileIcon from '@components/Common/ProfileIcon';
+import ProfileIcon from '@components/Common/Profile/ProfileIcon';
 
 import { Container, ProfileContainer, ProfileLinkContainer, LinkContainer } from './style';
 
