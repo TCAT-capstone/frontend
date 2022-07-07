@@ -11,7 +11,7 @@ const ProfileBox: React.FC = () => {
     <Container>
       <ProfileIcon size={9.375} />
       <h2>입장번호 1번</h2>
-      <p>황금시대의 동력은 고동을 군영과 황금시대다. 대한 이상을 구하기 그들의 가치를 가진 살 위하여서.</p>
+      <p>황금시대의 동력은 고동을 군영과 황금시대다.</p>
       <CountContainer>
         <div>
           <img src={TicketIcon} alt="티켓 아이콘" />

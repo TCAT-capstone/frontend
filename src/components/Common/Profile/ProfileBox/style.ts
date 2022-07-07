@@ -14,7 +14,9 @@ export const Container = styled.div`
     margin-bottom: 1rem;
   }
   p {
+    height: 1.11rem;
     font-size: 0.9375rem;
+    text-align: center;
     line-height: 1.11rem;
     word-break: keep-all;
     margin-bottom: 0.95rem;
