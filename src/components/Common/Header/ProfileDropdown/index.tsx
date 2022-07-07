@@ -18,7 +18,7 @@ const ProfileDropdown: React.FC = () => {
         </ProfileLinkContainer>
       </ProfileContainer>
       <LinkContainer>
-        <Link to="/">
+        <Link to="/@homeId">
           <span>나의 티켓 홈</span>
         </Link>
         <Link to="/">
