@@ -26,13 +26,15 @@ export const LinkWrapper = styled.div<LinkWrapperProps>`
   a {
     display: block;
     width: 4.1rem;
-    color: ${(props) => (props.focus ? ColorCode.BLACK : ColorCode.GRAY1)};
     padding: 0.35rem 0;
     text-align: center;
     background-color: ${(props) => (props.focus ? 'rgba(121, 77, 253, 0.3)' : 'transparent')};
     border-radius: 0.5rem;
     margin: 0 auto;
     transition: 0.3s;
+  }
+  span {
+    color: ${(props) => (props.focus ? ColorCode.BLACK : ColorCode.GRAY1)};
   }
 `;
 
