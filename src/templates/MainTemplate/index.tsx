@@ -1,12 +1,28 @@
 import React from 'react';
 
 import Layout from '@styles/Layout';
-import Ticket from '@components/Ticket';
+import Tab from '@components/Common/Tab';
+import TicketList from '@components/TicketList';
 
-const MainTemplate: React.FC = () => {
+import { TabWrapper } from './style';
+
+interface Props {
+  isTrend: boolean;
+}
+
+const MainTemplate: React.FC<Props> = ({ isTrend }) => {
   return (
     <Layout>
-      <Ticket />
+      <TabWrapper>
+        <Tab
+          firstText="트렌딩"
+          secondText="피드"
+          firstLink="/"
+          secondLink="/feed"
+          focus={isTrend ? 'first' : 'second'}
+        />
+      </TabWrapper>
+      <TicketList />
     </Layout>
   );
 };
