@@ -4,8 +4,10 @@ import Layout from '@styles/Layout';
 
 import ProfileBox from '@components/Common/Profile/ProfileBox';
 import BasicButton from '@components/Common/BasicButton';
+import TicketbookList from '@components/TicketbookList';
+import TicketList from '@components/TicketList';
 
-import { ProfileWrapper, ButtonWrapper } from './style';
+import { ProfileWrapper, ButtonWrapper, TicketbookListWrapper, TicketBackground } from './style';
 
 interface Props {
   isMyHome: boolean;
@@ -24,6 +26,11 @@ const HomeTemplate: React.FC<Props> = ({ isMyHome }) => {
           <BasicButton text="구독하기" handler={() => {}} />
         )}
       </ButtonWrapper>
+      <TicketbookListWrapper>
+        <TicketbookList />
+      </TicketbookListWrapper>
+      <TicketList backgroundColor="white" />
+      <TicketBackground color="PURPLE" />
     </Layout>
   );
 };
