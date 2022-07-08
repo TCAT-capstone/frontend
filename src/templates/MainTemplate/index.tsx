@@ -22,7 +22,7 @@ const MainTemplate: React.FC<Props> = ({ isTrend }) => {
           focus={isTrend ? 'first' : 'second'}
         />
       </TabWrapper>
-      <TicketList />
+      <TicketList backgroundColor="purple" />
     </Layout>
   );
 };

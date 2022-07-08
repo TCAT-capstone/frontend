@@ -3,7 +3,11 @@ import React from 'react';
 import { Container } from './style';
 import Ticket from './Ticket';
 
-const TicketList: React.FC = () => {
+interface Props {
+  backgroundColor: 'purple' | 'white';
+}
+
+const TicketList: React.FC<Props> = ({ backgroundColor }) => {
   return (
     <Container>
       {[...Array(30)].map((_, i) => (
@@ -14,6 +18,7 @@ const TicketList: React.FC = () => {
           likeCount={ticketEx.likeCount}
           memberName={ticketEx.memberName}
           date={ticketEx.date}
+          backgroundColor={backgroundColor}
         />
       ))}
     </Container>

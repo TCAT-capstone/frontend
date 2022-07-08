@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import ProfileIcon from '@components/Common/ProfileIcon';
+import ProfileIcon from '@components/Common/Profile/ProfileIcon';
 
 import { Container, ProfileContainer, ProfileLinkContainer, LinkContainer } from './style';
 
@@ -18,7 +18,7 @@ const ProfileDropdown: React.FC = () => {
         </ProfileLinkContainer>
       </ProfileContainer>
       <LinkContainer>
-        <Link to="/">
+        <Link to="/@homeId">
           <span>나의 티켓 홈</span>
         </Link>
         <Link to="/">

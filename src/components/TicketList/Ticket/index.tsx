@@ -11,11 +11,12 @@ interface Props {
   likeCount: number;
   memberName: string;
   date: Date;
+  backgroundColor: 'purple' | 'white';
 }
 
-const Ticket: React.FC<Props> = ({ title, likeCount, memberName, date }) => {
+const Ticket: React.FC<Props> = ({ title, likeCount, memberName, date, backgroundColor }) => {
   return (
-    <Container backgroundColor="purple">
+    <Container backgroundColor={backgroundColor}>
       <Link to="/">
         <TicketImage src={ticketImg} alt="티켓 사진" />
         <InfoContainer>

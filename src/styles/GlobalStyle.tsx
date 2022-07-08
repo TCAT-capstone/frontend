@@ -23,6 +23,9 @@ const GlobalStyle = createGlobalStyle`
       color: ${ColorCode.BLACK};
     }
   }
+  #root {
+    position: relative;
+  }
 `;
 
 export default GlobalStyle;

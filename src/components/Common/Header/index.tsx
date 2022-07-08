@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import logoImg from '@images/logo.png';
 import searchImg from '@images/search.svg';
 
-import ProfileIcon from '@components/Common/ProfileIcon';
+import ProfileIcon from '@components/Common/Profile/ProfileIcon';
 import BasicButton from '@components/Common/BasicButton';
 import LoginModal from '@components/Modal/LoginModal';
 import ProfileDropdown from './ProfileDropdown';
