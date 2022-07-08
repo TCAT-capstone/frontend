@@ -6,20 +6,27 @@ import ProfileIcon from '../ProfileIcon';
 
 import { Container, CountContainer } from './style';
 
-const ProfileBox: React.FC = () => {
+interface Props {
+  name: string;
+  bio: string;
+  ticketCount: number;
+  likeCount: number;
+}
+
+const ProfileBox: React.FC<Props> = ({ name, bio, ticketCount, likeCount }) => {
   return (
     <Container>
       <ProfileIcon size={9.375} />
-      <h2>입장번호 1번</h2>
-      <p>황금시대의 동력은 고동을 군영과 황금시대다.</p>
+      <h2>{name}</h2>
+      <p>{bio}</p>
       <CountContainer>
         <div>
           <img src={TicketIcon} alt="티켓 아이콘" />
-          <span>41</span>
+          <span>{ticketCount}</span>
         </div>
         <div>
           <Like size={1.125} fill={false} />
-          <span>718</span>
+          <span>{likeCount}</span>
         </div>
       </CountContainer>
     </Container>

@@ -11,13 +11,24 @@ import { ProfileWrapper, ButtonWrapper, TicketbookListWrapper, TicketBackground 
 
 interface Props {
   isMyHome: boolean;
+  profile: {
+    name: string;
+    bio: string;
+    ticketCount: number;
+    likeCount: number;
+  };
 }
 
-const HomeTemplate: React.FC<Props> = ({ isMyHome }) => {
+const HomeTemplate: React.FC<Props> = ({ isMyHome, profile }) => {
   return (
     <Layout>
       <ProfileWrapper>
-        <ProfileBox />
+        <ProfileBox
+          name={profile.name}
+          bio={profile.bio}
+          ticketCount={profile.ticketCount}
+          likeCount={profile.likeCount}
+        />
       </ProfileWrapper>
       <ButtonWrapper>
         {isMyHome ? (
