@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import HomeTemplate from '@templates/HomeTemplate';
 
+import { getTicketbookTickets } from '@apis/ticket';
+import { TicketListResType } from '@src/types/ticket';
+
 const HomePage: React.FC = () => {
+  const [tickets, setTickets] = useState<TicketListResType>([]);
   const isMyHome = true;
   const profile = {
     name: '입장번호 1번',
@@ -11,7 +15,16 @@ const HomePage: React.FC = () => {
     likeCount: 718,
   };
 
-  return <HomeTemplate isMyHome={isMyHome} profile={profile} />;
+  const getTickets = async () => {
+    const data = await getTicketbookTickets(1);
+    setTickets(data);
+  };
+
+  useEffect(() => {
+    getTickets();
+  }, []);
+
+  return <HomeTemplate isMyHome={isMyHome} profile={profile} tickets={tickets} />;
 };
 
 export default HomePage;
