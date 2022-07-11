@@ -23,12 +23,14 @@ export const Container = styled.div<ContainerProps>`
 
 export const TicketImage = styled.img`
   width: 20.25rem;
+  height: 11.65rem;
   border-radius: 0.5rem;
-  background-color: ${ColorCode.GRAY1};
+  background-color: ${ColorCode.GRAY2};
 `;
 
 export const InfoContainer = styled.div`
   position: relative;
+  width: 7.85rem;
   margin: 1.5rem 1.2rem 1rem 1.2rem;
   h2 {
     font-size: 0.94rem;
