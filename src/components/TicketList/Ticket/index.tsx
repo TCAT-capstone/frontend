@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import ticketImg from '@images/sample-ticket-img.png';
+import ticketSampleImg from '@images/sample-ticket-img.png';
 import Like from '@components/Common/Like';
 
 import { Container, TicketImage, InfoContainer, SubInfoContainer, LikeContainer } from './style';
 
 interface Props {
+  ticketImg: string;
   title: string;
   likeCount: number;
   memberName: string;
@@ -14,11 +15,11 @@ interface Props {
   backgroundColor: 'purple' | 'white';
 }
 
-const Ticket: React.FC<Props> = ({ title, likeCount, memberName, date, backgroundColor }) => {
+const Ticket: React.FC<Props> = ({ ticketImg, title, likeCount, memberName, date, backgroundColor }) => {
   return (
     <Container backgroundColor={backgroundColor}>
       <Link to="/">
-        <TicketImage src={ticketImg} alt="티켓 사진" />
+        <TicketImage src={ticketSampleImg} alt="티켓 사진" />
         <InfoContainer>
           <h2>{title}</h2>
           <SubInfoContainer>

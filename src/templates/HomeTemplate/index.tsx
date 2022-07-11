@@ -7,6 +7,8 @@ import BasicButton from '@components/Common/BasicButton';
 import TicketbookList from '@components/TicketbookList';
 import TicketList from '@components/TicketList';
 
+import { TicketListResType } from '@src/types/ticket';
+
 import { ProfileWrapper, ButtonWrapper, TicketbookListWrapper, TicketBackground } from './style';
 
 interface Props {
@@ -17,9 +19,10 @@ interface Props {
     ticketCount: number;
     likeCount: number;
   };
+  tickets: TicketListResType;
 }
 
-const HomeTemplate: React.FC<Props> = ({ isMyHome, profile }) => {
+const HomeTemplate: React.FC<Props> = ({ isMyHome, profile, tickets }) => {
   return (
     <Layout>
       <ProfileWrapper>
@@ -40,7 +43,7 @@ const HomeTemplate: React.FC<Props> = ({ isMyHome, profile }) => {
       <TicketbookListWrapper>
         <TicketbookList />
       </TicketbookListWrapper>
-      <TicketList backgroundColor="white" />
+      <TicketList tickets={tickets} backgroundColor="white" />
       <TicketBackground color="PURPLE" />
     </Layout>
   );
