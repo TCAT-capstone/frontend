@@ -1,7 +1,11 @@
-const baseUrl = process.env.REACT_APP_SERVER ?? 'http://localhost:3000';
+const baseUrl = process.env.REACT_APP_SERVER ?? 'http://localhost:8080';
 
 const headers = {
   'Content-Type': 'application/json',
+};
+
+const fileHeaders = {
+  'Content-Type': 'multipart/form-data',
 };
 
 type RequestData = { [key: string]: string | number };
@@ -20,6 +24,13 @@ const fetchApi = {
       mode: 'cors',
       headers,
       body: JSON.stringify(data),
+    }),
+
+  postFile: (path: string, data: FormData): Promise<Response> =>
+    fetch(`${baseUrl}${path}`, {
+      method: 'POST',
+      mode: 'cors',
+      body: data,
     }),
 
   put: (path: string, data: RequestData): Promise<Response> =>

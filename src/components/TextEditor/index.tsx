@@ -1,14 +1,39 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef } from 'react';
 import ReactQuill from 'react-quill';
+import { RangeStatic } from 'quill';
 import './editor.css';
 
-import ticketSampleImg from '@images/sample-ticket-img.png';
+import { uploadImage } from '@src/apis/image';
 
-import { Container, TitleInput, TicketImage } from './style';
+import { Container, TicketImage } from './style';
 
-const TextEditor: React.FC = () => {
+interface Props {
+  content: string;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
+  ticketImg: string;
+}
+
+const TextEditor: React.FC<Props> = ({ content, setContent, ticketImg }) => {
   const quillRef = useRef<ReactQuill>(null);
-  const [content, setContent] = useState('');
+
+  const imageHandler = () => {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.click();
+
+    input.onchange = async () => {
+      const { files } = input;
+      if (files) {
+        const imgUrl = await uploadImage(files[0]);
+        if (quillRef.current && imgUrl) {
+          const { index } = quillRef.current.getEditor().getSelection() as RangeStatic;
+          const quillEditor = quillRef.current.getEditor();
+          quillEditor.setSelection(index, 1);
+          quillEditor.clipboard.dangerouslyPasteHTML(index, `<img src=${imgUrl} alt='이미지'} />`);
+        }
+      }
+    };
+  };
 
   const modules = useMemo(
     () => ({
@@ -21,7 +46,7 @@ const TextEditor: React.FC = () => {
           [{ align: [] }, { color: [] }, { background: [] }],
         ],
         handlers: {
-          // 이미지 핸들러 설정
+          image: imageHandler,
         },
       },
     }),
@@ -30,9 +55,9 @@ const TextEditor: React.FC = () => {
 
   return (
     <Container>
-      <TitleInput placeholder="제목을 입력해주세요." />
-      <TicketImage src={ticketSampleImg} alt="티켓 사진" />
+      <TicketImage src={ticketImg} alt="티켓 사진" />
       <ReactQuill
+        ref={quillRef}
         theme="snow"
         modules={modules}
         value={content}
