@@ -14,6 +14,7 @@ import { ProfileWrapper, ButtonWrapper, TicketbookListWrapper, TicketBackground 
 interface Props {
   isMyHome: boolean;
   profile: {
+    img: string;
     name: string;
     bio: string;
     ticketCount: number;
@@ -27,6 +28,7 @@ const HomeTemplate: React.FC<Props> = ({ isMyHome, profile, tickets }) => {
     <Layout>
       <ProfileWrapper>
         <ProfileBox
+          img={profile.img}
           name={profile.name}
           bio={profile.bio}
           ticketCount={profile.ticketCount}
