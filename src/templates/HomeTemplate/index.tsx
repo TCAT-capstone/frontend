@@ -9,7 +9,7 @@ import TicketList from '@components/TicketList';
 
 import { TicketListResType } from '@src/types/ticket';
 
-import { ProfileWrapper, ButtonWrapper, TicketbookListWrapper, TicketBackground } from './style';
+import { ProfileWrapper, ButtonWrapper, TicketbookListWrapper, HomeBackground } from './style';
 
 interface Props {
   isMyHome: boolean;
@@ -46,7 +46,7 @@ const HomeTemplate: React.FC<Props> = ({ isMyHome, profile, tickets }) => {
         <TicketbookList />
       </TicketbookListWrapper>
       <TicketList tickets={tickets} backgroundColor="white" />
-      <TicketBackground color="PURPLE" />
+      <HomeBackground color="PURPLE" />
     </Layout>
   );
 };
