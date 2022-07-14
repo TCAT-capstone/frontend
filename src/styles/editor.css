@@ -7,7 +7,6 @@
 .ql-container {
   box-sizing: border-box;
   font-family: 'Pretendard';
-  font-size: 1.125rem;
   height: 100%;
   margin: 0px;
   position: relative;
@@ -30,6 +29,7 @@
   padding: 0;
 }
 .ql-editor {
+  font-size: 1.125rem;
   box-sizing: border-box;
   line-height: 1.875rem;
   height: 100%;
@@ -597,22 +597,19 @@
   display: none;
 }
 .ql-snow .ql-editor h1 {
-  font-size: 2em;
+  font-size: 2rem;
+  line-height: 1.8;
+  font-weight: 500;
 }
 .ql-snow .ql-editor h2 {
-  font-size: 1.5em;
+  font-size: 1.6em;
+  line-height: 1.8;
+  font-weight: 500;
 }
 .ql-snow .ql-editor h3 {
-  font-size: 1.17em;
-}
-.ql-snow .ql-editor h4 {
-  font-size: 1em;
-}
-.ql-snow .ql-editor h5 {
-  font-size: 0.83em;
-}
-.ql-snow .ql-editor h6 {
-  font-size: 0.67em;
+  font-size: 1.3em;
+  line-height: 1.8;
+  font-weight: 500;
 }
 .ql-snow .ql-editor a {
   text-decoration: underline;
@@ -644,6 +641,7 @@
   overflow: visible;
 }
 .ql-snow .ql-editor img {
+  padding: 1rem 0;
   max-width: 100%;
 }
 .ql-snow .ql-picker {

@@ -1,10 +1,10 @@
 import React, { useMemo, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import { RangeStatic } from 'quill';
-import './editor.css';
 
 import { uploadImage } from '@src/apis/image';
 
+import '@styles/editor.css';
 import { Container, TicketImage } from './style';
 
 interface Props {
