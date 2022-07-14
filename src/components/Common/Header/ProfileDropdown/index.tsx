@@ -12,7 +12,7 @@ const ProfileDropdown: React.FC = () => {
         <ProfileIcon size={2.2} />
         <ProfileLinkContainer>
           <b>닉네임</b>
-          <Link to="/">
+          <Link to="/@homeId/settings">
             <span>프로필 관리</span>
           </Link>
         </ProfileLinkContainer>
