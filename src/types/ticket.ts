@@ -29,7 +29,7 @@ export interface TicketType {
   ticketLocation: string;
   title: string;
   content: string;
-  date: Date;
+  date: string;
   category: CategoryType;
 }
 

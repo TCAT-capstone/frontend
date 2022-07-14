@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Like from '@components/Common/Like';
+import { getDateString } from '@utils/string';
 
 import { Container, TicketImage, InfoContainer, SubInfoContainer, LikeContainer } from './style';
 
@@ -28,10 +29,7 @@ const Ticket: React.FC<Props> = ({ link, ticketImg, title, likeCount, memberName
               <Like size={1} fill={false} />
             </LikeContainer>
             <span>{memberName}</span>
-            <span>{`${date.getFullYear()}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date
-              .getDate()
-              .toString()
-              .padStart(2, '0')}`}</span>
+            <span>{getDateString(date)}</span>
           </SubInfoContainer>
         </InfoContainer>
       </Link>
