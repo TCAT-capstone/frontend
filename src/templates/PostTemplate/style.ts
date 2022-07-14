@@ -60,3 +60,53 @@ export const CheckMarkWrapper = styled.div`
   top: -0.8rem;
   left: -0.8rem;
 `;
+
+export const MediumProfileContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3.5rem;
+  a {
+    display: flex;
+    div {
+      padding-left: 1.68rem;
+    }
+  }
+  b {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    margin: 0.2rem 0;
+  }
+  span {
+    display: block;
+    font-size: 0.94rem;
+    line-height: 1.125rem;
+  }
+  button {
+    display: block;
+  }
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  button {
+    flex-shrink: 0;
+  }
+`;
+
+export const TicketsContainer = styled.div`
+  height: 25rem;
+`;
+
+export const PostBackground = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 31rem;
+  background: rgba(121, 77, 253, 0.07);
+  border-top: 1px solid rgba(20, 0, 142, 0.7);
+  z-index: -10;
+`;

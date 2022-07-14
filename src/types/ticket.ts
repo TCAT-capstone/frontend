@@ -18,6 +18,7 @@ export interface TicketType {
   ticketId: number;
   ticketbookId: number;
   memberId: number;
+  memberHomeId: string;
   memberImg: string;
   memberName: string;
   memberBio: string;
