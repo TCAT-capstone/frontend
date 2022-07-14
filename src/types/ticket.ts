@@ -1,4 +1,4 @@
-type TicketValidationType = 'VERIFIED' | 'UNVERIFIED';
+export type TicketValidationType = 'VERIFIED' | 'UNVERIFIED';
 
 type CategoryType = 'MUSICAL' | 'CONCERT' | 'MOVIE' | 'SPORT' | 'ETC';
 

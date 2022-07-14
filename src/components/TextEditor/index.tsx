@@ -2,18 +2,21 @@ import React, { useMemo, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import { RangeStatic } from 'quill';
 
-import { uploadImage } from '@src/apis/image';
+import CheckMark from '@components/Common/CheckMark';
+import { uploadImage } from '@apis/image';
+import { TicketValidationType } from '@src/types/ticket';
 
 import '@styles/editor.css';
-import { Container, TicketImage } from './style';
+import { Container, TicketContainer, TicketImage, CheckMarkWrapper } from './style';
 
 interface Props {
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
   ticketImg: string;
+  ticketValidation: TicketValidationType;
 }
 
-const TextEditor: React.FC<Props> = ({ content, setContent, ticketImg }) => {
+const TextEditor: React.FC<Props> = ({ content, setContent, ticketImg, ticketValidation }) => {
   const quillRef = useRef<ReactQuill>(null);
 
   const imageHandler = () => {
@@ -55,7 +58,10 @@ const TextEditor: React.FC<Props> = ({ content, setContent, ticketImg }) => {
 
   return (
     <Container>
-      <TicketImage src={ticketImg} alt="티켓 사진" />
+      <TicketContainer>
+        <TicketImage src={ticketImg} alt="티켓 사진" />
+        <CheckMarkWrapper>{ticketValidation === 'VERIFIED' && <CheckMark />}</CheckMarkWrapper>
+      </TicketContainer>
       <ReactQuill
         ref={quillRef}
         theme="snow"

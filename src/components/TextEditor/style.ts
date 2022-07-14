@@ -4,11 +4,21 @@ export const Container = styled.div`
   position: relative;
 `;
 
-export const TicketImage = styled.img`
+export const TicketContainer = styled.div`
   position: absolute;
-  top: 13.5rem;
+  top: 14.5rem;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 30rem;
-  height: 17.1rem;
+`;
+
+export const TicketImage = styled.img`
+  display: block;
+  width: 100%;
+`;
+
+export const CheckMarkWrapper = styled.div`
+  position: absolute;
+  top: -0.8rem;
+  left: -0.8rem;
 `;

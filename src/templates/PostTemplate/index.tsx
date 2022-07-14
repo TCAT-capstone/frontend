@@ -3,12 +3,13 @@ import dompurify from 'dompurify';
 
 import Layout from '@styles/Layout';
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
+import CheckMark from '@components/Common/CheckMark';
 
 import { TicketType } from '@src/types/ticket';
 import { getDateString } from '@utils/string';
 
 import '@styles/editor.css';
-import { PostContainer, SmallProfileContainer, Title, TicketImage } from './style';
+import { PostContainer, SmallProfileContainer, Title, TicketContainer, TicketImage, CheckMarkWrapper } from './style';
 
 interface Props {
   post: TicketType | undefined;
@@ -29,7 +30,10 @@ const PostTemplate: React.FC<Props> = ({ post }) => {
             </div>
           </SmallProfileContainer>
           <Title>{post.title}</Title>
-          <TicketImage src={post.ticketImg} alt="티켓 사진" />
+          <TicketContainer>
+            <TicketImage src={post.ticketImg} alt="티켓 사진" />
+            <CheckMarkWrapper>{post.ticketValidation === 'VERIFIED' && <CheckMark />}</CheckMarkWrapper>
+          </TicketContainer>
           <div className="ql-container ql-snow">
             <div dangerouslySetInnerHTML={{ __html: sanitizer(post.content) }} className="ql-editor" />
           </div>

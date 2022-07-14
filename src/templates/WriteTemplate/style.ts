@@ -4,7 +4,7 @@ export const PostContainer = styled.div`
   margin: 0 auto;
   width: 49rem;
   @media (max-width: 49rem) {
-    width: 100%;
+    width: 95%;
   }
 `;
 

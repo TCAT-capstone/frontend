@@ -5,7 +5,7 @@ export const PostContainer = styled.div`
   margin: 0 auto;
   width: 49rem;
   @media (max-width: 49rem) {
-    width: 100%;
+    width: 95%;
   }
 `;
 
@@ -41,11 +41,22 @@ export const Title = styled.h1`
   letter-spacing: -0.02em;
 `;
 
-export const TicketImage = styled.img`
-  display: block;
+export const TicketContainer = styled.div`
+  position: relative;
   width: 65%;
   margin: 3rem auto;
   @media (max-width: 49rem) {
     width: 90%;
   }
+`;
+
+export const TicketImage = styled.img`
+  display: block;
+  width: 100%;
+`;
+
+export const CheckMarkWrapper = styled.div`
+  position: absolute;
+  top: -0.8rem;
+  left: -0.8rem;
 `;

@@ -18,6 +18,7 @@ const WritePage: React.FC = () => {
       content={content}
       setContent={setContent}
       ticketImg={ticketSampleImg}
+      ticketValidation="VERIFIED"
     />
   );
 };
