@@ -35,9 +35,9 @@ const HomeTemplate: React.FC<Props> = ({ isMyHome, profile, tickets }) => {
       </ProfileWrapper>
       <ButtonWrapper>
         {isMyHome ? (
-          <BasicButton text="티켓추가" handler={() => {}} />
+          <BasicButton type="button" text="티켓추가" handler={() => {}} />
         ) : (
-          <BasicButton text="구독하기" handler={() => {}} />
+          <BasicButton type="button" text="구독하기" handler={() => {}} />
         )}
       </ButtonWrapper>
       <TicketbookListWrapper>
