@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
 
 export const PostContainer = styled.div`
+  position: relative;
   margin: 0 auto;
   width: 49rem;
   @media (max-width: 49rem) {
@@ -39,12 +40,13 @@ export const Title = styled.h1`
   font-weight: 800;
   font-size: 2.5rem;
   letter-spacing: -0.02em;
+  margin-bottom: 3rem;
 `;
 
 export const TicketContainer = styled.div`
   position: relative;
   width: 65%;
-  margin: 3rem auto;
+  margin: 0 auto 3rem auto;
   @media (max-width: 49rem) {
     width: 90%;
   }
@@ -61,10 +63,47 @@ export const CheckMarkWrapper = styled.div`
   left: -0.8rem;
 `;
 
+export const TicketInfoWrapper = styled.div`
+  width: 15rem;
+  position: absolute;
+  right: -19rem;
+  @media (max-width: 85rem) {
+    display: none;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5.9rem;
+  margin-bottom: 5rem;
+  font-size: 0.875rem;
+  color: ${ColorCode.GRAY1};
+  button {
+    font-size: 0.875rem;
+    color: ${ColorCode.GRAY1};
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+`;
+
+export const ShareLikeContainer = styled.div`
+  display: flex;
+  width: 3rem;
+  justify-content: space-between;
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+`;
+
 export const MediumProfileContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 3.5rem;
   a {
     display: flex;
     div {

@@ -25,12 +25,13 @@ export interface TicketType {
   ticketImg: string;
   ticketValidation: TicketValidationType;
   ticketTitle: string;
-  ticketDate: Date;
+  ticketDate: string;
   ticketSeat: string;
   ticketLocation: string;
   title: string;
   content: string;
   date: string;
+  casting: string;
   category: CategoryType;
 }
 
@@ -40,7 +41,7 @@ export interface TicketReqType {
   ticketImg: string;
   ticketValidation: TicketValidationType;
   ticketTitle: string;
-  ticketDate: Date;
+  ticketDate: string;
   ticketSeat: string;
   ticketLocation: string;
   casting: string;
