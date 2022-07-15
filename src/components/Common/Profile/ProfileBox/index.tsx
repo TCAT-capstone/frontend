@@ -1,22 +1,24 @@
 import React from 'react';
 
-import Like from '@components/Common/Like';
 import TicketIcon from '@images/ticket.svg';
+
+import Like from '@components/Common/Like';
 import ProfileIcon from '../ProfileIcon';
 
 import { Container, CountContainer } from './style';
 
 interface Props {
+  img: string;
   name: string;
   bio: string;
   ticketCount: number;
   likeCount: number;
 }
 
-const ProfileBox: React.FC<Props> = ({ name, bio, ticketCount, likeCount }) => {
+const ProfileBox: React.FC<Props> = ({ img, name, bio, ticketCount, likeCount }) => {
   return (
     <Container>
-      <ProfileIcon size={9.375} />
+      <ProfileIcon size={9.375} profileImg={img} />
       <h2>{name}</h2>
       <p>{bio}</p>
       <CountContainer>

@@ -23,7 +23,7 @@ export const TicketbookListWrapper = styled.div`
   margin-bottom: 13rem;
 `;
 
-export const TicketBackground = styled.div<TicketBackgroundProps>`
+export const HomeBackground = styled.div<TicketBackgroundProps>`
   position: absolute;
   top: 59rem;
   bottom: 0;

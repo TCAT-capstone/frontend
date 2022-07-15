@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import ticketSampleImg from '@images/sample-ticket-img.png';
 import Like from '@components/Common/Like';
+import { getDateString } from '@utils/string';
 
 import { Container, TicketImage, InfoContainer, SubInfoContainer, LikeContainer } from './style';
 
 interface Props {
+  link: string;
   ticketImg: string;
   title: string;
   likeCount: number;
@@ -15,11 +16,11 @@ interface Props {
   backgroundColor: 'purple' | 'white';
 }
 
-const Ticket: React.FC<Props> = ({ ticketImg, title, likeCount, memberName, date, backgroundColor }) => {
+const Ticket: React.FC<Props> = ({ link, ticketImg, title, likeCount, memberName, date, backgroundColor }) => {
   return (
     <Container backgroundColor={backgroundColor}>
-      <Link to="/">
-        <TicketImage src={ticketSampleImg} alt="티켓 사진" />
+      <Link to={link}>
+        <TicketImage src={ticketImg} alt="티켓 사진" />
         <InfoContainer>
           <h2>{title}</h2>
           <SubInfoContainer>
@@ -28,10 +29,7 @@ const Ticket: React.FC<Props> = ({ ticketImg, title, likeCount, memberName, date
               <Like size={1} fill={false} />
             </LikeContainer>
             <span>{memberName}</span>
-            <span>{`${date.getFullYear()}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date
-              .getDate()
-              .toString()
-              .padStart(2, '0')}`}</span>
+            <span>{getDateString(date)}</span>
           </SubInfoContainer>
         </InfoContainer>
       </Link>
