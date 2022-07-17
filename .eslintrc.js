@@ -1,4 +1,8 @@
 module.exports = {
+  env: {
+    browser: true,
+    node: true,
+  },
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'prettier'],
   extends: ['airbnb', 'plugin:import/errors', 'plugin:import/warnings', 'plugin:prettier/recommended'],
@@ -21,5 +25,6 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    'no-unused-vars': 'off',
   },
 };
