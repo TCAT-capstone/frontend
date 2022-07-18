@@ -2,8 +2,7 @@ import React, { useState, FC } from 'react';
 
 import BasicButton from '@components/Common/BasicButton';
 
-import { Container, ButtonWrapper } from './style';
-import { InfoContainer } from '../TicketList/Ticket/style';
+import { Container, ProfileInfoContainer, ButtonWrapper } from './style';
 
 // Form에서 받는 Props -> onSubmit 함수 (인자로 form :{...} 을 받는다.)
 // form의 nickname은 문자, bio는 문자
@@ -22,7 +21,7 @@ const MyForm: FC<MyFormProps> = ({ onSubmit }) => {
 
   // e: any로 지정하고 마우스를 올라면 해당 이벤트의 type을 볼 수 있다.
   // onChange 함수가 실행되면 form의 nickname, bio value 변경
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setForm({
       ...form,
@@ -45,20 +44,20 @@ const MyForm: FC<MyFormProps> = ({ onSubmit }) => {
 
   return (
     <Container onSubmit={handleSubmit}>
-      <InfoContainer>
+      <ProfileInfoContainer>
         <h1>나의 프로필</h1>
-      </InfoContainer>
-      <InfoContainer>
+      </ProfileInfoContainer>
+      <ProfileInfoContainer>
         <h2>아이디</h2>
-      </InfoContainer>
-      <InfoContainer>
+      </ProfileInfoContainer>
+      <ProfileInfoContainer>
         <h2>닉네임</h2>
-        <input name="nickname" value={nickname} onChange={onChange} />
-      </InfoContainer>
-      <InfoContainer>
+        <textarea name="nickname" value={nickname} onChange={onChange} />
+      </ProfileInfoContainer>
+      <ProfileInfoContainer>
         <h2>바이오</h2>
-        <input name="bio" value={bio} onChange={onChange} />
-      </InfoContainer>
+        <textarea name="bio" value={bio} onChange={onChange} />
+      </ProfileInfoContainer>
       <ButtonWrapper>
         <BasicButton type="submit" text="프로필 저장하기" handler={() => {}} />
       </ButtonWrapper>

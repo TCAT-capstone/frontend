@@ -16,17 +16,35 @@ export const Container = styled.form`
     word-break: keep-all;
     margin-bottom: 0.95rem;
   }
-  input {
+  textarea {
     outline: none;
+    resize: none;
     width: 13rem;
-    height: 2rem;
+    height: 1rem;
+    padding: 0.8rem;
     border: none;
     border: solid 1px;
     border-radius: 0.5rem;
     :focus {
-      border: solid 1.8px;
-      color: ${ColorCode.PURPLE2};
+      border-color: ${ColorCode.PURPLE2};
     }
+  }
+`;
+
+export const ProfileInfoContainer = styled.div`
+  position: relative;
+  width: 7.85rem;
+  margin: 1.5rem 1.2rem 1rem 1.2rem;
+  h2 {
+    font-size: 0.94rem;
+    font-weight: 600;
+    line-height: 1.14rem;
+    letter-spacing: -0.03em;
+    word-break: keep-all;
+  }
+  textarea[name='bio'] {
+    width: 25.2rem;
+    height: 3.3rem;
   }
 `;
 
