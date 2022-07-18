@@ -16,6 +16,9 @@ export const Container = styled.form`
     word-break: keep-all;
     margin-bottom: 0.95rem;
   }
+  text {
+    font-size: 0.8rem;
+  }
   textarea {
     outline: none;
     resize: none;
@@ -34,11 +37,11 @@ export const Container = styled.form`
 export const ProfileInfoContainer = styled.div`
   position: relative;
   width: 7.85rem;
-  margin: 1.5rem 1.2rem 1rem 1.2rem;
+  margin: 1.5rem 1.2rem 2rem 1.2rem;
   h2 {
     font-size: 0.94rem;
     font-weight: 600;
-    line-height: 1.14rem;
+    line-height: 0.3rem;
     letter-spacing: -0.03em;
     word-break: keep-all;
   }
