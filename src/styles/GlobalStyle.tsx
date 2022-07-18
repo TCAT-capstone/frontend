@@ -23,6 +23,13 @@ const GlobalStyle = createGlobalStyle`
       color: ${ColorCode.BLACK};
     }
   }
+  input {
+    padding: 0;
+    border: 0;
+    outline: none;
+    color: ${ColorCode.BLACK};
+    font-family: 'Pretendard';
+  }
   #root {
     position: relative;
   }

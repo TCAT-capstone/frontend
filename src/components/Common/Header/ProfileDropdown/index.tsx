@@ -5,11 +5,15 @@ import ProfileIcon from '@components/Common/Profile/ProfileIcon';
 
 import { Container, ProfileContainer, ProfileLinkContainer, LinkContainer } from './style';
 
-const ProfileDropdown: React.FC = () => {
+interface Props {
+  profileImg: string;
+}
+
+const ProfileDropdown: React.FC<Props> = ({ profileImg }) => {
   return (
     <Container>
       <ProfileContainer>
-        <ProfileIcon size={2.2} />
+        <ProfileIcon size={2.2} profileImg={profileImg} />
         <ProfileLinkContainer>
           <b>닉네임</b>
           <Link to="/@homeId/settings">

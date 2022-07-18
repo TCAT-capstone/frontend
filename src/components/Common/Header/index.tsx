@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import logoImg from '@images/logo.png';
 import searchImg from '@images/search.svg';
+import userImg from '@images/sample-user-img.jpg';
 
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
 import BasicButton from '@components/Common/BasicButton';
@@ -59,9 +60,9 @@ const Header: React.FC = () => {
         {isLoggedIn ? (
           <ProfileContainer ref={ProfileContainerRef}>
             <ProfileButton onClick={handleProfileDropdownToggle}>
-              <ProfileIcon size={2.2} />
+              <ProfileIcon size={2.2} profileImg={userImg} />
             </ProfileButton>
-            {onProfileDropdown && <ProfileDropdown />}
+            {onProfileDropdown && <ProfileDropdown profileImg={userImg} />}
           </ProfileContainer>
         ) : (
           <BasicButton type="button" text="로그인" handler={handleLoginModalOpen} />
