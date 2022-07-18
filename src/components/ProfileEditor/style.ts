@@ -35,5 +35,5 @@ export const ButtonWrapper = styled.div`
   justify-content: center;
   position: absolute;
   right: 2rem;
-  bottom: 2rem;
+  bottom: -5.5rem;
 `;
