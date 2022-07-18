@@ -65,7 +65,7 @@ const Header: React.FC = () => {
             {onProfileDropdown && <ProfileDropdown profileImg={userImg} />}
           </ProfileContainer>
         ) : (
-          <BasicButton type="button" text="로그인" handler={handleLoginModalOpen} />
+          <BasicButton text="로그인" handler={handleLoginModalOpen} />
         )}
       </ButtonContainer>
       {onLoginModal && <LoginModal handleLoginModalClose={handleLoginModalClose} />}
