@@ -6,7 +6,7 @@ export const Container = styled.form`
   width: 30.054rem;
   margin: 2rem 2rem 8rem 2rem;
   h1 {
-    font-size: 1.56rem;
+    font-size: 1.3rem;
     font-weight: 500;
     margin-bottom: 1rem;
   }
