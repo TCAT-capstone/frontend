@@ -34,7 +34,7 @@ const ProfileTemplate: React.FC<Props> = ({ profile, homeId }) => {
           />
         </ProfileWrapper>
         <ProfileEditorWrapper>
-          <MyForm onSubmit={onSubmit} />
+          <MyForm id={homeId} onSubmit={onSubmit} />
         </ProfileEditorWrapper>
       </ProfileFrame>
     </Layout>

@@ -7,10 +7,11 @@ import { Container, ProfileInfoContainer, ButtonWrapper } from './style';
 // Form에서 받는 Props -> onSubmit 함수 (인자로 form :{...} 을 받는다.)
 // form의 nickname은 문자, bio는 문자
 type MyFormProps = {
+  id: string;
   onSubmit: (form: { nickname: string; bio: string }) => void;
 };
 
-const MyForm: FC<MyFormProps> = ({ onSubmit }) => {
+const MyForm: FC<MyFormProps> = ({ id, onSubmit }) => {
   const [form, setForm] = useState({
     nickname: '',
     bio: '',
@@ -49,6 +50,7 @@ const MyForm: FC<MyFormProps> = ({ onSubmit }) => {
       </ProfileInfoContainer>
       <ProfileInfoContainer>
         <h2>아이디</h2>
+        <text>{id}</text>
       </ProfileInfoContainer>
       <ProfileInfoContainer>
         <h2>닉네임</h2>
