@@ -4,13 +4,12 @@ import { Button } from './style';
 
 interface Props {
   text: string;
-  type: 'submit' | 'reset' | 'button';
   handler: () => void;
 }
 
-const BasicButton: React.FC<Props> = ({ type, text, handler }) => {
+const BasicButton: React.FC<Props> = ({ text, handler }) => {
   return (
-    <Button type={type} onClick={handler}>
+    <Button type="button" onClick={handler}>
       {text}
     </Button>
   );
