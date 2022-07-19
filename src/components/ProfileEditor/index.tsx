@@ -14,6 +14,11 @@ const ProfileEditor: React.FC<Props> = ({ homeId, name, bio }) => {
   const [newName, setNewName] = useState(name);
   const [newBio, setNewBio] = useState(bio);
 
+  const [isActive, setIsActive] = useState(false);
+  const isPassedSubmit = () => {
+    return newName !== name || newBio !== bio ? setIsActive(true) : setIsActive(false);
+  };
+
   const handleNameChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewName(e.target.value);
   };
@@ -33,17 +38,17 @@ const ProfileEditor: React.FC<Props> = ({ homeId, name, bio }) => {
       </ProfileInfoContainer>
       <ProfileInfoContainer>
         <h2>닉네임</h2>
-        <textarea name="newName" onChange={handleNameChange}>
+        <textarea name="newName" onChange={handleNameChange} onKeyUp={isPassedSubmit}>
           {newName}
         </textarea>
       </ProfileInfoContainer>
       <ProfileInfoContainer>
         <h2>바이오</h2>
-        <textarea name="newBio" onChange={handleBioChange}>
+        <textarea name="newBio" onChange={handleBioChange} onKeyUp={isPassedSubmit}>
           {newBio}
         </textarea>
       </ProfileInfoContainer>
-      <ButtonWrapper>
+      <ButtonWrapper isActive={isActive}>
         <BasicButton text="프로필 저장하기" handler={() => console.log({ newName, newBio })} />
       </ButtonWrapper>
     </Container>

@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
 
+interface ButtonWrapperProps {
+  isActive: boolean;
+}
+
 export const Container = styled.div`
   position: relative;
   width: 30.054rem;
@@ -51,10 +55,13 @@ export const ProfileInfoContainer = styled.div`
   }
 `;
 
-export const ButtonWrapper = styled.div`
+export const ButtonWrapper = styled.div<ButtonWrapperProps>`
   display: flex;
   justify-content: center;
   position: absolute;
   right: 2rem;
   bottom: -5.5rem;
+  button {
+    background-color: ${(props) => (props.isActive ? ColorCode.PRIMARY : ColorCode.GRAY2)};
+  }
 `;
