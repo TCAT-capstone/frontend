@@ -3,7 +3,7 @@ import React from 'react';
 import Layout from '@styles/Layout';
 
 import ProfileBox from '@components/Common/Profile/ProfileBox';
-import MyForm from '@components/ProfileEditor';
+import ProfileEditor from '@components/ProfileEditor';
 
 import { ProfileFrame, ProfileWrapper, ProfileEditorWrapper } from './style';
 
@@ -18,10 +18,6 @@ interface Props {
 }
 
 const ProfileTemplate: React.FC<Props> = ({ profile, homeId }) => {
-  const onSubmit = (form: { nickname: string; bio: string }) => {
-    console.log(form);
-  };
-
   return (
     <Layout>
       <ProfileFrame>
@@ -34,7 +30,7 @@ const ProfileTemplate: React.FC<Props> = ({ profile, homeId }) => {
           />
         </ProfileWrapper>
         <ProfileEditorWrapper>
-          <MyForm id={homeId} onSubmit={onSubmit} />
+          <ProfileEditor homeId={homeId} name={profile.name} bio={profile.bio} />
         </ProfileEditorWrapper>
       </ProfileFrame>
     </Layout>

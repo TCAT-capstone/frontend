@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
 
-export const Container = styled.form`
+export const Container = styled.div`
   position: relative;
   width: 30.054rem;
   margin: 2rem 2rem 8rem 2rem;
@@ -45,7 +45,7 @@ export const ProfileInfoContainer = styled.div`
     letter-spacing: -0.03em;
     word-break: keep-all;
   }
-  textarea[name='bio'] {
+  textarea[name='newBio'] {
     width: 25.2rem;
     height: 3.3rem;
   }
