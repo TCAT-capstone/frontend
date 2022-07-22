@@ -6,15 +6,10 @@ import ProfileBox from '@components/Common/Profile/ProfileBox';
 import ProfileEditor from '@components/ProfileEditor';
 
 import { ProfileFrame, ProfileWrapper, ProfileEditorWrapper } from './style';
+import { ProfileType } from '@src/types/member';
 
 interface Props {
-  profile: {
-    img: string;
-    name: string;
-    bio: string;
-    ticketCount: number;
-    likeCount: number;
-  };
+  profile: ProfileType | undefined;
   newName: string;
   newBio: string;
   isActive: boolean;
@@ -36,28 +31,32 @@ const ProfileTemplate: React.FC<Props> = ({
 }) => {
   return (
     <Layout>
-      <ProfileFrame>
-        <ProfileWrapper>
-          <ProfileBox
-            img={profile.img}
-            name={profile.name}
-            bio={profile.bio}
-            ticketCount={profile.ticketCount}
-            likeCount={profile.likeCount}
-          />
-        </ProfileWrapper>
-        <ProfileEditorWrapper>
-          <ProfileEditor
-            homeId={homeId}
-            newName={newName}
-            newBio={newBio}
-            isActive={isActive}
-            isPassedSubmit={isPassedSubmit}
-            handleNameChange={handleNameChange}
-            handleBioChange={handleBioChange}
-          />
-        </ProfileEditorWrapper>
-      </ProfileFrame>
+      {profile ? (
+        <ProfileFrame>
+          <ProfileWrapper>
+            <ProfileBox
+              img={profile.memberImg}
+              name={profile.name}
+              bio={profile.bio}
+              ticketCount={profile.ticketCount}
+              likeCount={profile.likeCount}
+            />
+          </ProfileWrapper>
+          <ProfileEditorWrapper>
+            <ProfileEditor
+              homeId={homeId}
+              newName={newName}
+              newBio={newBio}
+              isActive={isActive}
+              isPassedSubmit={isPassedSubmit}
+              handleNameChange={handleNameChange}
+              handleBioChange={handleBioChange}
+            />
+          </ProfileEditorWrapper>
+        </ProfileFrame>
+      ) : (
+        <p>로딩중</p>
+      )}
     </Layout>
   );
 };

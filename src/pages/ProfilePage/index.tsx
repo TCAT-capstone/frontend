@@ -1,24 +1,18 @@
-import React, { useState } from 'react';
-
-import userImg from '@images/sample-user-img.jpg';
+import React, { useEffect, useState } from 'react';
 
 import ProfileTemplate from '@templates/ProfileTemplate';
 
-const ProfilePage: React.FC = () => {
-  const profile = {
-    img: userImg,
-    name: '입장번호 1번',
-    bio: '황금시대의 동력은 고동을 군영과 황금시대다.',
-    ticketCount: 41,
-    likeCount: 718,
-  };
+import { getMemberProfile } from '@apis/member';
+import { ProfileType } from '@src/types/member';
 
-  const [newName, setNewName] = useState(profile.name);
-  const [newBio, setNewBio] = useState(profile.bio);
+const ProfilePage: React.FC = () => {
+  const [profile, setProfile] = useState<ProfileType>();
+  const [newName, setNewName] = useState('');
+  const [newBio, setNewBio] = useState('');
 
   const [isActive, setIsActive] = useState(false);
   const isPassedSubmit = () => {
-    return newName !== profile.name || newBio !== profile.bio ? setIsActive(true) : setIsActive(false);
+    return newName !== profile?.name || newBio !== profile?.bio ? setIsActive(true) : setIsActive(false);
   };
 
   const handleNameChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -28,6 +22,24 @@ const ProfilePage: React.FC = () => {
   const handleBioChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewBio(e.target.value);
   };
+
+  const getProfile = async () => {
+    const data = await getMemberProfile(1);
+    if (data) {
+      setProfile(data);
+    }
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
+  useEffect(() => {
+    if (profile) {
+      setNewName(profile?.name);
+      setNewBio(profile?.bio);
+    }
+  }, [profile]);
 
   return (
     <ProfileTemplate
