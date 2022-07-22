@@ -5,8 +5,8 @@ import Layout from '@styles/Layout';
 import ProfileBox from '@components/Common/Profile/ProfileBox';
 import ProfileEditor from '@components/ProfileEditor';
 
-import { ProfileFrame, ProfileWrapper, ProfileEditorWrapper } from './style';
 import { ProfileType } from '@src/types/member';
+import { ProfileFrame, ProfileWrapper, ProfileEditorWrapper } from './style';
 
 interface Props {
   profile: ProfileType | undefined;
