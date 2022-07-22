@@ -16,7 +16,7 @@ const ProfileDropdown: React.FC<Props> = ({ profileImg }) => {
         <ProfileIcon size={2.2} profileImg={profileImg} />
         <ProfileLinkContainer>
           <b>닉네임</b>
-          <Link to="/">
+          <Link to="/@homeId/profile">
             <span>프로필 관리</span>
           </Link>
         </ProfileLinkContainer>
