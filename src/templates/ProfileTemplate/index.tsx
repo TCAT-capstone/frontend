@@ -16,7 +16,6 @@ interface Props {
   isPassedSubmit: () => void;
   handleNameChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleBioChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  homeId: string;
 }
 
 const ProfileTemplate: React.FC<Props> = ({
@@ -27,7 +26,6 @@ const ProfileTemplate: React.FC<Props> = ({
   isPassedSubmit,
   handleNameChange,
   handleBioChange,
-  homeId,
 }) => {
   return (
     <Layout>
@@ -44,7 +42,7 @@ const ProfileTemplate: React.FC<Props> = ({
           </ProfileWrapper>
           <ProfileEditorWrapper>
             <ProfileEditor
-              homeId={homeId}
+              homeId={profile.homeId}
               newName={newName}
               newBio={newBio}
               isActive={isActive}

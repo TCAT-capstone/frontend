@@ -44,7 +44,6 @@ const ProfilePage: React.FC = () => {
   return (
     <ProfileTemplate
       profile={profile}
-      homeId="dkskglssdsd"
       newName={newName}
       newBio={newBio}
       isActive={isActive}
