@@ -1,11 +1,15 @@
+import { ACCESS_TOKEN } from './constants';
+
 const baseUrl = process.env.REACT_APP_SERVER ?? 'http://localhost:8080';
 
 const headers = {
   'Content-Type': 'application/json',
+  Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
 };
 
-const fileHeaders = {
-  'Content-Type': 'multipart/form-data',
+const getHeader = () => {
+  headers.Authorization = `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`;
+  return headers;
 };
 
 type RequestData = { [key: string]: string | number };
@@ -15,14 +19,14 @@ const fetchApi = {
     fetch(`${baseUrl}${path}`, {
       method: 'GET',
       mode: 'cors',
-      headers,
+      headers: getHeader(),
     }),
 
   post: (path: string, data: RequestData): Promise<Response> =>
     fetch(`${baseUrl}${path}`, {
       method: 'POST',
       mode: 'cors',
-      headers,
+      headers: getHeader(),
       body: JSON.stringify(data),
     }),
 
@@ -30,6 +34,7 @@ const fetchApi = {
     fetch(`${baseUrl}${path}`, {
       method: 'POST',
       mode: 'cors',
+      headers: getHeader(),
       body: data,
     }),
 
@@ -37,7 +42,7 @@ const fetchApi = {
     fetch(`${baseUrl}${path}`, {
       method: 'PUT',
       mode: 'cors',
-      headers,
+      headers: getHeader(),
       body: JSON.stringify(data),
     }),
 
@@ -45,7 +50,7 @@ const fetchApi = {
     fetch(`${baseUrl}${path}`, {
       method: 'PATCH',
       mode: 'cors',
-      headers,
+      headers: getHeader(),
       body: JSON.stringify(data),
     }),
 
@@ -53,7 +58,7 @@ const fetchApi = {
     fetch(`${baseUrl}${path}`, {
       method: 'DELETE',
       mode: 'cors',
-      headers,
+      headers: getHeader(),
       body: JSON.stringify(data),
     }),
 };

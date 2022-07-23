@@ -1,4 +1,4 @@
-enum ColorCode {
+export enum ColorCode {
   BLACK = '#212121',
   WHITE = '#FFFFFF',
   PRIMARY = '#794DFD',
@@ -9,7 +9,7 @@ enum ColorCode {
   PURPLE2 = '#5F3CCB',
 }
 
-const BookColorCode = {
+export const BookColorCode = {
   PURPLE: {
     background: '#EFEEFD',
     font: '#14008E',
@@ -32,4 +32,4 @@ const BookColorCode = {
   },
 };
 
-export { ColorCode, BookColorCode };
+export const ACCESS_TOKEN = 'access_token';
