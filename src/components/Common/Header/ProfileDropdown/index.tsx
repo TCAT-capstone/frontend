@@ -1,13 +1,20 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { Link } from 'react-router-dom';
 
 import { userProfileState } from '@stores/user';
+import { ACCESS_TOKEN } from '@utils/constants';
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
 import { Container, ProfileContainer, ProfileLinkContainer, LinkContainer } from './style';
 
 const ProfileDropdown: React.FC = () => {
   const userProfile = useRecoilValue(userProfileState);
+  const resetUserProfileState = useResetRecoilState(userProfileState);
+
+  const handleLogout = () => {
+    resetUserProfileState();
+    localStorage.removeItem(ACCESS_TOKEN);
+  };
 
   return (
     <Container>
@@ -27,7 +34,7 @@ const ProfileDropdown: React.FC = () => {
         <Link to="/">
           <span>나의 구독</span>
         </Link>
-        <button type="button">
+        <button type="button" onClick={handleLogout}>
           <span>로그아웃</span>
         </button>
       </LinkContainer>
