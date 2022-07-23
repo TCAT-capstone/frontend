@@ -1,28 +1,27 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 import { Link } from 'react-router-dom';
 
+import { userProfileState } from '@stores/user';
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
-
 import { Container, ProfileContainer, ProfileLinkContainer, LinkContainer } from './style';
 
-interface Props {
-  profileImg: string;
-}
+const ProfileDropdown: React.FC = () => {
+  const userProfile = useRecoilValue(userProfileState);
 
-const ProfileDropdown: React.FC<Props> = ({ profileImg }) => {
   return (
     <Container>
       <ProfileContainer>
-        <ProfileIcon size={2.2} profileImg={profileImg} />
+        <ProfileIcon size={2.2} profileImg={userProfile.memberImg} />
         <ProfileLinkContainer>
-          <b>닉네임</b>
-          <Link to="/@homeId/profile">
+          <b>{userProfile.name}</b>
+          <Link to={`/@${userProfile.homeId}/profile`}>
             <span>프로필 관리</span>
           </Link>
         </ProfileLinkContainer>
       </ProfileContainer>
       <LinkContainer>
-        <Link to="/@homeId">
+        <Link to={`/@${userProfile.homeId}`}>
           <span>나의 티켓 홈</span>
         </Link>
         <Link to="/">

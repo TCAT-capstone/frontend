@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import HomeTemplate from '@templates/HomeTemplate';
-
 import userImg from '@images/sample-user-img.jpg';
 
+import { userProfileState } from '@stores/user';
 import { getTicketbookTickets } from '@apis/ticket';
 import { TicketListResType } from '@src/types/ticket';
+import { useParams } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
+  const { homeId } = useParams();
+  const userProfile = useRecoilValue(userProfileState);
   const [tickets, setTickets] = useState<TicketListResType>([]);
-  const isMyHome = true;
+
+  const isMyHome = homeId === userProfile.homeId;
+  const myProfile = {
+    img: userProfile.memberImg,
+    name: userProfile.name,
+    bio: userProfile.bio,
+    ticketCount: userProfile.ticketCount,
+    likeCount: userProfile.likeCount,
+  };
   const profile = {
     img: userImg,
     name: '입장번호 1번',
@@ -27,7 +39,7 @@ const HomePage: React.FC = () => {
     getTickets();
   }, []);
 
-  return <HomeTemplate isMyHome={isMyHome} profile={profile} tickets={tickets} />;
+  return <HomeTemplate isMyHome={isMyHome} profile={isMyHome ? myProfile : profile} tickets={tickets} />;
 };
 
 export default HomePage;

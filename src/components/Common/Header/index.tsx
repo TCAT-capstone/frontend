@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import { Link } from 'react-router-dom';
 
+import { isLoggedInState, userProfileState } from '@stores/user';
 import logoImg from '@images/logo.png';
 import searchImg from '@images/search.svg';
-import userImg from '@images/sample-user-img.jpg';
 
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
 import BasicButton from '@components/Common/BasicButton';
@@ -13,11 +14,11 @@ import ProfileDropdown from './ProfileDropdown';
 import { Container, ButtonContainer, SearchButton, ProfileContainer, ProfileButton } from './style';
 
 const Header: React.FC = () => {
-  const ProfileContainerRef = useRef<HTMLDivElement>(null);
+  const isLoggedIn = useRecoilValue(isLoggedInState);
+  const userProfile = useRecoilValue(userProfileState);
   const [onLoginModal, setOnLoginModal] = useState(false);
   const [onProfileDropdown, setOnProfileDropdown] = useState(false);
-
-  const isLoggedIn = true;
+  const ProfileContainerRef = useRef<HTMLDivElement>(null);
 
   const handleLoginModalOpen = () => {
     setOnLoginModal(true);
@@ -60,9 +61,9 @@ const Header: React.FC = () => {
         {isLoggedIn ? (
           <ProfileContainer ref={ProfileContainerRef}>
             <ProfileButton onClick={handleProfileDropdownToggle}>
-              <ProfileIcon size={2.2} profileImg={userImg} />
+              <ProfileIcon size={2.2} profileImg={userProfile.memberImg} />
             </ProfileButton>
-            {onProfileDropdown && <ProfileDropdown profileImg={userImg} />}
+            {onProfileDropdown && <ProfileDropdown />}
           </ProfileContainer>
         ) : (
           <BasicButton text="로그인" handler={handleLoginModalOpen} />
