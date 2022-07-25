@@ -1,16 +1,14 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import { isLoggedInState } from '@stores/user';
+import ErrorPage from '@pages/ErrorPage';
 
 const PrivateRoute: React.FC = () => {
   const isLoggedIn = useRecoilValue(isLoggedInState);
 
-  if (!isLoggedIn) {
-    return <Outlet />;
-  }
-  return <Navigate to="/" replace state={{ error: '로그인이 필요합니다.' }} />;
+  return isLoggedIn ? <Outlet /> : <ErrorPage />;
 };
 
 export default PrivateRoute;
