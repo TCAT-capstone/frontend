@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Layout from '@styles/Layout';
 
@@ -24,6 +25,12 @@ interface Props {
 }
 
 const HomeTemplate: React.FC<Props> = ({ isMyHome, profile, tickets }) => {
+  const navigate = useNavigate();
+
+  const handlePageNavigate = () => {
+    navigate('/editor/new');
+  };
+
   return (
     <Layout>
       <ProfileWrapper>
@@ -37,7 +44,7 @@ const HomeTemplate: React.FC<Props> = ({ isMyHome, profile, tickets }) => {
       </ProfileWrapper>
       <ButtonWrapper>
         {isMyHome ? (
-          <BasicButton text="티켓추가" handler={() => {}} />
+          <BasicButton text="티켓추가" handler={handlePageNavigate} />
         ) : (
           <BasicButton text="구독하기" handler={() => {}} />
         )}
