@@ -25,7 +25,8 @@ export const LinkWrapper = styled.div`
   width: 6rem;
   text-align: center;
   margin: 0 auto;
-  a {
+  a,
+  a:visited {
     color: ${ColorCode.PURPLE2};
     font-size: 0.875rem;
     font-weight: 600;
