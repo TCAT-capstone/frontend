@@ -29,9 +29,30 @@ export const TextContainer = styled.div`
 `;
 
 export const ImageContainer = styled.div`
+  position: relative;
   img {
     width: 40.5rem;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  }
+`;
+
+export const TicketInfoContainer = styled.div`
+  position: absolute;
+  top: 5.5rem;
+  left: 3rem;
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding-bottom: 1.5rem;
+  }
+  p {
+    font-size: 1.2rem;
+    padding-top: 0.6rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding-top: 2rem;
   }
 `;
 
