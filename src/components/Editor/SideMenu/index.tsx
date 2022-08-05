@@ -1,57 +1,28 @@
 import React, { useState } from 'react';
 
-import { Container, TabContainer, TabItemWrapper, Line } from './style';
+import { Container, TabWrapper, MenuContainer } from './style';
+import Tab from './Tab';
+import TemplateMenu from './TemplateMenu';
+import TextMenu from './TextMenu';
+import TicketInfoMenu from './TicketInfoMenu';
 
-type menuType = 'ticketInfo' | 'template' | 'text';
+type MenuType = 'ticketInfo' | 'template' | 'text';
 
 const SideMenu: React.FC = () => {
-  const [currMenu, setCurrMenu] = useState<menuType>('ticketInfo');
+  const [currMenu, setCurrMenu] = useState<MenuType>('ticketInfo');
 
   return (
     <Container>
-      <TabContainer>
-        <TabItemWrapper
-          focus={currMenu === 'ticketInfo'}
-          onClick={() => {
-            setCurrMenu('ticketInfo');
-          }}
-        >
-          <span>티켓정보</span>
-        </TabItemWrapper>
-        <TabItemWrapper
-          focus={currMenu === 'template'}
-          onClick={() => {
-            setCurrMenu('template');
-          }}
-        >
-          <span>템플릿</span>
-        </TabItemWrapper>
-        <TabItemWrapper
-          focus={currMenu === 'text'}
-          onClick={() => {
-            setCurrMenu('text');
-          }}
-        >
-          <span>텍스트</span>
-        </TabItemWrapper>
-        <Line currMenu={currMenu} />
-      </TabContainer>
-      {currMenu === 'ticketInfo' && <TicketInfoMenu />}
-      {currMenu === 'template' && <TemplateMenu />}
-      {currMenu === 'ticketInfo' && <TextMenu />}
+      <TabWrapper>
+        <Tab currMenu={currMenu} setCurrMenu={setCurrMenu} />
+      </TabWrapper>
+      <MenuContainer>
+        {currMenu === 'ticketInfo' && <TicketInfoMenu />}
+        {currMenu === 'template' && <TemplateMenu />}
+        {currMenu === 'ticketInfo' && <TextMenu />}
+      </MenuContainer>
     </Container>
   );
-};
-
-const TicketInfoMenu: React.FC = () => {
-  return <div />;
-};
-
-const TemplateMenu: React.FC = () => {
-  return <div />;
-};
-const TextMenu: React.FC = () => {
-  return <div />;
 };
 
 export default SideMenu;
