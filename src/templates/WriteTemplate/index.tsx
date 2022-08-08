@@ -4,7 +4,6 @@ import Layout from '@styles/Layout';
 import TextEditor from '@components/TextEditor';
 import BasicButton from '@components/Common/BasicButton';
 
-import { TicketValidationType } from '@src/types/ticket';
 import { PostContainer, TitleInput, ButtonWrapper } from './style';
 
 interface Props {
@@ -13,7 +12,7 @@ interface Props {
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
   ticketImg: string;
-  ticketValidation: TicketValidationType;
+  handlePostSubmit: () => void;
 }
 
 const WriteTemplate: React.FC<Props> = ({
@@ -22,20 +21,15 @@ const WriteTemplate: React.FC<Props> = ({
   content,
   setContent,
   ticketImg,
-  ticketValidation,
+  handlePostSubmit,
 }) => {
   return (
     <Layout>
       <PostContainer>
         <TitleInput onChange={handleTitleChange} value={title} placeholder="제목을 입력해주세요." />
-        <TextEditor
-          content={content}
-          setContent={setContent}
-          ticketImg={ticketImg}
-          ticketValidation={ticketValidation}
-        />
+        <TextEditor content={content} setContent={setContent} ticketImg={ticketImg} />
         <ButtonWrapper>
-          <BasicButton text="글 작성하기" handler={() => console.log({ title, content })} />
+          <BasicButton text="글 작성하기" handler={handlePostSubmit} />
         </ButtonWrapper>
       </PostContainer>
     </Layout>
