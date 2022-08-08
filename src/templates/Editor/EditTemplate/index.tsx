@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
+import domtoimage from 'dom-to-image';
 
 import Header from '@components/Common/Header';
 import EditorFrame from '@components/Editor/EditorFrame';
@@ -28,8 +29,18 @@ const EditTemplate: React.FC = () => {
   const ticketInfo = useRecoilValue(ticketState);
   const templateInfo = useRecoilValue(templateState);
 
-  const handlePageNavigate = () => {
-    navigate('/write');
+  const handlePageNavigate = async () => {
+    const imgUrl = await getTicketImage();
+    navigate('/write', { state: { imgUrl }, replace: true });
+  };
+
+  const getTicketImage = async () => {
+    const node = document.getElementById('ticket');
+    if (node) {
+      const imgUrl = await domtoimage.toPng(node);
+      return imgUrl;
+    }
+    return '';
   };
 
   return (
@@ -44,18 +55,20 @@ const EditTemplate: React.FC = () => {
               <p>기존의 템플릿을 선택하거나 나만의 템플릿을 만들 수 있어요.</p>
             </TextContainer>
             <ImageContainer>
-              {templateInfo.templateType === 'interpark' && <img src={interpark} alt="티켓 사진" />}
-              {templateInfo.templateType === 'yes24' && <img src={yes24} alt="티켓 사진" />}
-              {templateInfo.templateType === 'melon' && <img src={melon} alt="티켓 사진" />}
-              <TicketInfoContainer>
-                <h2>{ticketInfo.title}</h2>
-                <p>일시 : {ticketInfo.date ? getDateTimeString(new Date(ticketInfo.date)) : ''}</p>
-                <p>장소 : {ticketInfo.location}</p>
-                <h3>{ticketInfo.seat}</h3>
-              </TicketInfoContainer>
+              <div id="ticket">
+                {templateInfo.templateType === 'interpark' && <img src={interpark} alt="티켓 사진" />}
+                {templateInfo.templateType === 'yes24' && <img src={yes24} alt="티켓 사진" />}
+                {templateInfo.templateType === 'melon' && <img src={melon} alt="티켓 사진" />}
+                <TicketInfoContainer>
+                  <h2>{ticketInfo.title}</h2>
+                  <p>일시 : {ticketInfo.date ? getDateTimeString(new Date(ticketInfo.date)) : ''}</p>
+                  <p>장소 : {ticketInfo.location}</p>
+                  <h3>{ticketInfo.seat}</h3>
+                </TicketInfoContainer>
+              </div>
             </ImageContainer>
             <ButtonContainer>
-              <Link to={-1 as any}>이전으로</Link>
+              <Link to="/editor/new">이전으로</Link>
               <BasicButton text="글 작성하기" handler={handlePageNavigate} />
             </ButtonContainer>
           </RightContainer>

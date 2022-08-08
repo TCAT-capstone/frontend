@@ -16,7 +16,9 @@ const NewTemplate: React.FC = () => {
           <p>티켓 실물사진 업로드를 통해 자동으로 공연 정보를 추출할 수 있어요.</p>
         </TextContainer>
         <LinkWrapper>
-          <Link to="/editor/edit">직접 입력할래요</Link>
+          <Link to="/editor/edit" replace>
+            직접 입력할래요
+          </Link>
         </LinkWrapper>
       </EditorFrame>
     </Layout>
