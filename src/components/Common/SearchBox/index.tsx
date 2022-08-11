@@ -6,7 +6,12 @@ import arrowImg from '@images/down-arrow.svg';
 import OptionDropdown from './OptionDropdown';
 import { Container, SearchContent, ResetButton, OptionContainer, OptionButton } from './style';
 
-const SearchBox: React.FC = () => {
+interface Props {
+  option: string;
+  handleOptionChange: (e: React.ChangeEvent<HTMLButtonElement>) => void;
+}
+
+const SearchBox: React.FC<Props> = ({ option, handleOptionChange }) => {
   const [text, setText] = useState('');
   const [onOptionDropdown, setOnOptionDropdown] = useState(false);
   const OptionContainerRef = useRef<HTMLDivElement>(null);
@@ -51,11 +56,11 @@ const SearchBox: React.FC = () => {
       </ResetButton>
       <OptionContainer ref={OptionContainerRef}>
         <OptionButton onClick={handleOptionDropdownToggle}>
-          통합검색
+          {option}
           <img src={arrowImg} alt="더보기" width="11rem" />
         </OptionButton>
       </OptionContainer>
-      {onOptionDropdown && <OptionDropdown />}
+      {onOptionDropdown && <OptionDropdown handleOptionChange={handleOptionChange} />}
     </Container>
   );
 };
