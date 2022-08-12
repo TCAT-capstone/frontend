@@ -1,33 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import { useParams } from 'react-router-dom';
 
 import HomeTemplate from '@templates/HomeTemplate';
-import userImg from '@images/sample-user-img.jpg';
 
 import { userProfileState } from '@stores/user';
 import { getTicketbookTickets } from '@apis/ticket';
+import { getMemberProfile } from '@apis/member';
 import { TicketListResType } from '@src/types/ticket';
-import { useParams } from 'react-router-dom';
+
+interface HomeProfileType {
+  img: string;
+  name: string;
+  bio: string;
+  ticketCount: number;
+  likeCount: number;
+}
+
+const initialProfile = {
+  img: '',
+  name: '',
+  bio: '',
+  ticketCount: 0,
+  likeCount: 0,
+};
 
 const HomePage: React.FC = () => {
   const { homeId } = useParams();
-  const userProfile = useRecoilValue(userProfileState);
+  const myProfile = useRecoilValue(userProfileState);
+  const [profile, setProfile] = useState<HomeProfileType>(initialProfile);
   const [tickets, setTickets] = useState<TicketListResType>([]);
 
-  const isMyHome = homeId === userProfile.homeId;
-  const myProfile = {
-    img: userProfile.memberImg,
-    name: userProfile.name,
-    bio: userProfile.bio,
-    ticketCount: userProfile.ticketCount,
-    likeCount: userProfile.likeCount,
-  };
-  const profile = {
-    img: userImg,
-    name: '입장번호 1번',
-    bio: '황금시대의 동력은 고동을 군영과 황금시대다.',
-    ticketCount: 41,
-    likeCount: 718,
+  const isMyHome = homeId === myProfile.homeId;
+
+  const getProfile = async (homeId: string) => {
+    const userProfile = await getMemberProfile(homeId);
+    if (userProfile) {
+      setProfile({
+        img: userProfile.memberImg,
+        name: userProfile.name,
+        bio: userProfile.bio,
+        ticketCount: userProfile.ticketCount,
+        likeCount: userProfile.likeCount,
+      });
+    }
   };
 
   const getTickets = async () => {
@@ -36,10 +52,21 @@ const HomePage: React.FC = () => {
   };
 
   useEffect(() => {
+    if (isMyHome) {
+      setProfile({
+        img: myProfile.memberImg,
+        name: myProfile.name,
+        bio: myProfile.bio,
+        ticketCount: myProfile.ticketCount,
+        likeCount: myProfile.likeCount,
+      });
+    } else if (homeId) {
+      getProfile(homeId);
+    }
     getTickets();
   }, []);
 
-  return <HomeTemplate isMyHome={isMyHome} profile={isMyHome ? myProfile : profile} tickets={tickets} />;
+  return <HomeTemplate isMyHome={isMyHome} profile={profile} tickets={tickets} />;
 };
 
 export default HomePage;

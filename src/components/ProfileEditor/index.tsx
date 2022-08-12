@@ -12,6 +12,7 @@ interface Props {
   isPassedSubmit: () => void;
   handleNameChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleBioChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  handleUpdateProfile: () => void;
 }
 
 const ProfileEditor: React.FC<Props> = ({
@@ -22,6 +23,7 @@ const ProfileEditor: React.FC<Props> = ({
   isPassedSubmit,
   handleNameChange,
   handleBioChange,
+  handleUpdateProfile,
 }) => {
   return (
     <Container>
@@ -30,22 +32,18 @@ const ProfileEditor: React.FC<Props> = ({
       </ProfileInfoContainer>
       <ProfileInfoContainer>
         <h2>아이디</h2>
-        <text>{homeId}</text>
+        <span>{homeId}</span>
       </ProfileInfoContainer>
       <ProfileInfoContainer>
         <h2>닉네임</h2>
-        <textarea name="newName" onChange={handleNameChange} onKeyUp={isPassedSubmit}>
-          {newName}
-        </textarea>
+        <textarea name="newName" value={newName} onChange={handleNameChange} onKeyUp={isPassedSubmit} />
       </ProfileInfoContainer>
       <ProfileInfoContainer>
         <h2>바이오</h2>
-        <textarea name="newBio" onChange={handleBioChange} onKeyUp={isPassedSubmit}>
-          {newBio}
-        </textarea>
+        <textarea name="newBio" value={newBio} onChange={handleBioChange} onKeyUp={isPassedSubmit} />
       </ProfileInfoContainer>
       <ButtonWrapper isActive={isActive}>
-        <BasicButton text="프로필 저장하기" handler={() => console.log({ newName, newBio })} />
+        <BasicButton text="프로필 저장하기" handler={handleUpdateProfile} />
       </ButtonWrapper>
     </Container>
   );

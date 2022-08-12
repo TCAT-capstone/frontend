@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 import ProfileTemplate from '@templates/ProfileTemplate';
 
-import { getMemberProfile } from '@apis/member';
-import { ProfileType } from '@src/types/member';
+import { userProfileState } from '@stores/user';
+import { updateMyProfile } from '@src/apis/member';
 
 const ProfilePage: React.FC = () => {
-  const [profile, setProfile] = useState<ProfileType>();
-  const [newName, setNewName] = useState('');
-  const [newBio, setNewBio] = useState('');
+  const [myProfile, setMyProfile] = useRecoilState(userProfileState);
+  const [newName, setNewName] = useState(myProfile.name);
+  const [newBio, setNewBio] = useState(myProfile.bio);
 
   const [isActive, setIsActive] = useState(false);
   const isPassedSubmit = () => {
-    return newName !== profile?.name || newBio !== profile?.bio ? setIsActive(true) : setIsActive(false);
+    return newName !== myProfile?.name || newBio !== myProfile?.bio ? setIsActive(true) : setIsActive(false);
+  };
+
+  const handleUpdateProfile = async () => {
+    const newProfile = await updateMyProfile({ name: newName, bio: newBio });
+    if (newProfile) {
+      setMyProfile((prev) => {
+        return { ...prev, name: newProfile.name, bio: newProfile.bio };
+      });
+    }
   };
 
   const handleNameChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -23,33 +33,21 @@ const ProfilePage: React.FC = () => {
     setNewBio(e.target.value);
   };
 
-  const getProfile = async () => {
-    const data = await getMemberProfile(1);
-    if (data) {
-      setProfile(data);
-    }
-  };
-
   useEffect(() => {
-    getProfile();
-  }, []);
-
-  useEffect(() => {
-    if (profile) {
-      setNewName(profile?.name);
-      setNewBio(profile?.bio);
-    }
-  }, [profile]);
+    setNewName(myProfile.name);
+    setNewBio(myProfile.bio);
+  }, [myProfile]);
 
   return (
     <ProfileTemplate
-      profile={profile}
+      profile={myProfile}
       newName={newName}
       newBio={newBio}
       isActive={isActive}
       isPassedSubmit={isPassedSubmit}
       handleNameChange={handleNameChange}
       handleBioChange={handleBioChange}
+      handleUpdateProfile={handleUpdateProfile}
     />
   );
 };

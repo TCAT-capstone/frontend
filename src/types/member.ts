@@ -13,3 +13,8 @@ export interface SignUpType {
   name: string;
   homeId: string;
 }
+
+export interface UpdateMyProfileType {
+  name: string;
+  bio: string;
+}

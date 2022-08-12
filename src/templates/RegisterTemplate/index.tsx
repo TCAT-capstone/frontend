@@ -25,7 +25,7 @@ const RegisterTemplate: React.FC<Props> = ({
   handleHomeIdChange,
   handleSignUp,
 }) => {
-  const user = useRecoilValue(userProfileState);
+  const myProfile = useRecoilValue(userProfileState);
   return (
     <Container>
       <img src={logoImg} alt="로고" width={58} />
@@ -45,7 +45,7 @@ const RegisterTemplate: React.FC<Props> = ({
       </InputContainer>
       <b>이메일 주소를 확인해 주세요.</b>
       <InputContainer>
-        <Input type="text" state="none" value={user.email} disabled />
+        <Input type="text" state="none" value={myProfile.email} disabled />
         <InputIcon src={lockImg} alt="자물쇠 모양 아이콘" />
       </InputContainer>
       <ButtonWrapper>

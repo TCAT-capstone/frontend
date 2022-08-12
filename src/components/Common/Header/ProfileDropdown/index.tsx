@@ -8,7 +8,7 @@ import ProfileIcon from '@components/Common/Profile/ProfileIcon';
 import { Container, ProfileContainer, ProfileLinkContainer, LinkContainer } from './style';
 
 const ProfileDropdown: React.FC = () => {
-  const userProfile = useRecoilValue(userProfileState);
+  const myProfile = useRecoilValue(userProfileState);
   const resetUserProfileState = useResetRecoilState(userProfileState);
 
   const handleLogout = () => {
@@ -19,16 +19,16 @@ const ProfileDropdown: React.FC = () => {
   return (
     <Container>
       <ProfileContainer>
-        <ProfileIcon size={2.2} profileImg={userProfile.memberImg} />
+        <ProfileIcon size={2.2} profileImg={myProfile.memberImg} />
         <ProfileLinkContainer>
-          <b>{userProfile.name}</b>
-          <Link to={`/~${userProfile.homeId}/profile`}>
+          <b>{myProfile.name}</b>
+          <Link to={`/~${myProfile.homeId}/profile`}>
             <span>프로필 관리</span>
           </Link>
         </ProfileLinkContainer>
       </ProfileContainer>
       <LinkContainer>
-        <Link to={`/~${userProfile.homeId}`}>
+        <Link to={`/~${myProfile.homeId}`}>
           <span>나의 티켓 홈</span>
         </Link>
         <Link to="/">
