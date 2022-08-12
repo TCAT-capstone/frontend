@@ -56,7 +56,9 @@ const Header: React.FC = () => {
       </Link>
       <ButtonContainer>
         <SearchButton>
-          <img src={searchImg} alt="검색" />
+          <Link to="/search">
+            <img src={searchImg} alt="검색" />
+          </Link>
         </SearchButton>
         {isLoggedIn ? (
           <ProfileContainer ref={ProfileContainerRef}>
