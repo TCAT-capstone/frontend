@@ -13,6 +13,17 @@ export const getTrendTickets = async (): Promise<TicketListResType> => {
   }
 };
 
+export const getSearchTickets = async (): Promise<TicketListResType> => {
+  try {
+    const res = await fetchApi.get('/api/tickets');
+    if (res.status !== 200) throw new Error('error');
+    const { tickets } = await res.json();
+    return tickets;
+  } catch (err) {
+    return [];
+  }
+};
+
 export const getTicketbookTickets = async (ticketbookId: number): Promise<TicketListResType> => {
   try {
     const res = await fetchApi.get(`/api/ticketbooks/${ticketbookId}/tickets`);
