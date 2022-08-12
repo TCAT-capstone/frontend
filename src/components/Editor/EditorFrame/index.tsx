@@ -12,11 +12,11 @@ interface Props {
 }
 
 const EditorFrame: React.FC<Props> = ({ children }) => {
-  const userProfile = useRecoilValue(userProfileState);
+  const myProfile = useRecoilValue(userProfileState);
   const navigate = useNavigate();
 
   const handlePageNavigate = () => {
-    navigate(`/@${userProfile.homeId}`);
+    navigate(`/@${myProfile.homeId}`);
   };
 
   return (

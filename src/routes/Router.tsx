@@ -18,6 +18,7 @@ import EditPage from '@pages/Editor/EditPage';
 import SearchPage from '@pages/SearchPage';
 
 import PrivateRoute from './PrivateRoute';
+import RegisterRoute from './RegisterRoute';
 
 const Router: React.FC = () => {
   const token = localStorage.getItem(ACCESS_TOKEN);
@@ -39,19 +40,21 @@ const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPage isTrend />} />
-        <Route path="/feed" element={<MainPage isTrend={false} />} />
-        <Route path="/@:homeId" element={<HomePage />} />
-        <Route path="/@:homeId/:ticketId" element={<PostPage />} />
-        <Route path="/oauth2/redirect" element={<OAuthRedirectPage />} />
-        <Route path="/search" element={<SearchPage />} />
-        <Route element={<PrivateRoute />}>
-          <Route path="/write" element={<WritePage />} />
-          <Route path="/editor/new" element={<NewPage />} />
-          <Route path="/editor/edit" element={<EditPage />} />
-          <Route path="/@:homeId/profile" element={<ProfilePage />} />
-        </Route>
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="/" element={<RegisterRoute />}>
+          <Route path="" element={<MainPage isTrend />} />
+          <Route path="feed" element={<MainPage isTrend={false} />} />
+          <Route path="~:homeId" element={<HomePage />} />
+          <Route path="~:homeId/:ticketId" element={<PostPage />} />
+          <Route path="oauth2/redirect" element={<OAuthRedirectPage />} />
+          <Route path="search" element={<SearchPage />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="write" element={<WritePage />} />
+            <Route path="editor/new" element={<NewPage />} />
+            <Route path="editor/edit" element={<EditPage />} />
+            <Route path="~:homeId/profile" element={<ProfilePage />} />
+          </Route>
+          <Route path="*" element={<ErrorPage />} />
+         </Route>
       </Routes>
     </BrowserRouter>
   );

@@ -20,7 +20,7 @@ export const Container = styled.div`
     word-break: keep-all;
     margin-bottom: 0.95rem;
   }
-  text {
+  span {
     font-size: 0.8rem;
   }
   textarea {
