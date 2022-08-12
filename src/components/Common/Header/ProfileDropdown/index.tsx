@@ -22,13 +22,13 @@ const ProfileDropdown: React.FC = () => {
         <ProfileIcon size={2.2} profileImg={userProfile.memberImg} />
         <ProfileLinkContainer>
           <b>{userProfile.name}</b>
-          <Link to={`/@${userProfile.homeId}/profile`}>
+          <Link to={`/~${userProfile.homeId}/profile`}>
             <span>프로필 관리</span>
           </Link>
         </ProfileLinkContainer>
       </ProfileContainer>
       <LinkContainer>
-        <Link to={`/@${userProfile.homeId}`}>
+        <Link to={`/~${userProfile.homeId}`}>
           <span>나의 티켓 홈</span>
         </Link>
         <Link to="/">

@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+
 import RegisterTemplate from '@templates/RegisterTemplate';
+import { signup } from '@apis/member';
+import { userProfileState } from '@stores/user';
 
 type ErrorType = { state: 'error' | 'valid'; message: string };
 
 const RegisterPage: React.FC = () => {
+  const setUserProfile = useSetRecoilState(userProfileState);
   const [name, setName] = useState('');
   const [homeId, setHomeId] = useState('');
   const [nameError, setNameError] = useState<ErrorType>({ state: 'error', message: '' });
@@ -25,6 +30,15 @@ const RegisterPage: React.FC = () => {
   useEffect(() => {
     validateHomeId();
   }, [homeId]);
+
+  const handleSignUp = async () => {
+    const newUserProfile = await signup({ name, homeId });
+    if (newUserProfile) {
+      setUserProfile((prev) => {
+        return { ...prev, name: newUserProfile.name, homeId: newUserProfile.homeId };
+      });
+    }
+  };
 
   const checkEng = (str: string) => {
     const regExp = /^[a-zA-Z]+[a-zA-Z0-9]*$/;
@@ -79,6 +93,7 @@ const RegisterPage: React.FC = () => {
       isButtonActive={isButtonActive}
       handleNameChange={handleNameChange}
       handleHomeIdChange={handleHomeIdChange}
+      handleSignUp={handleSignUp}
     />
   );
 };

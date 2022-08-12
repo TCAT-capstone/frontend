@@ -14,6 +14,7 @@ interface Props {
   isButtonActive: boolean;
   handleNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleHomeIdChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSignUp: () => void;
 }
 
 const RegisterTemplate: React.FC<Props> = ({
@@ -22,6 +23,7 @@ const RegisterTemplate: React.FC<Props> = ({
   isButtonActive,
   handleNameChange,
   handleHomeIdChange,
+  handleSignUp,
 }) => {
   const user = useRecoilValue(userProfileState);
   return (
@@ -47,7 +49,7 @@ const RegisterTemplate: React.FC<Props> = ({
         <InputIcon src={lockImg} alt="자물쇠 모양 아이콘" />
       </InputContainer>
       <ButtonWrapper>
-        <Button type="button" active={isButtonActive} disabled={!isButtonActive}>
+        <Button type="button" onClick={handleSignUp} active={isButtonActive} disabled={!isButtonActive}>
           <span>완료하기</span>
         </Button>
       </ButtonWrapper>

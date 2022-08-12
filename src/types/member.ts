@@ -8,3 +8,8 @@ export interface ProfileType {
   memberImg: string;
   homeId: string;
 }
+
+export interface SignUpType {
+  name: string;
+  homeId: string;
+}

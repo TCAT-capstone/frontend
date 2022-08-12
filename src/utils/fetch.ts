@@ -12,7 +12,7 @@ const getHeader = () => {
   return headers;
 };
 
-type RequestData = { [key: string]: string | number };
+type RequestData = { [key: string]: any };
 
 const fetchApi = {
   get: (path: string): Promise<Response> =>

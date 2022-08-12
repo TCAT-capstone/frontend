@@ -37,15 +37,15 @@ const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<RegisterRoute />}>
-          <Route path="/" element={<MainPage isTrend />} />
-          <Route path="/feed" element={<MainPage isTrend={false} />} />
-          <Route path="/@:homeId" element={<HomePage />} />
-          <Route path="/@:homeId/:ticketId" element={<PostPage />} />
-          <Route path="/oauth2/redirect" element={<OAuthRedirectPage />} />
+        <Route path="/" element={<RegisterRoute />}>
+          <Route path="" element={<MainPage isTrend />} />
+          <Route path="feed" element={<MainPage isTrend={false} />} />
+          <Route path="~:homeId" element={<HomePage />} />
+          <Route path="~:homeId/:ticketId" element={<PostPage />} />
+          <Route path="oauth2/redirect" element={<OAuthRedirectPage />} />
           <Route element={<PrivateRoute />}>
-            <Route path="/write" element={<WritePage />} />
-            <Route path="/@:homeId/profile" element={<ProfilePage />} />
+            <Route path="write" element={<WritePage />} />
+            <Route path="~:homeId/profile" element={<ProfilePage />} />
           </Route>
           <Route path="*" element={<ErrorPage />} />
         </Route>

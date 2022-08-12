@@ -9,7 +9,7 @@ const RegisterRoute: React.FC = () => {
   const isLoggedIn = useRecoilValue(isLoggedInState);
   const { homeId } = useRecoilValue(userProfileState);
 
-  return isLoggedIn && homeId !== '' ? <RegisterPage /> : <Outlet />;
+  return isLoggedIn && homeId === null ? <RegisterPage /> : <Outlet />;
 };
 
 export default RegisterRoute;
