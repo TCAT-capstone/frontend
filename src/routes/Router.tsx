@@ -54,7 +54,7 @@ const Router: React.FC = () => {
             <Route path="~:homeId/profile" element={<ProfilePage />} />
           </Route>
           <Route path="*" element={<ErrorPage />} />
-         </Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );
