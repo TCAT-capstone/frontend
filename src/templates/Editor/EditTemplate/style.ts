@@ -6,6 +6,15 @@ export const Layout = styled.div`
   width: 100rem;
 `;
 
+export const LoadingContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
+
 export const EditorContainer = styled.div`
   padding: 3.8rem 8.5rem;
   display: flex;
@@ -65,5 +74,8 @@ export const ButtonContainer = styled.div`
     font-weight: 600;
     color: ${ColorCode.PURPLE2};
     margin-right: 4rem;
+    :hover {
+      opacity: 0.8;
+    }
   }
 `;
