@@ -18,3 +18,7 @@ export interface UpdateMyProfileType {
   name: string;
   bio: string;
 }
+
+export interface HomeIdType {
+  homeId: string;
+}
