@@ -24,11 +24,14 @@ export const TextContainer = styled.div`
 export const LinkWrapper = styled.div`
   width: 6rem;
   text-align: center;
-  margin: 0 auto;
+  margin: 2.5rem auto 0 auto;
   a,
   a:visited {
     color: ${ColorCode.PURPLE2};
     font-size: 0.875rem;
     font-weight: 600;
+    :hover {
+      opacity: 0.8;
+    }
   }
 `;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 import RegisterTemplate from '@templates/RegisterTemplate';
-import { signup } from '@apis/member';
+import { checkDuplicateHomeId, signup } from '@apis/member';
 import { userProfileState } from '@stores/user';
 
 type ErrorType = { state: 'error' | 'valid'; message: string };
@@ -63,7 +63,7 @@ const RegisterPage: React.FC = () => {
     }
   };
 
-  const validateHomeId = () => {
+  const validateHomeId = async () => {
     let valid = true;
     if (homeId.length > 12 || homeId.length < 6) {
       setHomeIdError({ state: 'error', message: '아이디는 6자 이상, 12자 이내 이어야 해요.' });
@@ -71,6 +71,10 @@ const RegisterPage: React.FC = () => {
     }
     if (valid && (!checkEng(homeId) || checkSpace(homeId))) {
       setHomeIdError({ state: 'error', message: '아이디는 영문 + 숫자 조합만 가능해요.' });
+      valid = false;
+    }
+    if (valid && !(await checkDuplicateHomeId({ homeId }))) {
+      setHomeIdError({ state: 'error', message: '이미 사용중인 아이디에요.' });
       valid = false;
     }
     if (valid) {

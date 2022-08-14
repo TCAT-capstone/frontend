@@ -16,7 +16,7 @@ const TicketList: React.FC<Props> = ({ tickets, backgroundColor }) => {
       {tickets.map((t) => (
         <Ticket
           key={t.ticketId}
-          link={`/@${t.homeId}/${t.ticketId}`}
+          link={`/~${t.homeId}/${t.ticketId}`}
           ticketImg={t.ticketImg}
           title={t.title}
           likeCount={t.likeCount}

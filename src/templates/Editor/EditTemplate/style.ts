@@ -37,22 +37,31 @@ export const ImageContainer = styled.div`
 `;
 
 export const TicketInfoContainer = styled.div`
-  position: absolute;
-  top: 5.5rem;
-  left: 3rem;
   h2 {
+    position: absolute;
+    top: 5.5rem;
+    left: 3rem;
     font-size: 1.6rem;
     font-weight: 600;
-    padding-bottom: 1.5rem;
   }
-  p {
+  p:nth-of-type(1) {
+    position: absolute;
+    top: 9rem;
+    left: 3rem;
     font-size: 1.2rem;
-    padding-top: 0.6rem;
+  }
+  p:nth-of-type(2) {
+    position: absolute;
+    top: 11rem;
+    left: 3rem;
+    font-size: 1.2rem;
   }
   h3 {
+    position: absolute;
+    top: 14rem;
+    left: 3rem;
     font-size: 1.5rem;
     font-weight: 500;
-    padding-top: 2rem;
   }
 `;
 
@@ -65,5 +74,8 @@ export const ButtonContainer = styled.div`
     font-weight: 600;
     color: ${ColorCode.PURPLE2};
     margin-right: 4rem;
+    :hover {
+      opacity: 0.8;
+    }
   }
 `;
