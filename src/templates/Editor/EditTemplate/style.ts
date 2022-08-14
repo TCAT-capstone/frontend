@@ -6,15 +6,6 @@ export const Layout = styled.div`
   width: 100rem;
 `;
 
-export const LoadingContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-`;
-
 export const EditorContainer = styled.div`
   padding: 3.8rem 8.5rem;
   display: flex;

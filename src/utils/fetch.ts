@@ -1,15 +1,19 @@
 import { ACCESS_TOKEN } from './constants';
 
 const baseUrl = process.env.REACT_APP_SERVER ?? 'http://localhost:8080';
+const ocrBaseUrl = process.env.REACT_APP_OCR_SERVER ?? 'http://localhost:5000';
 
-const headers = {
-  'Content-Type': 'application/json',
-  Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+const getFileHeader = () => {
+  return {
+    Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+  };
 };
 
 const getHeader = () => {
-  headers.Authorization = `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`;
-  return headers;
+  return {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+  };
 };
 
 type RequestData = { [key: string]: any };
@@ -34,7 +38,15 @@ const fetchApi = {
     fetch(`${baseUrl}${path}`, {
       method: 'POST',
       mode: 'cors',
-      headers: getHeader(),
+      headers: getFileHeader(),
+      body: data,
+    }),
+
+  postOcrFile: (path: string, data: FormData): Promise<Response> =>
+    fetch(`${ocrBaseUrl}${path}`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: getFileHeader(),
       body: data,
     }),
 
