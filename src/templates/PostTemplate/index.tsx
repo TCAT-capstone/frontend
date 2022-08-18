@@ -84,7 +84,7 @@ const PostTemplate: React.FC<Props> = ({ post }) => {
               )}
             </ButtonContainer>
             <MediumProfileContainer>
-              <Link to={`/@${post.memberHomeId}`}>
+              <Link to={`/~${post.memberHomeId}`}>
                 <ProfileIcon size={3.75} profileImg={post.memberImg} />
                 <div>
                   <b>{post.memberName}</b>

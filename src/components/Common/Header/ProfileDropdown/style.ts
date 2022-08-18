@@ -6,9 +6,10 @@ export const Container = styled.div`
   top: 3rem;
   right: 0;
   width: 11.4rem;
-  height: 10.5rem;
+  height: auto;
   border-radius: 0.7rem;
   padding: 1.4rem;
+  padding-bottom: 0.9rem;
   background-color: ${ColorCode.WHITE};
   filter: drop-shadow(2px 10px 40px rgba(59, 70, 74, 0.2));
   box-sizing: border-box;

@@ -1,34 +1,40 @@
 import React from 'react';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { Link } from 'react-router-dom';
 
+import { userProfileState } from '@stores/user';
+import { ACCESS_TOKEN } from '@utils/constants';
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
-
 import { Container, ProfileContainer, ProfileLinkContainer, LinkContainer } from './style';
 
-interface Props {
-  profileImg: string;
-}
+const ProfileDropdown: React.FC = () => {
+  const myProfile = useRecoilValue(userProfileState);
+  const resetUserProfileState = useResetRecoilState(userProfileState);
 
-const ProfileDropdown: React.FC<Props> = ({ profileImg }) => {
+  const handleLogout = () => {
+    resetUserProfileState();
+    localStorage.removeItem(ACCESS_TOKEN);
+  };
+
   return (
     <Container>
       <ProfileContainer>
-        <ProfileIcon size={2.2} profileImg={profileImg} />
+        <ProfileIcon size={2.2} profileImg={myProfile.memberImg} />
         <ProfileLinkContainer>
-          <b>닉네임</b>
-          <Link to="/">
+          <b>{myProfile.name}</b>
+          <Link to={`/~${myProfile.homeId}/profile`}>
             <span>프로필 관리</span>
           </Link>
         </ProfileLinkContainer>
       </ProfileContainer>
       <LinkContainer>
-        <Link to="/@homeId">
+        <Link to={`/~${myProfile.homeId}`}>
           <span>나의 티켓 홈</span>
         </Link>
         <Link to="/">
           <span>나의 구독</span>
         </Link>
-        <button type="button">
+        <button type="button" onClick={handleLogout}>
           <span>로그아웃</span>
         </button>
       </LinkContainer>

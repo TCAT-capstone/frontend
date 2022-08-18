@@ -49,3 +49,9 @@ export interface TicketReqType {
   content: string;
   category: CategoryType;
 }
+
+export interface OcrTicketInfoResType {
+  ticetSeat: string;
+  ticketDate: string;
+  ticketLocation: string;
+}

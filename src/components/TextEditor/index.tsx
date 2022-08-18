@@ -1,10 +1,11 @@
 import React, { useMemo, useRef } from 'react';
+import { useRecoilValue } from 'recoil';
 import ReactQuill from 'react-quill';
 import { RangeStatic } from 'quill';
 
 import CheckMark from '@components/Common/CheckMark';
 import { uploadImage } from '@apis/image';
-import { TicketValidationType } from '@src/types/ticket';
+import { ticketState } from '@stores/editor';
 
 import '@styles/editor.css';
 import { Container, TicketContainer, TicketImage, CheckMarkWrapper } from './style';
@@ -13,11 +14,11 @@ interface Props {
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
   ticketImg: string;
-  ticketValidation: TicketValidationType;
 }
 
-const TextEditor: React.FC<Props> = ({ content, setContent, ticketImg, ticketValidation }) => {
+const TextEditor: React.FC<Props> = ({ content, setContent, ticketImg }) => {
   const quillRef = useRef<ReactQuill>(null);
+  const { validation } = useRecoilValue(ticketState);
 
   const imageHandler = () => {
     const input = document.createElement('input');
@@ -60,7 +61,7 @@ const TextEditor: React.FC<Props> = ({ content, setContent, ticketImg, ticketVal
     <Container>
       <TicketContainer>
         <TicketImage src={ticketImg} alt="티켓 사진" />
-        <CheckMarkWrapper>{ticketValidation === 'VERIFIED' && <CheckMark />}</CheckMarkWrapper>
+        <CheckMarkWrapper>{validation && <CheckMark />}</CheckMarkWrapper>
       </TicketContainer>
       <ReactQuill
         ref={quillRef}
