@@ -15,9 +15,18 @@ const WritePage: React.FC = () => {
   const state = location.state as LocationStateType;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [onTicketbookDropdown, setOnTicketbookDropdown] = useState(false);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
+  };
+
+  const handleTicketbookDropdownOpen = () => {
+    setOnTicketbookDropdown(true);
+  };
+
+  const handleTicketbookDropdownClose = () => {
+    setOnTicketbookDropdown(false);
   };
 
   const handlePostSubmit = () => {
@@ -43,6 +52,8 @@ const WritePage: React.FC = () => {
       setContent={setContent}
       ticketImg={state.imgUrl}
       handlePostSubmit={handlePostSubmit}
+      onTicketbookDropdown={onTicketbookDropdown}
+      handleTicketbookDropdownOpen={handleTicketbookDropdownOpen}
     />
   );
 };
