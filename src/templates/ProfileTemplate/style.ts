@@ -6,6 +6,7 @@ export const ProfileFrame = styled.div`
   display: flex;
   overflow: auto;
   margin: 0 2rem;
+  justify-content: center;
   ${media.medium`
   flex-direction: column;
   align-items: center;
