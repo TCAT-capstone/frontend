@@ -12,7 +12,7 @@ export const Container = styled.div`
     bottom: -3rem;
   }
   .slick-track {
-    padding-top: 5rem;
+    padding-top: 5.3rem;
     position: absolute;
     bottom: -16rem;
   }
