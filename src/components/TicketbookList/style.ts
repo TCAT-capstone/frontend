@@ -8,9 +8,6 @@ export const Container = styled.div`
   .slick-list {
     height: 25rem;
   }
-  .slick-dots {
-    bottom: -3rem;
-  }
   .slick-track {
     padding-top: 5.3rem;
     position: absolute;
