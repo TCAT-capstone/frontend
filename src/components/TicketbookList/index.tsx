@@ -12,7 +12,7 @@ const TicketbookList: React.FC = () => {
     className: 'center',
     centerMode: true,
     centerPadding: '0px',
-    dots: true,
+    dots: false,
     arrows: false,
     infinite: true,
     focusOnSelect: true,
