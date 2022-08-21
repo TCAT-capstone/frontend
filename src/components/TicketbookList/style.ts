@@ -4,22 +4,23 @@ export const Container = styled.div`
   position: relative;
   width: 100%;
   height: 19rem;
-  margin: 4rem 0;
   .slick-list {
     height: 25rem;
   }
-  .slick-dots {
-    bottom: -3rem;
-  }
   .slick-track {
-    padding-top: 5.3rem;
+    display: flex;
     position: absolute;
-    bottom: -16rem;
+    bottom: 0rem;
+  }
+  .slick-track .slick-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .slick-center {
     -webkit-transform: scale(1.15);
     -moz-transform: scale(1.15);
-    transform: scale(1.15);
+    transform: scale(1.15) translateY(-1.2rem);
     transition: 0.8s;
   }
 `;
