@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { BookColorCode } from '@utils/constants';
+import { example } from '@src/types/ticket';
 
 interface ContainerProps {
+  backgroundImg: string;
   color: 'PURPLE' | 'GREEN' | 'BLUE' | 'RED';
 }
 
@@ -9,11 +11,11 @@ export const Container = styled.div<ContainerProps>`
   position: relative;
   width: 15rem;
   height: 19rem;
-  background-color: ${(props) => BookColorCode[props.color].background};
+  background-image: url(${(props) => example[parseInt(props.backgroundImg, 10)].img});
+  background-size: 15rem;
   border-radius: 0.3rem 1rem 1rem 0.3rem;
-  margin: 0 1rem;
-  flex-shrink: 0;
   cursor: pointer;
+  margin: auto;
   h3 {
     position: absolute;
     top: 3.5rem;
