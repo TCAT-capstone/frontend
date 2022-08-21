@@ -4,6 +4,7 @@ export const Container = styled.div`
   position: relative;
   width: 100%;
   height: 19rem;
+  margin: 8rem 0;
   .slick-slider {
   }
   .slick-list {
