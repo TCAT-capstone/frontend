@@ -93,7 +93,7 @@ export const example = [
     date: '22.03.04~22.09.09',
   },
   {
-    img: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhLo8sx6yf5o_VjlNSRdVLM3akblPz_4ggH6T_KofpcMPN6_HEw966PHXtsvyiUgukG37zPNmG_bRFZIBXx0RA-WGYIuvIFJt-6I7mImM3Cxqev-z04JiW95H_PdtInUCaR6nNC_ktPpNF1lUEjbDNA3gECr1LN1SiU0uD7Z9qZRGuvAuvIxxgaLY3TVw/s16000/FPBY1MsXIBIW0uQ.jpg',
+    img: 'https://image.fmkorea.com/files/attach/new2/20220329/3655109/2889212861/4478307323/6090b3178e5b2bbc3476308bc475a3fb.jpg',
     title: '레이',
     date: '22.03.04~22.09.09',
   },
