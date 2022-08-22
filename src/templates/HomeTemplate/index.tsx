@@ -7,6 +7,7 @@ import ProfileBox from '@components/Common/Profile/ProfileBox';
 import BasicButton from '@components/Common/BasicButton';
 import TicketbookList from '@components/TicketbookList';
 import TicketList from '@components/TicketList';
+import TicketbookExample from '@src/components/TicketbookList/TicketbookExample';
 
 import { TicketListResType } from '@src/types/ticket';
 
@@ -50,7 +51,7 @@ const HomeTemplate: React.FC<Props> = ({ isMyHome, profile, tickets }) => {
         )}
       </ButtonWrapper>
       <TicketbookListWrapper>
-        <TicketbookList />
+        <TicketbookExample />
       </TicketbookListWrapper>
       <TicketList tickets={tickets} backgroundColor="white" />
       <HomeBackground color="PURPLE" />
