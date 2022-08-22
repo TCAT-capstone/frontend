@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { MouseEvent } from 'react';
 
 import Layout from '@styles/Layout';
 import TextEditor from '@components/TextEditor';
 import BasicButton from '@components/Common/BasicButton';
 
+import { TicketbookListResType, TicketbookType } from '@src/types/ticketbook';
 import arrowImg from '@images/down-arrow.svg';
 
 import {
   PostContainer,
   TitleInput,
   BottomBar,
-  Ticketbookontainer,
+  TicketbookContainer,
   DropdownContainer,
   SelectedTicketbook,
+  ArrowImg,
+  SelectTicketbookContainer,
+  ButtonWrapper,
 } from './style';
 
 interface Props {
@@ -22,8 +28,14 @@ interface Props {
   setContent: React.Dispatch<React.SetStateAction<string>>;
   ticketImg: string;
   handlePostSubmit: () => void;
-  onTicketbookDropdown: boolean;
-  handleTicketbookDropdownOpen: () => void;
+  onTicketbook: boolean;
+  handleTicketbookOpen: (e: MouseEvent) => void;
+  ticketbooks: TicketbookListResType;
+  ticketbook: TicketbookType;
+  handleTicketbookChange: (e: MouseEvent, ticketbook: TicketbookType) => void;
+  onDropdown: boolean;
+  handleDropdownOpen: () => void;
+  TicketbookContainerRef: React.RefObject<HTMLDivElement>;
 }
 
 const WriteTemplate: React.FC<Props> = ({
@@ -33,15 +45,15 @@ const WriteTemplate: React.FC<Props> = ({
   setContent,
   ticketImg,
   handlePostSubmit,
-  onTicketbookDropdown,
-  handleTicketbookDropdownOpen,
+  onTicketbook,
+  handleTicketbookOpen,
+  ticketbooks,
+  ticketbook,
+  handleTicketbookChange,
+  onDropdown,
+  handleDropdownOpen,
+  TicketbookContainerRef,
 }) => {
-  const [onDropdown, setOnDropdown] = useState(false);
-
-  const handleDropdownOpen = () => {
-    setOnDropdown(true);
-  };
-
   return (
     <Layout>
       <PostContainer>
@@ -49,19 +61,31 @@ const WriteTemplate: React.FC<Props> = ({
         <TextEditor content={content} setContent={setContent} ticketImg={ticketImg} />
       </PostContainer>
       <BottomBar>
-        {onTicketbookDropdown && (
-          <Ticketbookontainer>
+        {onTicketbook && (
+          <TicketbookContainer ref={TicketbookContainerRef}>
             <span>티켓북</span>
             <DropdownContainer>
-              <img src={arrowImg} alt="화살표" />
-              <SelectedTicketbook>기본 티켓북</SelectedTicketbook>
+              <SelectedTicketbook onClick={handleDropdownOpen}>{ticketbook.name}</SelectedTicketbook>
+              <ArrowImg src={arrowImg} alt="화살표" onDropdown={onDropdown} />
+              {onDropdown && (
+                <SelectTicketbookContainer>
+                  {ticketbooks.map((ticketbook) => (
+                    <div key={ticketbook.id} onClick={(e) => handleTicketbookChange(e, ticketbook)}>
+                      {ticketbook.name}
+                    </div>
+                  ))}
+                </SelectTicketbookContainer>
+              )}
             </DropdownContainer>
-          </Ticketbookontainer>
+            <ButtonWrapper>
+              <BasicButton text="글 작성 완료하기" handler={handlePostSubmit} />
+            </ButtonWrapper>
+          </TicketbookContainer>
         )}
-        {onTicketbookDropdown ? (
-          <BasicButton text="완료하기" handler={handlePostSubmit} />
-        ) : (
-          <BasicButton text="티켓북 고르기" handler={handleTicketbookDropdownOpen} />
+        {!onTicketbook && (
+          <ButtonWrapper>
+            <BasicButton text="티켓북 고르기" handler={handleTicketbookOpen} />
+          </ButtonWrapper>
         )}
       </BottomBar>
     </Layout>

@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
-import { media } from '@src/styles/media';
+import { media } from '@styles/media';
+
+interface ArrowImgProps {
+  onDropdown: boolean;
+}
 
 export const PostContainer = styled.div`
   margin: 0 auto;
@@ -32,17 +36,11 @@ export const BottomBar = styled.div`
   display: flex;
   justify-content: right;
   z-index: 5;
-  button {
-    position: absolute;
-    top: -2.5rem;
-    right: 1rem;
-    height: 2rem;
-  }
 `;
 
-export const Ticketbookontainer = styled.div`
+export const TicketbookContainer = styled.div`
   position: absolute;
-  top: -7.5rem;
+  top: -7.8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -56,13 +54,6 @@ export const Ticketbookontainer = styled.div`
 
 export const DropdownContainer = styled.div`
   position: relative;
-  img {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    width: 1rem;
-    transform: scaleY(-1);
-  }
 `;
 
 export const SelectedTicketbook = styled.div`
@@ -75,4 +66,39 @@ export const SelectedTicketbook = styled.div`
   padding-left: 0.8rem;
   box-sizing: border-box;
   cursor: pointer;
+`;
+
+export const ArrowImg = styled.img<ArrowImgProps>`
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 1rem;
+  transform: ${(props) => (props.onDropdown ? '' : 'scaleY(-1)')};
+`;
+
+export const SelectTicketbookContainer = styled.div`
+  position: absolute;
+  bottom: 2.3rem;
+  background-color: ${ColorCode.WHITE};
+  border-radius: 0.5rem;
+  div {
+    display: flex;
+    align-items: center;
+    width: 14rem;
+    height: 2rem;
+    padding-left: 0.8rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    :hover {
+      background-color: ${ColorCode.GRAY2};
+      border-radius: 0.5rem;
+    }
+  }
+`;
+
+export const ButtonWrapper = styled.div`
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  height: 2rem;
 `;
