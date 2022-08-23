@@ -12,7 +12,12 @@ export interface TicketSimpleType {
   likeCount: number;
 }
 
-export type TicketListResType = TicketSimpleType[];
+export type TicketListType = TicketSimpleType[];
+
+export interface TicketListResType {
+  hasNotTicket: boolean;
+  tickets: TicketListType;
+}
 
 export interface TicketType {
   ticketId: number;
