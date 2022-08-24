@@ -4,6 +4,7 @@ import ProfileBox from '@components/Common/Profile/ProfileBox';
 import BasicButton from '@components/Common/BasicButton';
 import TicketbookList from '@components/TicketbookList';
 import TicketList from '@components/TicketList';
+import TicketbookExample from '@components/TicketbookList/TicketbookExample';
 import { TicketListType } from '@src/types/ticket';
 
 import Layout from '@styles/Layout';
@@ -44,7 +45,7 @@ const HomeTemplate: React.FC<Props> = ({ isMyHome, profile, tickets, isLoaded, s
         )}
       </ButtonWrapper>
       <TicketbookListWrapper>
-        <TicketbookList />
+        <TicketbookExample />
       </TicketbookListWrapper>
       <TicketList tickets={tickets} backgroundColor="white" isLoaded={isLoaded} setTarget={setTarget} />
       <HomeBackground color="PURPLE" />

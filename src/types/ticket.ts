@@ -87,4 +87,19 @@ export const example = [
     title: '영화🎥',
     date: '22.03.04~22.09.09',
   },
+  {
+    img: 'http://file3.instiz.net/data/file3/2022/03/31/9/f/e/9fe20dba9362e23bba3d2475a2ce02a3.jpg',
+    title: '원영',
+    date: '22.03.04~22.09.09',
+  },
+  {
+    img: 'https://images.chosun.com/resizer/XbRfWtmHCcz9i7qyJpuV7vBzugQ=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/Q5AGLAHF4BG7VDI6VEXYK75SPU.jpg',
+    title: '지킬',
+    date: '22.03.04~22.09.09',
+  },
+  {
+    img: 'https://image.fmkorea.com/files/attach/new2/20220329/3655109/2889212861/4478307323/6090b3178e5b2bbc3476308bc475a3fb.jpg',
+    title: '레이',
+    date: '22.03.04~22.09.09',
+  },
 ];
