@@ -7,6 +7,7 @@ import HomeTemplate from '@templates/HomeTemplate';
 import { userProfileState } from '@stores/user';
 import { getTicketbookTickets } from '@apis/ticket';
 import { getMemberProfile } from '@apis/member';
+import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { TicketListType } from '@src/types/ticket';
 
 interface HomeProfileType {
@@ -33,9 +34,8 @@ const HomePage: React.FC = () => {
   const [tickets, setTickets] = useState<TicketListType>([]);
   const [cursorId, setCursorId] = useState<number | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [target, setTarget] = useState();
-  const [apiTrigger, setApiTrigger] = useState(0);
   const [hasNotTicket, setHasNoTicket] = useState(false);
+  const { apiTrigger, setTarget } = useInfiniteScroll();
 
   const isMyHome = homeId === myProfile.homeId;
 
@@ -82,36 +82,15 @@ const HomePage: React.FC = () => {
     }
   };
 
-  const onIntersect = ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-    if (entry.isIntersecting && !isLoaded) {
-      console.log('intersecting');
-      setApiTrigger((prev) => prev + 1);
-    }
-  };
-
   useEffect(() => {
     getProfile();
   }, []);
 
   useEffect(() => {
     if (apiTrigger > 0) {
-      console.log('get');
       getTickets();
     }
   }, [apiTrigger]);
-
-  useEffect(() => {
-    let observer: IntersectionObserver;
-    if (target) {
-      observer = new IntersectionObserver(onIntersect, { rootMargin: '100px', threshold: 1 });
-      observer.observe(target);
-    }
-    return () => observer && observer.disconnect();
-  }, [target]);
-
-  useEffect(() => {
-    console.log(tickets);
-  }, [tickets]);
 
   return (
     <HomeTemplate

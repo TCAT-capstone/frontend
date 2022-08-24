@@ -3,22 +3,26 @@ import React, { useEffect, useState } from 'react';
 import MainTemplate from '@templates/MainTemplate';
 
 import { getTrendTickets } from '@apis/ticket';
+import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { TicketListType } from '@src/types/ticket';
 
 interface Props {
   isTrend: boolean;
 }
 
+type CursorType = { cursorId: number | null; cursorLikeCount: number | null };
+
+const initialCursor = {
+  cursorId: null,
+  cursorLikeCount: null,
+};
+
 const MainPage: React.FC<Props> = ({ isTrend }) => {
   const [tickets, setTickets] = useState<TicketListType>([]);
-  const [cursor, setCursor] = useState<{ cursorId: number | null; cursorLikeCount: number | null }>({
-    cursorId: null,
-    cursorLikeCount: null,
-  });
+  const [cursor, setCursor] = useState<CursorType>(initialCursor);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [target, setTarget] = useState();
-  const [apiTrigger, setApiTrigger] = useState(0);
   const [hasNotTicket, setHasNoTicket] = useState(false);
+  const { apiTrigger, setTarget } = useInfiniteScroll();
 
   const getTickets = async () => {
     if (!hasNotTicket) {
@@ -39,32 +43,11 @@ const MainPage: React.FC<Props> = ({ isTrend }) => {
     }
   };
 
-  const onIntersect = async ([entry]: IntersectionObserverEntry[]) => {
-    if (entry.isIntersecting && !isLoaded) {
-      console.log('intersecting');
-      setApiTrigger((prev) => prev + 1);
-    }
-  };
-
   useEffect(() => {
     if (apiTrigger > 0) {
-      console.log('get');
       getTickets();
     }
   }, [apiTrigger]);
-
-  useEffect(() => {
-    let observer: IntersectionObserver;
-    if (target) {
-      observer = new IntersectionObserver(onIntersect, { threshold: 0.4 });
-      observer.observe(target);
-    }
-    return () => observer && observer.disconnect();
-  }, [target]);
-
-  useEffect(() => {
-    console.log(tickets);
-  }, [tickets]);
 
   return <MainTemplate isTrend={isTrend} tickets={tickets} isLoaded={isLoaded} setTarget={setTarget} />;
 };
