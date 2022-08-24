@@ -82,8 +82,9 @@ const HomePage: React.FC = () => {
     }
   };
 
-  const onIntersect = async ([entry]: IntersectionObserverEntry[]) => {
+  const onIntersect = ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
     if (entry.isIntersecting && !isLoaded) {
+      console.log('intersecting');
       setApiTrigger((prev) => prev + 1);
     }
   };
@@ -93,7 +94,10 @@ const HomePage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    getTickets();
+    if (apiTrigger > 0) {
+      console.log('get');
+      getTickets();
+    }
   }, [apiTrigger]);
 
   useEffect(() => {
@@ -104,6 +108,10 @@ const HomePage: React.FC = () => {
     }
     return () => observer && observer.disconnect();
   }, [target]);
+
+  useEffect(() => {
+    console.log(tickets);
+  }, [tickets]);
 
   return (
     <HomeTemplate
