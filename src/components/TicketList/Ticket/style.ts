@@ -13,6 +13,8 @@ export const Container = styled.div<ContainerProps>`
   margin: 1.3rem 2.1rem;
   transition: 0.3s;
   a {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-shrink: 0;
   }
@@ -22,10 +24,11 @@ export const Container = styled.div<ContainerProps>`
 `;
 
 export const TicketImage = styled.img`
-  width: 20.25rem;
-  height: 11.65rem;
+  width: 100%;
+  height: 100%;
   border-radius: 0.5rem;
   background-color: ${ColorCode.GRAY2};
+  object-fit: cover;
 `;
 
 export const InfoContainer = styled.div`
