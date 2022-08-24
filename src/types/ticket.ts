@@ -32,11 +32,9 @@ export interface TicketType {
   content: string;
   date: string;
   casting: string;
-  category: CategoryType;
 }
 
-export interface TicketReqType {
-  memberId: number;
+export interface CreateTicketReqType {
   ticketbookId: number;
   ticketImg: string;
   ticketValidation: TicketValidationType;
@@ -47,7 +45,6 @@ export interface TicketReqType {
   casting: string;
   title: string;
   content: string;
-  category: CategoryType;
 }
 
 export interface OcrTicketInfoResType {

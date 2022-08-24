@@ -6,7 +6,7 @@ import Layout from '@styles/Layout';
 import TextEditor from '@components/TextEditor';
 import BasicButton from '@components/Common/BasicButton';
 
-import { TicketbookListResType, TicketbookType } from '@src/types/ticketbook';
+import { TicketbookListType, TicketbookType } from '@src/types/ticketbook';
 import arrowImg from '@images/down-arrow.svg';
 
 import {
@@ -30,7 +30,7 @@ interface Props {
   handlePostSubmit: () => void;
   onTicketbook: boolean;
   handleTicketbookOpen: (e: MouseEvent) => void;
-  ticketbooks: TicketbookListResType;
+  ticketbooks: TicketbookListType;
   ticketbook: TicketbookType;
   handleTicketbookChange: (e: MouseEvent, ticketbook: TicketbookType) => void;
   onDropdown: boolean;
@@ -69,9 +69,9 @@ const WriteTemplate: React.FC<Props> = ({
               <ArrowImg src={arrowImg} alt="화살표" onDropdown={onDropdown} />
               {onDropdown && (
                 <SelectTicketbookContainer>
-                  {ticketbooks.map((ticketbook) => (
-                    <div key={ticketbook.id} onClick={(e) => handleTicketbookChange(e, ticketbook)}>
-                      {ticketbook.name}
+                  {ticketbooks.map((book) => (
+                    <div key={book.id} onClick={(e) => handleTicketbookChange(e, book)}>
+                      {book.name}
                     </div>
                   ))}
                 </SelectTicketbookContainer>

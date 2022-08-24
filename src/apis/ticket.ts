@@ -1,5 +1,5 @@
 import fetchApi from '@utils/fetch';
-import { OcrTicketInfoResType, TicketListResType, TicketType } from '@src/types/ticket';
+import { CreateTicketReqType, OcrTicketInfoResType, TicketListResType, TicketType } from '@src/types/ticket';
 
 export const getTrendTickets = async (): Promise<TicketListResType> => {
   try {
@@ -50,6 +50,16 @@ export const getOcrTicketInfo = async (file: File): Promise<OcrTicketInfoResType
     formData.append('file', file);
     const res = await fetchApi.postOcrFile('/ocr', formData);
     if (res.status !== 200) throw new Error('error');
+    return await res.json();
+  } catch (err) {
+    return false;
+  }
+};
+
+export const createTicket = async (createTicketReq: CreateTicketReqType): Promise<TicketType | false> => {
+  try {
+    const res = await fetchApi.post('/api/tickets', createTicketReq);
+    if (res.status !== 201) throw new Error('error');
     return await res.json();
   } catch (err) {
     return false;

@@ -1,7 +1,7 @@
 import fetchApi from '@utils/fetch';
-import { TicketbookListResType } from '@src/types/ticketbook';
+import { TicketbookListType } from '@src/types/ticketbook';
 
-export const getTicketbookList = async (homeId: string): Promise<TicketbookListResType> => {
+export const getTicketbookList = async (homeId: string): Promise<TicketbookListType> => {
   try {
     const res = await fetchApi.get(`/api/members/${homeId}/ticketbooks`);
     if (res.status !== 200) throw new Error('error');
