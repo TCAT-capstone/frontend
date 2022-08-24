@@ -4,7 +4,7 @@ import { Button } from './style';
 
 interface Props {
   text: string;
-  handler: () => void;
+  handler: (e?: any) => void;
 }
 
 const BasicButton: React.FC<Props> = ({ text, handler }) => {

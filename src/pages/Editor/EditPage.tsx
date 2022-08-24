@@ -36,15 +36,17 @@ const EditPage: React.FC = () => {
   };
 
   const handlePageNavigate = async () => {
-    const imgUrl = await getTicketImage();
-    navigate('/write', { state: { imgUrl }, replace: true });
+    const imgObj = await getTicketImage();
+    navigate('/write', { state: { imgObj }, replace: true });
   };
 
   const getTicketImage = async () => {
     const node = document.getElementById('ticket');
     if (node) {
       const imgUrl = await domtoimage.toPng(node);
-      return imgUrl;
+      const res = await fetch(imgUrl);
+      const blob = await res.blob();
+      return { file: new File([blob], 'ticket-image', { type: 'image/png' }), url: imgUrl };
     }
     return '';
   };
