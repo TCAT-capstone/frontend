@@ -4,16 +4,18 @@ import Layout from '@styles/Layout';
 import Tab from '@components/Common/Tab';
 import TicketList from '@components/TicketList';
 
-import { TicketListResType } from '@src/types/ticket';
+import { TicketListType } from '@src/types/ticket';
 
 import { TabWrapper } from './style';
 
 interface Props {
   isTrend: boolean;
-  tickets: TicketListResType;
+  tickets: TicketListType;
+  isLoaded: boolean;
+  setTarget: any;
 }
 
-const MainTemplate: React.FC<Props> = ({ isTrend, tickets }) => {
+const MainTemplate: React.FC<Props> = ({ isTrend, tickets, isLoaded, setTarget }) => {
   return (
     <Layout>
       <TabWrapper>
@@ -25,7 +27,7 @@ const MainTemplate: React.FC<Props> = ({ isTrend, tickets }) => {
           focus={isTrend ? 'first' : 'second'}
         />
       </TabWrapper>
-      <TicketList tickets={tickets} backgroundColor="purple" />
+      <TicketList tickets={tickets} backgroundColor="purple" isLoaded={isLoaded} setTarget={setTarget} />
     </Layout>
   );
 };
