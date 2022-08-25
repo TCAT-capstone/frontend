@@ -31,6 +31,9 @@ const ProfileDropdown: React.FC = () => {
         <Link to={`/~${myProfile.homeId}`}>
           <span>나의 티켓 홈</span>
         </Link>
+        <Link to={`/~${myProfile.homeId}/ticketbook`}>
+          <span>나의 티켓북</span>
+        </Link>
         <Link to="/">
           <span>나의 구독</span>
         </Link>
