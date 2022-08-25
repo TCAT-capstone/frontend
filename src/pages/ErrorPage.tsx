@@ -1,11 +1,9 @@
 import React from 'react';
 
+import ErrorTemplate from '@templates/ErrorTemplate';
+
 const ErrorPage: React.FC = () => {
-  return (
-    <div>
-      <h2>페이지를 찾을 수 없습니다.</h2>
-    </div>
-  );
+  return <ErrorTemplate />;
 };
 
 export default ErrorPage;
