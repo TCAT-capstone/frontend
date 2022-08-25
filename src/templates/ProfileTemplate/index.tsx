@@ -12,10 +12,11 @@ interface Props {
   profile: ProfileType | undefined;
   newName: string;
   newBio: string;
-  isActive: boolean;
-  isPassedSubmit: () => void;
-  handleNameChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  handleBioChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  nameError: { state: 'error' | 'valid'; message: string };
+  bioError: { state: 'error' | 'valid'; message: string };
+  isButtonActive: boolean;
+  handleNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleBioChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleUpdateProfile: () => void;
 }
 
@@ -23,8 +24,9 @@ const ProfileTemplate: React.FC<Props> = ({
   profile,
   newName,
   newBio,
-  isActive,
-  isPassedSubmit,
+  nameError,
+  bioError,
+  isButtonActive,
   handleNameChange,
   handleBioChange,
   handleUpdateProfile,
@@ -47,8 +49,9 @@ const ProfileTemplate: React.FC<Props> = ({
               homeId={profile.homeId}
               newName={newName}
               newBio={newBio}
-              isActive={isActive}
-              isPassedSubmit={isPassedSubmit}
+              nameError={nameError}
+              bioError={bioError}
+              isButtonActive={isButtonActive}
               handleNameChange={handleNameChange}
               handleBioChange={handleBioChange}
               handleUpdateProfile={handleUpdateProfile}

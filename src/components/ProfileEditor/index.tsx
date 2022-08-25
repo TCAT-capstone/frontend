@@ -1,17 +1,16 @@
 import React from 'react';
 
-import BasicButton from '@components/Common/BasicButton';
-
-import { Container, ProfileInfoContainer, ButtonWrapper } from './style';
+import { Container, ProfileInfoContainer, Input, ErrorText, ButtonWrapper, Button } from './style';
 
 interface Props {
   homeId: string;
   newName: string;
   newBio: string;
-  isActive: boolean;
-  isPassedSubmit: () => void;
-  handleNameChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  handleBioChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  nameError: { state: 'error' | 'valid'; message: string };
+  bioError: { state: 'error' | 'valid'; message: string };
+  isButtonActive: boolean;
+  handleNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleBioChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleUpdateProfile: () => void;
 }
 
@@ -19,8 +18,9 @@ const ProfileEditor: React.FC<Props> = ({
   homeId,
   newName,
   newBio,
-  isActive,
-  isPassedSubmit,
+  nameError,
+  bioError,
+  isButtonActive,
   handleNameChange,
   handleBioChange,
   handleUpdateProfile,
@@ -36,14 +36,18 @@ const ProfileEditor: React.FC<Props> = ({
       </ProfileInfoContainer>
       <ProfileInfoContainer>
         <h2>닉네임</h2>
-        <textarea name="newName" value={newName} onChange={handleNameChange} onKeyUp={isPassedSubmit} />
+        <Input type="text" onChange={handleNameChange} state={nameError.state} value={newName} />
+        <ErrorText>{nameError.message}</ErrorText>
       </ProfileInfoContainer>
       <ProfileInfoContainer>
         <h2>바이오</h2>
-        <textarea name="newBio" value={newBio} onChange={handleBioChange} onKeyUp={isPassedSubmit} />
+        <Input type="text" onChange={handleBioChange} state={bioError.state} value={newBio} />
+        <ErrorText>{bioError.message}</ErrorText>
       </ProfileInfoContainer>
-      <ButtonWrapper isActive={isActive}>
-        <BasicButton text="프로필 저장하기" handler={handleUpdateProfile} />
+      <ButtonWrapper>
+        <Button type="button" onClick={handleUpdateProfile} active={isButtonActive} disabled={!isButtonActive}>
+          <span>프로필 저장하기</span>
+        </Button>
       </ButtonWrapper>
     </Container>
   );
