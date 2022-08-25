@@ -74,3 +74,13 @@ export const createTicket = async (createTicketReq: CreateTicketReqType): Promis
     return false;
   }
 };
+
+export const deleteTicket = async (ticketId: number): Promise<boolean> => {
+  try {
+    const res = await fetchApi.delete(`/api/tickets/${ticketId}`);
+    if (res.status !== 200) throw new Error('error');
+    return true;
+  } catch (err) {
+    return false;
+  }
+};
