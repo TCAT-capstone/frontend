@@ -52,6 +52,12 @@ export interface CreateTicketReqType {
   content: string;
 }
 
+export interface UpdateTicketReqType {
+  ticketbookId: number;
+  title: string;
+  content: string;
+}
+
 export interface OcrTicketInfoResType {
   ticetSeat: string;
   ticketDate: string;

@@ -35,9 +35,10 @@ interface Props {
   post: TicketType | undefined;
   isMyHome: boolean;
   handlePostDelete: () => void;
+  handlePostEdit: () => void;
 }
 
-const PostTemplate: React.FC<Props> = ({ post, isMyHome, handlePostDelete }) => {
+const PostTemplate: React.FC<Props> = ({ post, isMyHome, handlePostDelete, handlePostEdit }) => {
   const sanitizer = dompurify.sanitize;
 
   return (
@@ -80,7 +81,10 @@ const PostTemplate: React.FC<Props> = ({ post, isMyHome, handlePostDelete }) => 
               </ShareLikeContainer>
               {isMyHome && (
                 <div>
-                  <button type="button">수정</button> •{' '}
+                  <button type="button" onClick={handlePostEdit}>
+                    수정
+                  </button>{' '}
+                  •{' '}
                   <button type="button" onClick={handlePostDelete}>
                     삭제
                   </button>

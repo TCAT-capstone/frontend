@@ -1,5 +1,11 @@
 import fetchApi from '@utils/fetch';
-import { CreateTicketReqType, OcrTicketInfoResType, TicketListResType, TicketType } from '@src/types/ticket';
+import {
+  CreateTicketReqType,
+  OcrTicketInfoResType,
+  TicketListResType,
+  TicketType,
+  UpdateTicketReqType,
+} from '@src/types/ticket';
 
 export const getTrendTickets = async (
   cursorId: number | null,
@@ -80,6 +86,19 @@ export const deleteTicket = async (ticketId: number): Promise<boolean> => {
     const res = await fetchApi.delete(`/api/tickets/${ticketId}`);
     if (res.status !== 200) throw new Error('error');
     return true;
+  } catch (err) {
+    return false;
+  }
+};
+
+export const updateTicket = async (
+  ticketId: number,
+  updateTicketReqType: UpdateTicketReqType,
+): Promise<TicketType | false> => {
+  try {
+    const res = await fetchApi.patch(`/api/tickets/${ticketId}`, updateTicketReqType);
+    if (res.status !== 200) throw new Error('error');
+    return await res.json();
   } catch (err) {
     return false;
   }

@@ -58,7 +58,7 @@ const WriteTemplate: React.FC<Props> = ({
     <Layout>
       <PostContainer>
         <TitleInput onChange={handleTitleChange} value={title} placeholder="제목을 입력해주세요." />
-        <TextEditor content={content} setContent={setContent} ticketImg={ticketImg} />
+        <TextEditor content={content} setContent={setContent} ticketImg={ticketImg ?? ''} />
       </PostContainer>
       <BottomBar>
         {onTicketbook && (

@@ -16,24 +16,30 @@ const PostPage: React.FC = () => {
   const isMyHome = homeId === myProfile.homeId;
 
   const getPost = async () => {
-    const data = await getTicket(Number(ticketId));
-    if (data) {
-      setPost(data);
+    const ticket = await getTicket(Number(ticketId));
+    if (ticket) {
+      setPost(ticket);
     }
   };
 
   const handlePostDelete = async () => {
     const result = await deleteTicket(Number(ticketId));
     if (result) {
-      navigate(`/~${homeId}`);
+      navigate(`/~${homeId}`, { replace: true });
     }
+  };
+
+  const handlePostEdit = () => {
+    navigate('/write', { state: { ticketId, post }, replace: true });
   };
 
   useEffect(() => {
     getPost();
   }, []);
 
-  return <PostTemplate post={post} isMyHome={isMyHome} handlePostDelete={handlePostDelete} />;
+  return (
+    <PostTemplate post={post} isMyHome={isMyHome} handlePostDelete={handlePostDelete} handlePostEdit={handlePostEdit} />
+  );
 };
 
 export default PostPage;
