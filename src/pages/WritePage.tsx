@@ -11,6 +11,7 @@ import { uploadImage } from '@apis/image';
 import WriteTemplate from '@templates/WriteTemplate';
 import { TicketType } from '@src/types/ticket';
 import { TicketbookListType, TicketbookType } from '@src/types/ticketbook';
+import { toast } from 'react-toastify';
 
 interface LocationStateType {
   imgObj: { file: File; url: string };
@@ -64,8 +65,21 @@ const WritePage: React.FC = () => {
     }
   };
 
+  const validatePost = () => {
+    if (title === '') {
+      toast.error('제목을 입력해주세요!');
+      return false;
+    }
+    if (content === '') {
+      toast.error('내용을 입력해주세요!');
+      return false;
+    }
+    return true;
+  };
+
   const handlePostSubmit = async () => {
     let newTicket;
+    if (!validatePost()) return;
     if (isUpdateMode) {
       newTicket = await updateTicket(state.post.ticketId, { ticketbookId: ticketbook.id, title, content });
     } else {

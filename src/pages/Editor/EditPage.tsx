@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import domtoimage from 'dom-to-image';
+import { toast } from 'react-toastify';
 
 import EditTemplate from '@templates/Editor/EditTemplate';
 import { ticketState } from '@stores/editor';
@@ -16,7 +17,7 @@ const EditPage: React.FC = () => {
   const location = useLocation();
   const state = location.state as LocationStateType;
   const [isLoading, setIsLoading] = useState(state !== null);
-  const setTicketInfo = useSetRecoilState(ticketState);
+  const [ticketInfo, setTicketInfo] = useRecoilState(ticketState);
 
   const getTicketInfo = async () => {
     if (state.imgFile) {
@@ -35,7 +36,22 @@ const EditPage: React.FC = () => {
     }
   };
 
+  const validateTicketInfo = () => {
+    if (
+      ticketInfo.title === '' ||
+      ticketInfo.date === '' ||
+      ticketInfo.location === '' ||
+      ticketInfo.seat === '' ||
+      ticketInfo.casting === ''
+    ) {
+      toast.error('티켓 정보가 비어있어요!');
+      return false;
+    }
+    return true;
+  };
+
   const handlePageNavigate = async () => {
+    if (!validateTicketInfo()) return;
     const imgObj = await getTicketImage();
     navigate('/write', { state: { imgObj }, replace: true });
   };
