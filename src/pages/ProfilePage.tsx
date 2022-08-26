@@ -11,7 +11,7 @@ type ErrorType = { state: 'error' | 'valid'; message: string };
 const ProfilePage: React.FC = () => {
   const [myProfile, setMyProfile] = useRecoilState(userProfileState);
   const [newName, setNewName] = useState(myProfile.name);
-  const [newBio, setNewBio] = useState(myProfile.bio);
+  const [newBio, setNewBio] = useState(myProfile.bio === null ? '' : myProfile.bio);
   const [nameError, setNameError] = useState<ErrorType>({ state: 'error', message: '' });
   const [bioError, setBioError] = useState<ErrorType>({ state: 'error', message: '' });
 
@@ -63,7 +63,7 @@ const ProfilePage: React.FC = () => {
   };
 
   const validateBio = () => {
-    if (newBio.length > 30 || newBio.length < 1) {
+    if (newBio && (newBio.length > 30 || newBio.length < 1)) {
       setBioError({ state: 'error', message: '바이오는 1자 이상, 30자 이내 이어야 해요.' });
     } else {
       setBioError({ state: 'valid', message: '' });

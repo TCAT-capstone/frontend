@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
+import { media } from '@styles/media';
 
 interface InputProps {
   state: 'none' | 'error' | 'valid';
@@ -27,6 +28,9 @@ export const Container = styled.div`
   span {
     font-size: 0.8rem;
   }
+  ${media.large`
+    width: 29rem;
+  `}
 `;
 
 export const ProfileInfoContainer = styled.div`
@@ -42,7 +46,6 @@ export const ProfileInfoContainer = styled.div`
   }
   :nth-of-type(4) > Input {
     width: 25.8rem;
-    height: 3.3rem;
   }
 `;
 
