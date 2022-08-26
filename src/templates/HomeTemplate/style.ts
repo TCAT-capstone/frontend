@@ -7,7 +7,7 @@ interface TicketBackgroundProps {
 }
 
 export const ProfileWrapper = styled.div`
-  width: 18.75rem;
+  width: 23rem;
   margin: 3.1rem auto 2rem auto;
 `;
 
