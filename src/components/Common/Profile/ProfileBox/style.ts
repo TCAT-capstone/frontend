@@ -22,11 +22,6 @@ export const Container = styled.div`
     word-break: keep-all;
     margin: auto;
     margin-bottom: 0.95rem;
-    ${media.large`
-      word-break: normal;
-      margin-bottom: 1.9rem;
-      width: 18rem;
-    `}
   }
 `;
 
