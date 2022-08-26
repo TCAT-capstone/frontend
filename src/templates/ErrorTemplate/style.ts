@@ -4,7 +4,7 @@ import { media } from '@styles/media';
 
 export const NumImg = styled.img`
   position: absolute;
-  top: 0;
+  top: -40%;
   left: 50%;
   transform: translate(-50%, 0);
   ${media.large`
@@ -16,7 +16,7 @@ export const NumImg = styled.img`
 export const ErrorFrame = styled.div`
   position: relative;
   display: flex;
-  margin-top: 2rem;
+  margin-top: 8rem;
   justify-content: center;
   flex-direction: column;
   align-items: center;

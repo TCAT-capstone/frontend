@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import BasicButton from '@components/Common/BasicButton';
 import pawImg from '@images/error-paw.png';
 import numImg from '@images/error-404.png';
-import Layout from '@styles/Layout';
 import { NumImg, ErrorFrame, ButtonContainer } from './style';
 
 const ErrorTemplate: React.FC = () => {
@@ -18,7 +17,7 @@ const ErrorTemplate: React.FC = () => {
     window.location.href = `/`;
   };
   return (
-    <Layout>
+    <div>
       <NumImg src={numImg} alt="404 이미지" />
       <ErrorFrame>
         <h2>이런! 무언가 잘못됐어요!</h2>
@@ -30,7 +29,7 @@ const ErrorTemplate: React.FC = () => {
           <BasicButton text="홈으로" handler={goHome} />
         </ButtonContainer>
       </ErrorFrame>
-    </Layout>
+    </div>
   );
 };
 
