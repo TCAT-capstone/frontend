@@ -1,15 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import Layout from '@styles/Layout';
 
 import ProfileBox from '@components/Common/Profile/ProfileBox';
 import BasicButton from '@components/Common/BasicButton';
 import TicketbookList from '@components/TicketbookList';
 import TicketList from '@components/TicketList';
+import TicketbookExample from '@components/TicketbookList/TicketbookExample';
+import { TicketListType } from '@src/types/ticket';
 
-import { TicketListResType } from '@src/types/ticket';
-
+import Layout from '@styles/Layout';
 import { ProfileWrapper, ButtonWrapper, TicketbookListWrapper, HomeBackground } from './style';
 
 interface Props {
@@ -21,16 +19,13 @@ interface Props {
     ticketCount: number;
     likeCount: number;
   };
-  tickets: TicketListResType;
+  tickets: TicketListType;
+  isLoaded: boolean;
+  setTarget: any;
+  handlePageNavigate: () => void;
 }
 
-const HomeTemplate: React.FC<Props> = ({ isMyHome, profile, tickets }) => {
-  const navigate = useNavigate();
-
-  const handlePageNavigate = () => {
-    navigate('/editor/new');
-  };
-
+const HomeTemplate: React.FC<Props> = ({ isMyHome, profile, tickets, isLoaded, setTarget, handlePageNavigate }) => {
   return (
     <Layout>
       <ProfileWrapper>
@@ -50,9 +45,9 @@ const HomeTemplate: React.FC<Props> = ({ isMyHome, profile, tickets }) => {
         )}
       </ButtonWrapper>
       <TicketbookListWrapper>
-        <TicketbookList />
+        <TicketbookExample />
       </TicketbookListWrapper>
-      <TicketList tickets={tickets} backgroundColor="white" />
+      <TicketList tickets={tickets} backgroundColor="white" isLoaded={isLoaded} setTarget={setTarget} />
       <HomeBackground color="PURPLE" />
     </Layout>
   );

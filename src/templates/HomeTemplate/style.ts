@@ -7,7 +7,7 @@ interface TicketBackgroundProps {
 }
 
 export const ProfileWrapper = styled.div`
-  width: 18.75rem;
+  width: 23rem;
   margin: 3.1rem auto 2rem auto;
 `;
 
@@ -17,8 +17,7 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const TicketbookListWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+  width: 100%;
   margin-top: 3.5rem;
   margin-bottom: 13rem;
 `;

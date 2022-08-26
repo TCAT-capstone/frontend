@@ -1,21 +1,24 @@
 import React from 'react';
 
-import { TicketListResType } from '@src/types/ticket';
+import { TicketListType } from '@src/types/ticket';
+import spinnerImg from '@images/spinner.gif';
 
-import { Container } from './style';
+import { Container, SpinnerWrapper } from './style';
 import Ticket from './Ticket';
 
 interface Props {
-  tickets: TicketListResType;
+  tickets: TicketListType;
   backgroundColor: 'purple' | 'white';
+  isLoaded: boolean;
+  setTarget: any;
 }
 
-const TicketList: React.FC<Props> = ({ tickets, backgroundColor }) => {
+const TicketList: React.FC<Props> = ({ tickets, backgroundColor, isLoaded, setTarget }) => {
   return (
     <Container>
       {tickets.map((t) => (
         <Ticket
-          key={t.ticketId}
+          key={`ticket${t.ticketId}`}
           link={`/~${t.homeId}/${t.ticketId}`}
           ticketImg={t.ticketImg}
           title={t.title}
@@ -25,6 +28,7 @@ const TicketList: React.FC<Props> = ({ tickets, backgroundColor }) => {
           backgroundColor={backgroundColor}
         />
       ))}
+      <SpinnerWrapper ref={setTarget}>{isLoaded && <img src={spinnerImg} alt="로딩" />}</SpinnerWrapper>
     </Container>
   );
 };

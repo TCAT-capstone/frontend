@@ -19,8 +19,6 @@ interface Props {
 }
 
 const TicketInfoBox: React.FC<Props> = ({ title, date, location, seat, casting }) => {
-  const castingList = casting.split(',');
-
   return (
     <Container>
       <InfoContainer>
@@ -41,14 +39,7 @@ const TicketInfoBox: React.FC<Props> = ({ title, date, location, seat, casting }
       </InfoContainer>
       <InfoContainer>
         <img src={CastImg} alt="사람 아이콘" />
-        <div>
-          {castingList.map((c, i) => (
-            <>
-              <span key={c}>{c}</span>
-              {i !== castingList.length - 1 && <span> / </span>}
-            </>
-          ))}
-        </div>
+        <span>{casting}</span>
       </InfoContainer>
     </Container>
   );

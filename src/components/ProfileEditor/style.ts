@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
+import { media } from '@styles/media';
 
-interface ButtonWrapperProps {
-  isActive: boolean;
+interface InputProps {
+  state: 'none' | 'error' | 'valid';
+}
+
+interface ButtonProps {
+  active: boolean;
 }
 
 export const Container = styled.div`
@@ -23,19 +28,9 @@ export const Container = styled.div`
   span {
     font-size: 0.8rem;
   }
-  textarea {
-    outline: none;
-    resize: none;
-    width: 13rem;
-    height: 1rem;
-    padding: 0.8rem;
-    border: none;
-    border: solid 1px;
-    border-radius: 0.5rem;
-    :focus {
-      border-color: ${ColorCode.PURPLE2};
-    }
-  }
+  ${media.large`
+    width: 29rem;
+  `}
 `;
 
 export const ProfileInfoContainer = styled.div`
@@ -49,19 +44,54 @@ export const ProfileInfoContainer = styled.div`
     letter-spacing: -0.03em;
     word-break: keep-all;
   }
-  textarea[name='newBio'] {
-    width: 25.2rem;
-    height: 3.3rem;
+  :nth-of-type(4) > Input {
+    width: 25.8rem;
   }
 `;
 
-export const ButtonWrapper = styled.div<ButtonWrapperProps>`
+export const Input = styled.input<InputProps>`
+  width: 15rem;
+  height: 2.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  padding-left: 0.8rem;
+  padding-right: 2rem;
+  transition: 0.3s;
+  box-sizing: border-box;
+  border: 2px solid
+    ${(props) => {
+      if (props.state === 'error') return ColorCode.RED;
+      return ColorCode.GRAY1;
+    }};
+  :focus {
+    border-color: ${ColorCode.PURPLE2};
+  }
+`;
+
+export const ErrorText = styled.span`
+  color: ${ColorCode.RED};
+  font-size: 0.625rem;
+  letter-spacing: -0.03em;
+`;
+
+export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   position: absolute;
   right: 2rem;
   bottom: -5.5rem;
-  button {
-    background-color: ${(props) => (props.isActive ? ColorCode.PRIMARY : ColorCode.GRAY2)};
+`;
+
+export const Button = styled.button<ButtonProps>`
+  background-color: ${(props) => (props.active ? ColorCode.PRIMARY : ColorCode.GRAY4)};
+  color: ${ColorCode.WHITE};
+  padding: 0.5rem 1rem;
+  border-radius: 16.5rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+  transition: 0.3s;
+  &:hover {
+    opacity: 0.8;
   }
 `;

@@ -1,15 +1,41 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-import Ticketbook from './Ticketbook';
 import { Container } from './style';
 
-const TicketbookList: React.FC = () => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const TicketbookList: React.FC<Props> = ({ children }) => {
+  const ticketbookCount = React.Children.count(children);
+  const settings = {
+    className: 'center',
+    centerMode: true,
+    centerPadding: '0',
+    infinite: ticketbookCount > 5,
+    dots: false,
+    arrows: false,
+    focusOnSelect: true,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    speed: 800,
+    responsive: [
+      {
+        breakpoint: 1610,
+        settings: {
+          infinite: ticketbookCount > 3,
+          slidesToShow: 3,
+        },
+      },
+    ],
+  };
   return (
     <Container>
-      <Ticketbook color="PURPLE" title="뮤지컬💥" date="22.03.04~22.09.09" />
-      <Ticketbook color="GREEN" title="뮤지컬💥" date="22.03.04~22.09.09" />
-      <Ticketbook color="BLUE" title="뮤지컬💥" date="22.03.04~22.09.09" />
-      <Ticketbook color="RED" title="뮤지컬💥" date="22.03.04~22.09.09" />
+      <Slider {...settings}>{children}</Slider>
     </Container>
   );
 };

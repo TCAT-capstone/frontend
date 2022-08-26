@@ -11,6 +11,7 @@ import HomePage from '@pages/HomePage';
 import PostPage from '@pages/PostPage';
 import WritePage from '@pages/WritePage';
 import ProfilePage from '@pages/ProfilePage';
+import TicketbookPage from '@pages/TicketbookPage';
 import ErrorPage from '@pages/ErrorPage';
 import OAuthRedirectPage from '@pages/OAuthRedirectPage';
 import NewPage from '@pages/Editor/NewPage';
@@ -52,6 +53,7 @@ const Router: React.FC = () => {
             <Route path="editor/new" element={<NewPage />} />
             <Route path="editor/edit" element={<EditPage />} />
             <Route path="~:homeId/profile" element={<ProfilePage />} />
+            <Route path="~:homeId/ticketbook" element={<TicketbookPage />} />
           </Route>
           <Route path="*" element={<ErrorPage />} />
         </Route>

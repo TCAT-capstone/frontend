@@ -7,14 +7,15 @@ interface ContainerProps {
 
 export const Container = styled.div<ContainerProps>`
   width: 30.5rem;
-  height: 11.65rem;
+  height: 11.6rem;
   background-color: ${(props) => (props.backgroundColor === 'purple' ? ColorCode.PURPLE1 : ColorCode.WHITE)};
   border-radius: 0.5rem;
   margin: 1.3rem 2.1rem;
   transition: 0.3s;
   a {
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-shrink: 0;
   }
   &:hover {
     transform: translateY(-0.5rem);
@@ -22,16 +23,18 @@ export const Container = styled.div<ContainerProps>`
 `;
 
 export const TicketImage = styled.img`
-  width: 20.25rem;
-  height: 11.65rem;
+  width: 20.5rem;
+  height: 100%;
   border-radius: 0.5rem;
-  background-color: ${ColorCode.GRAY2};
+  object-fit: cover;
+  flex-shrink: 0;
 `;
 
 export const InfoContainer = styled.div`
   position: relative;
   width: 7.85rem;
   margin: 1.5rem 1.2rem 1rem 1.2rem;
+  flex-shrink: 0;
   h2 {
     font-size: 0.94rem;
     font-weight: 600;

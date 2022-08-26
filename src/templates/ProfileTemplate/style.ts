@@ -6,15 +6,20 @@ export const ProfileFrame = styled.div`
   display: flex;
   overflow: auto;
   margin: 0 2rem;
+  justify-content: center;
   ${media.medium`
   flex-direction: column;
   align-items: center;
-`}
+  `}
 `;
 
 export const ProfileWrapper = styled.div`
-  width: 18.75rem;
+  width: 23rem;
   margin: 5rem 2.2rem 0 0;
+  ${media.large`
+    width: 18rem;
+    margin-right: 7rem;
+  `}
 `;
 
 export const ProfileEditorWrapper = styled.div`
@@ -27,6 +32,7 @@ export const ProfileEditorWrapper = styled.div`
   transition: 0.3s;
   ${media.large`
     border-radius: 2.8rem;
+    margin-left: 0;
   `}
   ${media.medium`
     border-radius: 1.5rem;
