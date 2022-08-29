@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -25,13 +25,17 @@ interface Props {
   isLoading: boolean;
   handlePageNavigate: () => void;
   templates: TicketTemplateListType;
+  addTemplate: (url: string) => void;
 }
 
-const EditTemplate: React.FC<Props> = ({ isLoading, handlePageNavigate, templates }) => {
+const EditTemplate: React.FC<Props> = ({ isLoading, handlePageNavigate, templates, addTemplate }) => {
   const ticketInfo = useRecoilValue(ticketState);
   const templateInfo = useRecoilValue(templateState);
 
-  const currentTemplateImg = templates.filter((t) => t.templateId === templateInfo.templateId)[0].img;
+  const currentTemplateImg = () => {
+    if (templates.length > 0) return templates.filter((t) => t.templateId === templateInfo.templateId)[0].img;
+    return '';
+  };
 
   return (
     <Layout>
@@ -41,7 +45,7 @@ const EditTemplate: React.FC<Props> = ({ isLoading, handlePageNavigate, template
           <Loading />
         ) : (
           <EditorContainer>
-            <SideMenu templates={templates} />
+            <SideMenu templates={templates} addTemplate={addTemplate} />
             <RightContainer>
               <TextContainer>
                 <h2>티켓정보를 확인하고 수정하세요.</h2>
@@ -49,7 +53,7 @@ const EditTemplate: React.FC<Props> = ({ isLoading, handlePageNavigate, template
               </TextContainer>
               <ImageContainer>
                 <div id="ticket">
-                  <img src={currentTemplateImg} alt="티켓 사진" />
+                  <img src={currentTemplateImg()} alt="티켓 사진" />
                   <TicketInfoContainer>
                     <h2>{ticketInfo.title}</h2>
                     <p>일시 : {ticketInfo.date ? getDateTimeString(new Date(ticketInfo.date)) : ''}</p>

@@ -8,9 +8,10 @@ import { AddTemplateButton, Container, TemplateImage } from './style';
 
 interface Props {
   templates: TicketTemplateListType;
+  addTemplate: (url: string) => void;
 }
 
-const TemplateMenu: React.FC<Props> = ({ templates }) => {
+const TemplateMenu: React.FC<Props> = ({ templates, addTemplate }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [templateInfo, setTemplateInfo] = useRecoilState(templateState);
 
@@ -18,8 +19,20 @@ const TemplateMenu: React.FC<Props> = ({ templates }) => {
     inputRef.current?.click();
   };
 
-  const handleFile = (file: File) => {
-    console.log(file);
+  const readFile = (file: File) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleFile = async (file: File) => {
+    const url = await readFile(file);
+    addTemplate(url as string);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +46,7 @@ const TemplateMenu: React.FC<Props> = ({ templates }) => {
     <Container>
       {templates.map((t) => (
         <TemplateImage
+          key={`template${t.templateId}`}
           onClick={() => {
             setTemplateInfo((prev) => {
               return { ...prev, templateId: t.templateId };

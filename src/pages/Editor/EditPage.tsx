@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 import EditTemplate from '@templates/Editor/EditTemplate';
 import { ticketState } from '@stores/editor';
-import { getOcrTicketInfo } from '@src/apis/ticket';
+import { getOcrTicketInfo } from '@apis/ticket';
 import { TemplateEx, TicketTemplateListType } from '@src/types/ticket';
 
 interface LocationStateType {
@@ -42,6 +42,10 @@ const EditPage: React.FC = () => {
     setTemplates(TemplateEx);
   };
 
+  const addTemplate = (url: string) => {
+    setTemplates((prev) => [...prev, { templateId: prev.length + 1, img: url }]);
+  };
+
   const validateTicketInfo = () => {
     if (
       ticketInfo.title === '' ||
@@ -70,7 +74,7 @@ const EditPage: React.FC = () => {
       const blob = await res.blob();
       return { file: new File([blob], 'ticket-image', { type: 'image/png' }), url: imgUrl };
     }
-    return '';
+    return null;
   };
 
   useEffect(() => {
@@ -80,7 +84,14 @@ const EditPage: React.FC = () => {
     getTemplates();
   }, []);
 
-  return <EditTemplate isLoading={isLoading} handlePageNavigate={handlePageNavigate} templates={templates} />;
+  return (
+    <EditTemplate
+      isLoading={isLoading}
+      handlePageNavigate={handlePageNavigate}
+      templates={templates}
+      addTemplate={addTemplate}
+    />
+  );
 };
 
 export default EditPage;

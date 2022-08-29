@@ -10,9 +10,10 @@ type MenuType = 'ticketInfo' | 'template' | 'text';
 
 interface Props {
   templates: TicketTemplateListType;
+  addTemplate: (url: string) => void;
 }
 
-const SideMenu: React.FC<Props> = ({ templates }) => {
+const SideMenu: React.FC<Props> = ({ templates, addTemplate }) => {
   const [currMenu, setCurrMenu] = useState<MenuType>('ticketInfo');
 
   return (
@@ -22,7 +23,7 @@ const SideMenu: React.FC<Props> = ({ templates }) => {
       </TabWrapper>
       <MenuContainer>
         {currMenu === 'ticketInfo' && <TicketInfoMenu />}
-        {currMenu === 'template' && <TemplateMenu templates={templates} />}
+        {currMenu === 'template' && <TemplateMenu templates={templates} addTemplate={addTemplate} />}
         {currMenu === 'ticketInfo' && <TextMenu />}
       </MenuContainer>
     </Container>
