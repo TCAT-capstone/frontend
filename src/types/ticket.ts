@@ -1,7 +1,5 @@
 export type TicketValidationType = 'VERIFIED' | 'UNVERIFIED';
 
-type CategoryType = 'MUSICAL' | 'CONCERT' | 'MOVIE' | 'SPORT' | 'ETC';
-
 export interface TicketSimpleType {
   ticketId: number;
   homeId: number;
@@ -63,6 +61,28 @@ export interface OcrTicketInfoResType {
   ticketDate: string;
   ticketLocation: string;
 }
+
+export type TicketTemplateListType = TicketTemplateType[];
+
+export interface TicketTemplateType {
+  templateId: number;
+  img: string;
+}
+
+export const TemplateEx = [
+  {
+    templateId: 1,
+    img: 'https://mytcatbucket.s3.ap-northeast-2.amazonaws.com/static/20f291d5-12d4-4585-b0d9-2935d5c55c72',
+  },
+  {
+    templateId: 2,
+    img: 'https://mytcatbucket.s3.ap-northeast-2.amazonaws.com/static/eeee6c7b-bbf0-4c9f-8132-76fe9d111a01',
+  },
+  {
+    templateId: 3,
+    img: 'https://mytcatbucket.s3.ap-northeast-2.amazonaws.com/static/78d18ae4-bcf2-42fe-a751-d3373165bc1e',
+  },
+];
 
 export const example = [
   {

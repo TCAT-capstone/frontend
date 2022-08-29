@@ -7,5 +7,5 @@ export const ticketState = atom({
 
 export const templateState = atom({
   key: 'templateState',
-  default: { templateType: 'interpark', textColor: '' },
+  default: { templateId: 1, textColor: '' },
 });

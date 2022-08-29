@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import EditTemplate from '@templates/Editor/EditTemplate';
 import { ticketState } from '@stores/editor';
 import { getOcrTicketInfo } from '@src/apis/ticket';
+import { TemplateEx, TicketTemplateListType } from '@src/types/ticket';
 
 interface LocationStateType {
   imgFile?: File;
@@ -18,6 +19,7 @@ const EditPage: React.FC = () => {
   const state = location.state as LocationStateType;
   const [isLoading, setIsLoading] = useState(state !== null);
   const [ticketInfo, setTicketInfo] = useRecoilState(ticketState);
+  const [templates, setTemplates] = useState<TicketTemplateListType>([]);
 
   const getTicketInfo = async () => {
     if (state.imgFile) {
@@ -34,6 +36,10 @@ const EditPage: React.FC = () => {
       }
       setIsLoading(false);
     }
+  };
+
+  const getTemplates = async () => {
+    setTemplates(TemplateEx);
   };
 
   const validateTicketInfo = () => {
@@ -71,9 +77,10 @@ const EditPage: React.FC = () => {
     if (state !== null) {
       getTicketInfo();
     }
+    getTemplates();
   }, []);
 
-  return <EditTemplate isLoading={isLoading} handlePageNavigate={handlePageNavigate} />;
+  return <EditTemplate isLoading={isLoading} handlePageNavigate={handlePageNavigate} templates={templates} />;
 };
 
 export default EditPage;
