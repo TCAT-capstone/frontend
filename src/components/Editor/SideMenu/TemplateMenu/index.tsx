@@ -1,10 +1,11 @@
-import React, { ChangeEvent, useRef } from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { templateState } from '@stores/editor';
 import plusImg from '@images/plus-rounded.svg';
 import { TicketTemplateListType } from '@src/types/ticket';
 import { AddTemplateButton, Container, TemplateImage } from './style';
+import ImageEditModal from './ImageEditModal';
 
 interface Props {
   templates: TicketTemplateListType;
@@ -14,6 +15,12 @@ interface Props {
 const TemplateMenu: React.FC<Props> = ({ templates, addTemplate }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [templateInfo, setTemplateInfo] = useRecoilState(templateState);
+  const [templateImageUrl, setTemplateImageUrl] = useState('');
+  const [onEditModal, setOnEditModal] = useState(false);
+
+  const handleModalClose = () => {
+    setOnEditModal(false);
+  };
 
   const handleButtonClick = () => {
     inputRef.current?.click();
@@ -31,8 +38,10 @@ const TemplateMenu: React.FC<Props> = ({ templates, addTemplate }) => {
   };
 
   const handleFile = async (file: File) => {
-    const url = await readFile(file);
-    addTemplate(url as string);
+    const url = (await readFile(file)) as string;
+    setOnEditModal(true);
+    setTemplateImageUrl(url);
+    // addTemplate(url);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -68,6 +77,7 @@ const TemplateMenu: React.FC<Props> = ({ templates, addTemplate }) => {
         style={{ display: 'none' }}
         accept="image/jpeg, image/jpg, image/png"
       />
+      {onEditModal && <ImageEditModal handleModalClose={handleModalClose} templateImageUrl={templateImageUrl} />}
     </Container>
   );
 };
