@@ -41,7 +41,6 @@ const TemplateMenu: React.FC<Props> = ({ templates, addTemplate }) => {
     const url = (await readFile(file)) as string;
     setOnEditModal(true);
     setTemplateImageUrl(url);
-    // addTemplate(url);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -77,7 +76,13 @@ const TemplateMenu: React.FC<Props> = ({ templates, addTemplate }) => {
         style={{ display: 'none' }}
         accept="image/jpeg, image/jpg, image/png"
       />
-      {onEditModal && <ImageEditModal handleModalClose={handleModalClose} templateImageUrl={templateImageUrl} />}
+      {onEditModal && (
+        <ImageEditModal
+          handleModalClose={handleModalClose}
+          templateImageUrl={templateImageUrl}
+          addTemplate={addTemplate}
+        />
+      )}
     </Container>
   );
 };

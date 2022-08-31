@@ -25,6 +25,14 @@ export const DragContainer = styled.div`
   overflow: hidden;
 `;
 
+export const NewTemplate = styled.div`
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: 1.5rem;
+  right: 1.5rem;
+`;
+
 export const ImageContainer = styled.div`
   position: absolute;
   top: 0;
@@ -46,7 +54,7 @@ export const BackgroundImage = styled.div<BackgroundImageProps>`
   background-position: center;
 `;
 
-export const TicketFrame = styled.div`
+export const TemplateFrame = styled.div`
   width: 672px;
   height: 23.9rem;
   border: solid 4px ${ColorCode.PRIMARY};
