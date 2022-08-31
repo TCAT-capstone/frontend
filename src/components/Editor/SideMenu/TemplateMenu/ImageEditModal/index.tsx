@@ -1,4 +1,4 @@
-import React, { DragEvent, MouseEvent, UIEvent, useState, WheelEvent } from 'react';
+import React, { useState, MouseEvent, WheelEvent, useRef } from 'react';
 import Slider from '@mui/material/Slider';
 import ModalFrame from '@components/Modal/ModalFrame';
 import BasicButton from '@components/Common/BasicButton';
@@ -23,6 +23,12 @@ const ImageEditModal: React.FC<Props> = ({ handleModalClose, templateImageUrl })
   const [imageOrigin, setImageOrigin] = useState({ x: 0, y: 0 });
   const [origin, setOrigin] = useState({ x: 0, y: 0 });
   const [diff, setDiff] = useState({ x: 0, y: 0 });
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  const getHeight = () => {
+    if (imgRef.current) return (imgRef.current.naturalHeight / imgRef.current.naturalWidth) * 672;
+    return 672;
+  };
 
   const handleChange = (event: Event, newValue: number | number[]) => {
     setScale(newValue as number);
@@ -66,11 +72,12 @@ const ImageEditModal: React.FC<Props> = ({ handleModalClose, templateImageUrl })
           <ImageContainer
             style={{
               width: `${672 * scale}px`,
+              height: `${getHeight() * scale}px`,
               transform: `translate3d(${diff.x}px, ${diff.y}px, 0px)`,
             }}
           >
             <BackgroundImage templateImageUrl={templateImageUrl} />
-            <img src={templateImageUrl} alt="사진" style={{ display: 'none' }} />
+            <img src={templateImageUrl} alt="사진" style={{ display: 'none' }} ref={imgRef} />
           </ImageContainer>
           <TicketFrame />
         </DragContainer>
