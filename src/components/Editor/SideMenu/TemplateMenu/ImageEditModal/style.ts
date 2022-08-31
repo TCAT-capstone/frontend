@@ -29,7 +29,7 @@ export const ImageContainer = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
+  left: 1.5rem;
   right: 0;
 `;
 
@@ -47,11 +47,12 @@ export const BackgroundImage = styled.div<BackgroundImageProps>`
 `;
 
 export const TicketFrame = styled.div`
-  width: 100%;
+  width: 672px;
   height: 23.9rem;
   border: solid 4px ${ColorCode.PRIMARY};
   box-shadow: rgb(20 29 38 / 70%) 0px 0px 0px 9999px;
   box-sizing: border-box;
+  z-index: 5;
 `;
 
 export const BottomContainer = styled.div`
