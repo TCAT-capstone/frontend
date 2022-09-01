@@ -37,7 +37,7 @@ export const ImageContainer = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 1.5rem;
+  left: 0;
   right: 0;
 `;
 

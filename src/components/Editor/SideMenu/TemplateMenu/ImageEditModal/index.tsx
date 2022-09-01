@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent, WheelEvent, useRef } from 'react';
+import React, { useState, useRef, useEffect, MouseEvent, WheelEvent } from 'react';
 import html2canvas from 'html2canvas';
 
 import Slider from '@mui/material/Slider';
@@ -29,6 +29,7 @@ const ImageEditModal: React.FC<Props> = ({ handleModalClose, templateImageUrl, a
   const [imageOrigin, setImageOrigin] = useState({ x: 0, y: 0 });
   const [origin, setOrigin] = useState({ x: 0, y: 0 });
   const [diff, setDiff] = useState({ x: 0, y: 0 });
+  const [height, setHeight] = useState(WIDTH_SIZE);
   const imgRef = useRef<HTMLImageElement>(null);
 
   const getHeight = () => {
@@ -68,7 +69,7 @@ const ImageEditModal: React.FC<Props> = ({ handleModalClose, templateImageUrl, a
   const getTemplateImage = async () => {
     const node = document.getElementById('template');
     if (node) {
-      const canvas = await html2canvas(node);
+      const canvas = await html2canvas(node, { scale: 2 });
       const imgUrl = canvas.toDataURL();
       return imgUrl;
     }
@@ -82,6 +83,10 @@ const ImageEditModal: React.FC<Props> = ({ handleModalClose, templateImageUrl, a
     }
     handleModalClose();
   };
+
+  useEffect(() => {
+    setHeight(getHeight());
+  }, []);
 
   return (
     <ModalFrame w={45} h={35} handleModalClose={handleModalClose}>
@@ -97,7 +102,7 @@ const ImageEditModal: React.FC<Props> = ({ handleModalClose, templateImageUrl, a
             <ImageContainer
               style={{
                 width: `${WIDTH_SIZE * scale}px`,
-                height: `${getHeight() * scale}px`,
+                height: `${height * scale}px`,
                 transform: `translate3d(${diff.x}px, ${diff.y}px, 0px)`,
               }}
             >

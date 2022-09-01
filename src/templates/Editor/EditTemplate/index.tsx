@@ -63,7 +63,9 @@ const EditTemplate: React.FC<Props> = ({ isLoading, handlePageNavigate, template
                 </div>
               </ImageContainer>
               <ButtonContainer>
-                <Link to="/editor/new">이전으로</Link>
+                <Link to="/editor/new" replace>
+                  이전으로
+                </Link>
                 <BasicButton text="글 작성하기" handler={handlePageNavigate} />
               </ButtonContainer>
             </RightContainer>

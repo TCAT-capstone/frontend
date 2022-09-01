@@ -1,13 +1,15 @@
+/* eslint-disable no-promise-executor-return */
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import domtoimage from 'dom-to-image';
+import html2canvas from 'html2canvas';
 import { toast } from 'react-toastify';
 
 import EditTemplate from '@templates/Editor/EditTemplate';
 import { ticketState } from '@stores/editor';
 import { getOcrTicketInfo } from '@apis/ticket';
-import { TemplateEx, TicketTemplateListType } from '@src/types/ticket';
+import { templateList } from '@images/template';
+import { TicketTemplateListType } from '@src/types/ticket';
 
 interface LocationStateType {
   imgFile?: File;
@@ -19,7 +21,7 @@ const EditPage: React.FC = () => {
   const state = location.state as LocationStateType;
   const [isLoading, setIsLoading] = useState(state !== null);
   const [ticketInfo, setTicketInfo] = useRecoilState(ticketState);
-  const [templates, setTemplates] = useState<TicketTemplateListType>([]);
+  const [templates, setTemplates] = useState<TicketTemplateListType>(templateList);
 
   const getTicketInfo = async () => {
     if (state.imgFile) {
@@ -36,10 +38,6 @@ const EditPage: React.FC = () => {
       }
       setIsLoading(false);
     }
-  };
-
-  const getTemplates = async () => {
-    setTemplates(TemplateEx);
   };
 
   const addTemplate = (url: string) => {
@@ -69,10 +67,10 @@ const EditPage: React.FC = () => {
   const getTicketImage = async () => {
     const node = document.getElementById('ticket');
     if (node) {
-      const imgUrl = await domtoimage.toPng(node);
-      const res = await fetch(imgUrl);
-      const blob = await res.blob();
-      return { file: new File([blob], 'ticket-image', { type: 'image/png' }), url: imgUrl };
+      const canvas = await html2canvas(node, { scale: 2 });
+      const imgUrl = canvas.toDataURL();
+      const blob = await new Promise((resolve) => canvas.toBlob(resolve));
+      return { file: new File([blob as Blob], 'ticket-image', { type: 'image/png' }), url: imgUrl };
     }
     return null;
   };
@@ -81,7 +79,6 @@ const EditPage: React.FC = () => {
     if (state !== null) {
       getTicketInfo();
     }
-    getTemplates();
   }, []);
 
   return (
