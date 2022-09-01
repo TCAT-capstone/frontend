@@ -1,4 +1,5 @@
 import React from 'react';
+import loadingCatImg from '@images/loading-cat.png';
 import { Container, TextContainer } from './style';
 
 const Loading: React.FC = () => {
@@ -8,7 +9,7 @@ const Loading: React.FC = () => {
         <h2>티켓 정보를 가져오는 중이에요.</h2>
         <p>잠시만 기다려주세요.</p>
       </TextContainer>
-      <img src="https://c.tenor.com/Zo7QIOpsHCoAAAAC/cat-running.gif" alt="로딩 사진" />
+      <img src={loadingCatImg} alt="로딩 사진" />
     </Container>
   );
 };
