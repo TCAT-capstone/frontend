@@ -25,7 +25,7 @@ const PostPage: React.FC = () => {
   const handlePostDelete = async () => {
     const result = await deleteTicket(Number(ticketId));
     if (result) {
-      navigate(`/~${homeId}`, { replace: true });
+      navigate(-1);
     }
   };
 

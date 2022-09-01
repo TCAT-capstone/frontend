@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { TicketTemplateListType } from '@src/types/ticket';
 import { Container, TabWrapper, MenuContainer } from './style';
 import Tab from './Tab';
 import TemplateMenu from './TemplateMenu';
@@ -8,7 +8,12 @@ import TicketInfoMenu from './TicketInfoMenu';
 
 type MenuType = 'ticketInfo' | 'template' | 'text';
 
-const SideMenu: React.FC = () => {
+interface Props {
+  templates: TicketTemplateListType;
+  addTemplate: (url: string) => void;
+}
+
+const SideMenu: React.FC<Props> = ({ templates, addTemplate }) => {
   const [currMenu, setCurrMenu] = useState<MenuType>('ticketInfo');
 
   return (
@@ -18,7 +23,7 @@ const SideMenu: React.FC = () => {
       </TabWrapper>
       <MenuContainer>
         {currMenu === 'ticketInfo' && <TicketInfoMenu />}
-        {currMenu === 'template' && <TemplateMenu />}
+        {currMenu === 'template' && <TemplateMenu templates={templates} addTemplate={addTemplate} />}
         {currMenu === 'ticketInfo' && <TextMenu />}
       </MenuContainer>
     </Container>

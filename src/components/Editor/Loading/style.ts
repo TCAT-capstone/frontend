@@ -10,7 +10,9 @@ export const Container = styled.div`
   align-items: center;
   text-align: center;
   img {
-    width: 22.5rem;
+    margin-top: 6.3rem;
+    margin-bottom: 4rem;
+    width: 18.3rem;
   }
 `;
 
