@@ -20,5 +20,5 @@ export const Text = styled.p`
   font-size: 0.75rem;
   font-weight: 600;
   color: ${ColorCode.GRAY1};
-  margin-top: 10rem;
+  margin-top: 13rem;
 `;

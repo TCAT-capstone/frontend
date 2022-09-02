@@ -33,6 +33,8 @@ export const ImageContainer = styled.div`
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   img {
     width: 40.5rem;
+    height: 23.1rem;
+    object-fit: cover;
   }
 `;
 
