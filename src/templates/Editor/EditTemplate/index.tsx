@@ -54,7 +54,7 @@ const EditTemplate: React.FC<Props> = ({ isLoading, handlePageNavigate, template
               <ImageContainer>
                 <div id="ticket">
                   <img src={currentTemplateImg()} alt="티켓 사진" />
-                  <TicketInfoContainer>
+                  <TicketInfoContainer textColor={templateInfo.textColor}>
                     <h2>{ticketInfo.title}</h2>
                     <p>일시 : {ticketInfo.date ? getDateTimeString(new Date(ticketInfo.date)) : ''}</p>
                     <p>장소 : {ticketInfo.location}</p>

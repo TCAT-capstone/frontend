@@ -24,7 +24,7 @@ const SideMenu: React.FC<Props> = ({ templates, addTemplate }) => {
       <MenuContainer>
         {currMenu === 'ticketInfo' && <TicketInfoMenu />}
         {currMenu === 'template' && <TemplateMenu templates={templates} addTemplate={addTemplate} />}
-        {currMenu === 'ticketInfo' && <TextMenu />}
+        {currMenu === 'text' && <TextMenu />}
       </MenuContainer>
     </Container>
   );

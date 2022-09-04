@@ -30,14 +30,13 @@ const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const { homeId } = useParams();
   const myProfile = useRecoilValue(userProfileState);
-  const [isMyHome, setIsMyhome] = useState(homeId === myProfile.homeId)
+  const [isMyHome, setIsMyhome] = useState(homeId === myProfile.homeId);
   const [profile, setProfile] = useState<HomeProfileType>(initialProfile);
   const [tickets, setTickets] = useState<TicketListType>([]);
   const [cursorId, setCursorId] = useState<number | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasNotTicket, setHasNoTicket] = useState(false);
   const { apiTrigger, setTarget } = useInfiniteScroll();
-
 
   const handlePageNavigate = () => {
     navigate('/editor/new');
@@ -83,8 +82,9 @@ const HomePage: React.FC = () => {
   };
 
   useEffect(() => {
+    setIsMyhome(homeId === myProfile.homeId);
     getProfile();
-  }, [homeId]);
+  }, [homeId, myProfile.homeId]);
 
   useEffect(() => {
     if (apiTrigger > 0) {
