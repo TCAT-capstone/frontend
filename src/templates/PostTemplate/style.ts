@@ -93,11 +93,16 @@ export const ShareLikeContainer = styled.div`
   width: 3rem;
   justify-content: space-between;
   button {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1.125rem;
-    height: 1.125rem;
+  }
+  span {
+    position: absolute;
+    left: 1.4rem;
+    font-size: 0.875rem;
+    color: ${ColorCode.GRAY3};
   }
 `;
 

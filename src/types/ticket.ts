@@ -20,7 +20,6 @@ export interface TicketListResType {
 export interface TicketType {
   ticketId: number;
   ticketbookId: number;
-  memberId: number;
   memberHomeId: string;
   memberImg: string;
   memberName: string;
@@ -67,6 +66,11 @@ export type TicketTemplateListType = TicketTemplateType[];
 export interface TicketTemplateType {
   templateId: number;
   img: string;
+}
+
+export interface TicketLikeType {
+  status: boolean;
+  count: number;
 }
 
 export const example = [
