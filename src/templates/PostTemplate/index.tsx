@@ -10,6 +10,7 @@ import CheckMark from '@components/Common/CheckMark';
 import TicketInfoBox from '@components/Common/TicketInfoBox';
 import Like from '@components/Common/Like';
 import BasicButton from '@components/Common/BasicButton';
+import Spinner from '@src/components/Common/Spinner';
 
 import { TicketLikeType, TicketType } from '@src/types/ticket';
 import { getDateString } from '@utils/string';
@@ -29,6 +30,7 @@ import {
   ButtonWrapper,
   TicketsContainer,
   PostBackground,
+  SpinnerWrapper,
 } from './style';
 
 interface Props {
@@ -113,7 +115,9 @@ const PostTemplate: React.FC<Props> = ({ post, isMyHome, like, handlePostDelete,
           <PostBackground />
         </>
       ) : (
-        <p>로딩중</p>
+        <SpinnerWrapper>
+          <Spinner size={3.5} />
+        </SpinnerWrapper>
       )}
     </Layout>
   );

@@ -154,3 +154,11 @@ export const PostBackground = styled.div`
   border-top: 1px solid rgba(20, 0, 142, 0.7);
   z-index: -10;
 `;
+
+export const SpinnerWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+`;
