@@ -5,6 +5,7 @@ import {
   TicketListResType,
   TicketType,
   UpdateTicketReqType,
+  TicketLikeType,
 } from '@src/types/ticket';
 
 export const getTrendTickets = async (
@@ -97,6 +98,26 @@ export const updateTicket = async (
 ): Promise<TicketType | false> => {
   try {
     const res = await fetchApi.patch(`/api/tickets/${ticketId}`, updateTicketReqType);
+    if (res.status !== 200) throw new Error('error');
+    return await res.json();
+  } catch (err) {
+    return false;
+  }
+};
+
+export const getLike = async (ticketId: number): Promise<TicketLikeType | false> => {
+  try {
+    const res = await fetchApi.get(`/api/tickets/${ticketId}/like`);
+    if (res.status !== 200) throw new Error('error');
+    return await res.json();
+  } catch (err) {
+    return false;
+  }
+};
+
+export const updatelike = async (ticketId: number): Promise<TicketLikeType | false> => {
+  try {
+    const res = await fetchApi.post(`/api/tickets/${ticketId}/like`, {});
     if (res.status !== 200) throw new Error('error');
     return await res.json();
   } catch (err) {
