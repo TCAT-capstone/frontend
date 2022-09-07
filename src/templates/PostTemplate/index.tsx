@@ -10,8 +10,9 @@ import CheckMark from '@components/Common/CheckMark';
 import TicketInfoBox from '@components/Common/TicketInfoBox';
 import Like from '@components/Common/Like';
 import BasicButton from '@components/Common/BasicButton';
+import Spinner from '@src/components/Common/Spinner';
 
-import { TicketType } from '@src/types/ticket';
+import { TicketLikeType, TicketType } from '@src/types/ticket';
 import { getDateString } from '@utils/string';
 
 import '@styles/editor.css';
@@ -29,16 +30,19 @@ import {
   ButtonWrapper,
   TicketsContainer,
   PostBackground,
+  SpinnerWrapper,
 } from './style';
 
 interface Props {
   post: TicketType | undefined;
   isMyHome: boolean;
+  like: TicketLikeType;
   handlePostDelete: () => void;
   handlePostEdit: () => void;
+  handleLike: () => void;
 }
 
-const PostTemplate: React.FC<Props> = ({ post, isMyHome, handlePostDelete, handlePostEdit }) => {
+const PostTemplate: React.FC<Props> = ({ post, isMyHome, like, handlePostDelete, handlePostEdit, handleLike }) => {
   const sanitizer = dompurify.sanitize;
 
   return (
@@ -75,8 +79,9 @@ const PostTemplate: React.FC<Props> = ({ post, isMyHome, handlePostDelete, handl
                 <button type="button">
                   <img src={shareImg} alt="공유 아이콘" />
                 </button>
-                <button type="button">
-                  <Like size={1.125} fill={false} />
+                <button type="button" onClick={handleLike}>
+                  <Like size={1.125} fill={like.status} />
+                  <span>{like.count}</span>
                 </button>
               </ShareLikeContainer>
               {isMyHome && (
@@ -110,7 +115,9 @@ const PostTemplate: React.FC<Props> = ({ post, isMyHome, handlePostDelete, handl
           <PostBackground />
         </>
       ) : (
-        <p>로딩중</p>
+        <SpinnerWrapper>
+          <Spinner size={3.5} />
+        </SpinnerWrapper>
       )}
     </Layout>
   );

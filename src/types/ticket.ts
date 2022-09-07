@@ -1,7 +1,5 @@
 export type TicketValidationType = 'VERIFIED' | 'UNVERIFIED';
 
-type CategoryType = 'MUSICAL' | 'CONCERT' | 'MOVIE' | 'SPORT' | 'ETC';
-
 export interface TicketSimpleType {
   ticketId: number;
   homeId: number;
@@ -22,7 +20,6 @@ export interface TicketListResType {
 export interface TicketType {
   ticketId: number;
   ticketbookId: number;
-  memberId: number;
   memberHomeId: string;
   memberImg: string;
   memberName: string;
@@ -62,6 +59,18 @@ export interface OcrTicketInfoResType {
   ticetSeat: string;
   ticketDate: string;
   ticketLocation: string;
+}
+
+export type TicketTemplateListType = TicketTemplateType[];
+
+export interface TicketTemplateType {
+  templateId: number;
+  img: string;
+}
+
+export interface TicketLikeType {
+  status: boolean;
+  count: number;
 }
 
 export const example = [

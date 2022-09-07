@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
 
+interface TicketInfoContainerProps {
+  textColor: 'black' | 'white';
+}
+
 export const Layout = styled.div`
   margin: 0 auto;
   width: 100rem;
@@ -33,10 +37,13 @@ export const ImageContainer = styled.div`
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   img {
     width: 40.5rem;
+    height: 23.1rem;
+    object-fit: cover;
   }
 `;
 
-export const TicketInfoContainer = styled.div`
+export const TicketInfoContainer = styled.div<TicketInfoContainerProps>`
+  color: ${(props) => (props.textColor === 'black' ? ColorCode.BLACK : ColorCode.WHITE)};
   h2 {
     position: absolute;
     top: 5.5rem;

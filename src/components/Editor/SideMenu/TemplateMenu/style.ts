@@ -18,9 +18,18 @@ export const Container = styled.div`
 
 export const TemplateImage = styled.img<TemplateImageProps>`
   width: 100%;
+  height: 10.4rem;
   border: solid 2px ${(props) => (props.focus ? ColorCode.PRIMARY : 'transparent')};
   border-radius: 0.625rem;
   margin-bottom: 1rem;
   box-sizing: border-box;
+  object-fit: cover;
   cursor: pointer;
+`;
+
+export const AddTemplateButton = styled.button`
+  width: 100%;
+  height: 10.4rem;
+  border-radius: 0.625rem;
+  background-color: rgba(94, 81, 233, 0.1);
 `;

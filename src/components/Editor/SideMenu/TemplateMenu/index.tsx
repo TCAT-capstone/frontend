@@ -1,47 +1,88 @@
-import React from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { templateState } from '@stores/editor';
-import interpark from '@images/template/interpark.png';
-import yes24 from '@images/template/yes24.png';
-import melon from '@images/template/melon.png';
-import { Container, TemplateImage } from './style';
+import plusImg from '@images/plus-rounded.svg';
+import { TicketTemplateListType } from '@src/types/ticket';
+import { AddTemplateButton, Container, TemplateImage } from './style';
+import ImageEditModal from './ImageEditModal';
 
-const TemplateMenu: React.FC = () => {
+interface Props {
+  templates: TicketTemplateListType;
+  addTemplate: (url: string) => void;
+}
+
+const TemplateMenu: React.FC<Props> = ({ templates, addTemplate }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [templateInfo, setTemplateInfo] = useRecoilState(templateState);
+  const [templateImageUrl, setTemplateImageUrl] = useState('');
+  const [onEditModal, setOnEditModal] = useState(false);
+
+  const handleModalClose = () => {
+    setOnEditModal(false);
+  };
+
+  const handleButtonClick = () => {
+    inputRef.current?.click();
+  };
+
+  const readFile = (file: File) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleFile = async (file: File) => {
+    const url = (await readFile(file)) as string;
+    setOnEditModal(true);
+    setTemplateImageUrl(url);
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (e.target.files && e.target.files[0]) {
+      handleFile(e.target.files[0]);
+    }
+  };
 
   return (
     <Container>
-      <TemplateImage
-        onClick={() => {
-          setTemplateInfo((prev) => {
-            return { ...prev, templateType: 'interpark' };
-          });
-        }}
-        src={interpark}
-        alt="티켓 템플릿 사진"
-        focus={templateInfo.templateType === 'interpark'}
+      {templates.map((t) => (
+        <TemplateImage
+          key={`template${t.templateId}`}
+          onClick={() => {
+            setTemplateInfo((prev) => {
+              return { ...prev, templateId: t.templateId };
+            });
+          }}
+          src={t.img}
+          alt="티켓 템플릿 사진"
+          focus={templateInfo.templateId === t.templateId}
+        />
+      ))}
+      <AddTemplateButton type="button" onClick={handleButtonClick}>
+        <img src={plusImg} alt="티켓 템플릿 추가하기" />
+      </AddTemplateButton>
+      <input
+        type="file"
+        id="fileUpload"
+        ref={inputRef}
+        onChange={handleChange}
+        style={{ display: 'none' }}
+        accept="image/jpeg, image/jpg, image/png"
       />
-      <TemplateImage
-        onClick={() => {
-          setTemplateInfo((prev) => {
-            return { ...prev, templateType: 'yes24' };
-          });
-        }}
-        src={yes24}
-        alt="티켓 템플릿 사진"
-        focus={templateInfo.templateType === 'yes24'}
-      />
-      <TemplateImage
-        onClick={() => {
-          setTemplateInfo((prev) => {
-            return { ...prev, templateType: 'melon' };
-          });
-        }}
-        src={melon}
-        alt="티켓 템플릿 사진"
-        focus={templateInfo.templateType === 'melon'}
-      />
+      {onEditModal && (
+        <ImageEditModal
+          handleModalClose={handleModalClose}
+          templateImageUrl={templateImageUrl}
+          addTemplate={addTemplate}
+        />
+      )}
     </Container>
   );
 };

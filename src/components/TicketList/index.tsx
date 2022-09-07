@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { TicketListType } from '@src/types/ticket';
-import spinnerImg from '@images/spinner.gif';
 
 import { Container, SpinnerWrapper } from './style';
 import Ticket from './Ticket';
+import Spinner from '../Common/Spinner';
 
 interface Props {
   tickets: TicketListType;
@@ -28,7 +28,7 @@ const TicketList: React.FC<Props> = ({ tickets, backgroundColor, isLoaded, setTa
           backgroundColor={backgroundColor}
         />
       ))}
-      <SpinnerWrapper ref={setTarget}>{isLoaded && <img src={spinnerImg} alt="로딩" />}</SpinnerWrapper>
+      <SpinnerWrapper ref={setTarget}>{isLoaded && <Spinner size={3} />}</SpinnerWrapper>
     </Container>
   );
 };

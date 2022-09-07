@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { deleteTicket, getTicket } from '@apis/ticket';
+import { deleteTicket, getLike, getTicket, updatelike } from '@apis/ticket';
 
 import PostTemplate from '@templates/PostTemplate';
-import { TicketType } from '@src/types/ticket';
-import { userProfileState } from '@src/stores/user';
+import { userProfileState } from '@stores/user';
+import { TicketLikeType, TicketType } from '@src/types/ticket';
 
 const PostPage: React.FC = () => {
   const navigate = useNavigate();
   const { ticketId, homeId } = useParams();
   const myProfile = useRecoilValue(userProfileState);
   const [post, setPost] = useState<TicketType>();
+  const [like, setLike] = useState<TicketLikeType>({ count: 0, status: false });
 
   const isMyHome = homeId === myProfile.homeId;
 
@@ -25,7 +26,7 @@ const PostPage: React.FC = () => {
   const handlePostDelete = async () => {
     const result = await deleteTicket(Number(ticketId));
     if (result) {
-      navigate(`/~${homeId}`, { replace: true });
+      navigate(-1);
     }
   };
 
@@ -33,12 +34,34 @@ const PostPage: React.FC = () => {
     navigate('/write', { state: { ticketId, post }, replace: true });
   };
 
+  const getLikeInfo = async () => {
+    const like = await getLike(Number(ticketId));
+    if (like) {
+      setLike(like);
+    }
+  };
+
+  const handleLike = async () => {
+    const like = await updatelike(Number(ticketId));
+    if (like) {
+      setLike(like);
+    }
+  };
+
   useEffect(() => {
     getPost();
+    getLikeInfo();
   }, []);
 
   return (
-    <PostTemplate post={post} isMyHome={isMyHome} handlePostDelete={handlePostDelete} handlePostEdit={handlePostEdit} />
+    <PostTemplate
+      post={post}
+      isMyHome={isMyHome}
+      like={like}
+      handlePostDelete={handlePostDelete}
+      handlePostEdit={handlePostEdit}
+      handleLike={handleLike}
+    />
   );
 };
 
