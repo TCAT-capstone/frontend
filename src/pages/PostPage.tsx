@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { deleteTicket, getLike, getTicket, updatelike } from '@apis/ticket';
+import { toast } from 'react-toastify';
 
 import PostTemplate from '@templates/PostTemplate';
-import { userProfileState } from '@stores/user';
+import { deleteTicket, getLike, getTicket, updatelike } from '@apis/ticket';
+import { isLoggedInState, userProfileState } from '@stores/user';
 import { TicketLikeType, TicketType } from '@src/types/ticket';
 
 const PostPage: React.FC = () => {
   const navigate = useNavigate();
   const { ticketId, homeId } = useParams();
   const myProfile = useRecoilValue(userProfileState);
+  const isLoggedIn = useRecoilValue(isLoggedInState);
   const [post, setPost] = useState<TicketType>();
   const [like, setLike] = useState<TicketLikeType>({ count: 0, status: false });
 
@@ -42,6 +44,10 @@ const PostPage: React.FC = () => {
   };
 
   const handleLike = async () => {
+    if (!isLoggedIn) {
+      toast.error('로그인이 필요합니다!');
+      return;
+    }
     const like = await updatelike(Number(ticketId));
     if (like) {
       setLike(like);
