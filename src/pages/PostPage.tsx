@@ -7,6 +7,7 @@ import PostTemplate from '@templates/PostTemplate';
 import { deleteTicket, getLike, getTicket, updatelike } from '@apis/ticket';
 import { isLoggedInState, userProfileState } from '@stores/user';
 import { TicketLikeType, TicketType } from '@src/types/ticket';
+import ErrorPage from './ErrorPage';
 
 const PostPage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,13 +16,20 @@ const PostPage: React.FC = () => {
   const isLoggedIn = useRecoilValue(isLoggedInState);
   const [post, setPost] = useState<TicketType>();
   const [like, setLike] = useState<TicketLikeType>({ count: 0, status: false });
+  const [noSuchPost, setNoSuchPost] = useState(false);
 
   const isMyHome = homeId === myProfile.homeId;
 
   const getPost = async () => {
     const ticket = await getTicket(Number(ticketId));
     if (ticket) {
-      setPost(ticket);
+      if (ticket.memberHomeId !== homeId) {
+        setNoSuchPost(true);
+      } else {
+        setPost(ticket);
+      }
+    } else {
+      setNoSuchPost(true);
     }
   };
 
@@ -59,7 +67,9 @@ const PostPage: React.FC = () => {
     getLikeInfo();
   }, []);
 
-  return (
+  return noSuchPost ? (
+    <ErrorPage />
+  ) : (
     <PostTemplate
       post={post}
       isMyHome={isMyHome}
