@@ -14,8 +14,4 @@ export const Container = styled.div`
 export const SpinnerWrapper = styled.div`
   width: 100%;
   height: 3rem;
-  text-align: center;
-  img {
-    width: 3rem;
-  }
 `;

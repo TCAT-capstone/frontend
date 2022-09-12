@@ -93,11 +93,16 @@ export const ShareLikeContainer = styled.div`
   width: 3rem;
   justify-content: space-between;
   button {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1.125rem;
-    height: 1.125rem;
+  }
+  span {
+    position: absolute;
+    left: 1.4rem;
+    font-size: 0.875rem;
+    color: ${ColorCode.GRAY3};
   }
 `;
 
@@ -148,4 +153,12 @@ export const PostBackground = styled.div`
   background: rgba(121, 77, 253, 0.07);
   border-top: 1px solid rgba(20, 0, 142, 0.7);
   z-index: -10;
+`;
+
+export const SpinnerWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 `;
