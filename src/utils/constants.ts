@@ -11,6 +11,7 @@ export enum ColorCode {
   PURPLE1 = '#F5F5FF',
   PURPLE2 = '#5F3CCB',
   LIGHT_PURPLE = '#F5F7FF',
+  LIGHT_PURPLE2 = '#E7EDFF',
 }
 
 export const BookColorCode = {
