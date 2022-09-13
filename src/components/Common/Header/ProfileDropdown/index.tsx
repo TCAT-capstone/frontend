@@ -31,11 +31,11 @@ const ProfileDropdown: React.FC = () => {
         <Link to={`/~${myProfile.homeId}`}>
           <span>나의 티켓 홈</span>
         </Link>
-        <Link to={`/~${myProfile.homeId}/ticketbook`}>
-          <span>나의 티켓북</span>
-        </Link>
         <Link to="/">
           <span>나의 구독</span>
+        </Link>
+        <Link to={`/~${myProfile.homeId}/ticketbook`}>
+          <span>티켓북 관리</span>
         </Link>
         <button type="button" onClick={handleLogout}>
           <span>로그아웃</span>
