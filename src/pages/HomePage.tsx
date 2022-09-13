@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
+import ErrorPage from '@pages/ErrorPage';
 import HomeTemplate from '@templates/HomeTemplate';
 
 import { userProfileState } from '@stores/user';
@@ -36,6 +37,7 @@ const HomePage: React.FC = () => {
   const [cursorId, setCursorId] = useState<number | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasNotTicket, setHasNoTicket] = useState(false);
+  const [noSuchUser, setNoSuchUser] = useState(false);
   const { apiTrigger, setTarget } = useInfiniteScroll();
 
   const handlePageNavigate = () => {
@@ -61,6 +63,8 @@ const HomePage: React.FC = () => {
           ticketCount: userProfile.ticketCount,
           likeCount: userProfile.likeCount,
         });
+      } else {
+        setNoSuchUser(true);
       }
     }
   };
@@ -92,7 +96,9 @@ const HomePage: React.FC = () => {
     }
   }, [apiTrigger]);
 
-  return (
+  return noSuchUser ? (
+    <ErrorPage />
+  ) : (
     <HomeTemplate
       isMyHome={isMyHome}
       profile={profile}
