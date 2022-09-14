@@ -17,9 +17,18 @@ export const SearchContent = styled.input`
   ::-webkit-input-placeholder {
     color: black;
   }
-  width: 23rem;
+  width: 30.5rem;
   background-color: rgba(248, 249, 255);
   margin-left: 0.5rem;
+`;
+
+export const SearchButton = styled.button`
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+  :hover {
+    opacity: 0.7;
+  }
 `;
 
 export const ResetButton = styled.button`

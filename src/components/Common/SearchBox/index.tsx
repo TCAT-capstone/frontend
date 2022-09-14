@@ -4,7 +4,7 @@ import searchImg from '@images/search.svg';
 import xImg from '@images/x-black.svg';
 import arrowImg from '@images/down-arrow.svg';
 import OptionDropdown from './OptionDropdown';
-import { Container, SearchContent, ResetButton, OptionContainer, OptionButton } from './style';
+import { Container, SearchContent, SearchButton, ResetButton, OptionContainer, OptionButton } from './style';
 
 interface Props {
   option: string;
@@ -43,7 +43,6 @@ const SearchBox: React.FC<Props> = ({ option, handleOptionChange }) => {
 
   return (
     <Container>
-      <img src={searchImg} alt="검색" width="18rem" />
       <SearchContent
         onChange={(e) => {
           setText(e.target.value);
@@ -51,7 +50,10 @@ const SearchBox: React.FC<Props> = ({ option, handleOptionChange }) => {
         value={text}
         placeholder="검색어를 입력하세요"
       />
-      <ResetButton type="button" onClick={onReset}>
+      <SearchButton>
+        <img src={searchImg} alt="검색" width="18rem" />
+      </SearchButton>
+      {/* <ResetButton type="button" onClick={onReset}>
         <img src={xImg} alt="취소" width="11rem" />
       </ResetButton>
       <OptionContainer ref={OptionContainerRef}>
@@ -60,7 +62,7 @@ const SearchBox: React.FC<Props> = ({ option, handleOptionChange }) => {
           <img src={arrowImg} alt="더보기" width="11rem" />
         </OptionButton>
       </OptionContainer>
-      {onOptionDropdown && <OptionDropdown handleOptionChange={handleOptionChange} />}
+      {onOptionDropdown && <OptionDropdown handleOptionChange={handleOptionChange} />} */}
     </Container>
   );
 };
