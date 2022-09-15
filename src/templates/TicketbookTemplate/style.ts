@@ -8,13 +8,16 @@ interface TicketbookItemProps {
 export const Container = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 2rem;
 `;
 
 export const TicketbookListContainer = styled.div``;
 
-export const EditContainer = styled.div``;
+export const EditContainer = styled.div`
+  margin-left: 7.5rem;
+`;
 
-export const TicketbookItem = styled.ul<TicketbookItemProps>`
+export const TicketbookItem = styled.li<TicketbookItemProps>`
   position: relative;
   width: 20rem;
   height: 4rem;
@@ -27,13 +30,6 @@ export const TicketbookItem = styled.ul<TicketbookItemProps>`
   align-items: center;
   padding: 0 2rem;
   margin: 0.5rem 0;
-  & > img {
-    width: 2rem;
-    height: 2rem;
-    background-color: ${ColorCode.GRAY1};
-    border-radius: 50%;
-    margin-right: 0.5rem;
-  }
   span {
     width: 12rem;
     color: ${ColorCode.PRIMARY};
@@ -41,6 +37,14 @@ export const TicketbookItem = styled.ul<TicketbookItemProps>`
   }
   button {
   }
+`;
+
+export const TicketbookItemImg = styled.img`
+  width: 2rem;
+  height: 2rem;
+  background-color: ${ColorCode.GRAY1};
+  border-radius: 50%;
+  margin-right: 0.5rem;
 `;
 
 export const TicketbookAddButton = styled.button`
@@ -62,9 +66,16 @@ export const TicketbookAddButton = styled.button`
     padding-left: 0.5rem;
     width: 12rem;
     color: ${ColorCode.PRIMARY};
+    font-size: 1rem;
     font-weight: 500;
     text-align: left;
   }
+`;
+
+export const CheckCircleImg = styled.img`
+  position: absolute;
+  top: -0.7rem;
+  right: -0.5rem;
 `;
 
 export const MoreDropdown = styled.div`
@@ -74,7 +85,7 @@ export const MoreDropdown = styled.div`
   background-color: ${ColorCode.WHITE};
   box-shadow: 1px 1px 10px 3px rgba(196, 196, 196, 0.2);
   border-radius: 0.625rem;
-  z-index: 10;
+  z-index: 20;
   button {
     display: block;
     margin: 0.5rem;

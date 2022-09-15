@@ -1,18 +1,19 @@
 import styled from 'styled-components';
-import { BookColorCode } from '@utils/constants';
-import { example } from '@src/types/ticket';
+import { ColorCode } from '@utils/constants';
 
 interface ContainerProps {
   backgroundImg: string;
-  color: 'PURPLE' | 'GREEN' | 'BLUE' | 'RED';
+  size: 'small' | 'medium';
 }
 
 export const Container = styled.div<ContainerProps>`
   position: relative;
-  width: 15rem;
-  height: 19rem;
-  background-image: url(${(props) => example[parseInt(props.backgroundImg, 10)].img});
-  background-size: 15rem;
+  width: ${(props) => (props.size === 'medium' ? '15rem' : '11.8rem')};
+  height: ${(props) => (props.size === 'medium' ? '19rem' : '16.8rem')};
+  background-image: url(${(props) => props.backgroundImg});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   border-radius: 0.3rem 1rem 1rem 0.3rem;
   cursor: pointer;
   margin: auto;
@@ -20,24 +21,24 @@ export const Container = styled.div<ContainerProps>`
     position: absolute;
     top: 3.5rem;
     left: 2.8rem;
-    font-size: 1.3rem;
+    font-size: ${(props) => (props.size === 'medium' ? '1.3rem' : '1rem')};
     font-weight: 600;
-    color: ${(props) => BookColorCode[props.color].font};
+    color: ${ColorCode.WHITE2};
   }
   span {
     position: absolute;
-    bottom: 2.6rem;
+    bottom: 10%;
     right: 1.6rem;
     font-size: 0.875rem;
     font-weight: 600;
-    color: ${(props) => BookColorCode[props.color].line};
+    color: ${ColorCode.WHITE2};
   }
   div {
     position: absolute;
+    top: 5%;
     left: 1.3rem;
     width: 1px;
-    height: 17rem;
-    margin: 1rem 0;
-    background-color: ${(props) => BookColorCode[props.color].line};
+    height: 90%;
+    background-color: ${ColorCode.WHITE2};
   }
 `;

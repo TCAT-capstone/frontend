@@ -4,14 +4,16 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import { TicketbookListType } from '@src/types/ticketbook';
 import { Container } from './style';
+import Ticketbook from './Ticketbook';
 
 interface Props {
-  children: React.ReactNode;
+  ticketbooks: TicketbookListType;
 }
 
-const TicketbookList: React.FC<Props> = ({ children }) => {
-  const ticketbookCount = React.Children.count(children);
+const TicketbookList: React.FC<Props> = ({ ticketbooks }) => {
+  const ticketbookCount = ticketbooks.length;
   const settings = {
     className: 'center',
     centerMode: true,
@@ -35,7 +37,16 @@ const TicketbookList: React.FC<Props> = ({ children }) => {
   };
   return (
     <Container>
-      <Slider {...settings}>{children}</Slider>
+      <Slider {...settings}>
+        {ticketbooks.map((ticketbook) => (
+          <Ticketbook
+            backgroundImg={ticketbook.ticketbookImg as string}
+            size="medium"
+            name={ticketbook.name}
+            description={ticketbook.description}
+          />
+        ))}
+      </Slider>
     </Container>
   );
 };

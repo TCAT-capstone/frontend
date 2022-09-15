@@ -1,38 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
 
 import TicketbookTemplate from '@templates/TicketbookTemplate';
-
-import { TicketbookType } from '@src/types/ticketbook';
-
-const sampleTicketbooks = [
-  {
-    id: 1,
-    name: '1',
-    ticketbookImg: '',
-    description: '1',
-  },
-  {
-    id: 2,
-    name: '2',
-    ticketbookImg: '',
-    description: '2',
-  },
-  {
-    id: 3,
-    name: '3',
-    ticketbookImg: '',
-    description: '3',
-  },
-];
+import { TicketbookListType, TicketbookType } from '@src/types/ticketbook';
+import { exampleTicketbooks } from '@src/stores/user';
 
 const TicketbookPage: React.FC = () => {
-  const [ticketbooks, setTicketbooks] = useState<TicketbookType[]>(sampleTicketbooks);
-  const [currTicketbookId, setCurrTicketbookId] = useState(1);
-  const [newSequence, setNewSequence] = useState(-1);
+  const [ticketbooks, setTicketbooks] = useState<TicketbookListType>(exampleTicketbooks);
+  const [currTicketbook, setCurrTicketbook] = useState<TicketbookType>(ticketbooks[0]);
+  const [newIndex, setNewIndex] = useState(-1);
 
   const changeCurrTicketbook = (id: number) => {
-    setCurrTicketbookId(id);
+    const ticketbook = ticketbooks.find((v) => v.id === id);
+    if (ticketbook) {
+      setCurrTicketbook(ticketbook);
+    }
+  };
+
+  const changeDefaultTicketbook = (id: number) => {
+    setTicketbooks((prev) => {
+      return [prev.find((v) => v.id === id) as TicketbookType, ...prev.filter((v) => v.id !== id)];
+    });
   };
 
   const deleteTicketbook = (id: number) => {
@@ -41,14 +28,15 @@ const TicketbookPage: React.FC = () => {
 
   const addTicketbook = () => {
     const newTicketbook = {
-      id: newSequence,
+      id: newIndex,
       name: '새로운 티켓북',
-      ticketbookImg: '',
+      ticketbookImg:
+        'https://image.fmkorea.com/files/attach/new2/20220329/3655109/2889212861/4478307323/6090b3178e5b2bbc3476308bc475a3fb.jpg',
       description: '설명',
     };
     setTicketbooks((prev) => [...prev, newTicketbook]);
-    setCurrTicketbookId(newSequence);
-    setNewSequence((prev) => prev - 1);
+    setCurrTicketbook(newTicketbook);
+    setNewIndex((prev) => prev - 1);
   };
 
   return (
@@ -57,8 +45,9 @@ const TicketbookPage: React.FC = () => {
       setTicketbooks={setTicketbooks}
       deleteTicketbook={deleteTicketbook}
       addTicketbook={addTicketbook}
-      currTicketbookId={currTicketbookId}
+      currTicketbook={currTicketbook}
       changeCurrTicketbook={changeCurrTicketbook}
+      changeDefaultTicketbook={changeDefaultTicketbook}
     />
   );
 };

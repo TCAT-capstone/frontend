@@ -5,11 +5,12 @@ import { useRecoilValue } from 'recoil';
 import ErrorPage from '@pages/ErrorPage';
 import HomeTemplate from '@templates/HomeTemplate';
 
-import { userProfileState } from '@stores/user';
+import { exampleTicketbooks, userProfileState } from '@stores/user';
 import { getTicketbookTickets } from '@apis/ticket';
 import { getMemberProfile } from '@apis/member';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { TicketListType } from '@src/types/ticket';
+import { TicketbookListType } from '@src/types/ticketbook';
 
 interface HomeProfileType {
   img: string;
@@ -38,6 +39,7 @@ const HomePage: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasNotTicket, setHasNoTicket] = useState(false);
   const [noSuchUser, setNoSuchUser] = useState(false);
+  const [ticketbooks, setTicketbooks] = useState<TicketbookListType>(exampleTicketbooks);
   const { apiTrigger, setTarget } = useInfiniteScroll();
 
   const handlePageNavigate = () => {
@@ -104,6 +106,7 @@ const HomePage: React.FC = () => {
       profile={profile}
       tickets={tickets}
       isLoaded={isLoaded}
+      ticketbooks={ticketbooks}
       setTarget={setTarget}
       handlePageNavigate={handlePageNavigate}
     />
