@@ -31,6 +31,7 @@ export const TicketbookItemImg = styled.img`
   width: 2rem;
   height: 2rem;
   background-color: ${ColorCode.GRAY1};
+  object-fit: cover;
   border-radius: 50%;
   margin-right: 0.5rem;
 `;
