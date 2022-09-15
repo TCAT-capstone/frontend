@@ -1,28 +1,16 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { List, arrayMove } from 'react-movable';
 
-import Ticketbook from '@components/TicketbookList/Ticketbook';
-import { TicketbookType } from '@src/types/ticketbook';
+import TicketBookItemList from '@components/Ticketbook/TicketbookItemList';
+import TicketbookEditor from '@components/Ticketbook/TicketbookEditor';
+import { TicketbookType, TicketbookListType } from '@src/types/ticketbook';
 
-import moreImg from '@images/more.svg';
-import checkImg from '@images/check-rounded-purple.svg';
 import plusImg from '@images/plus-rounded.svg';
 import Layout from '@styles/Layout';
-import {
-  Container,
-  TicketbookListContainer,
-  EditContainer,
-  TicketbookItem,
-  TicketbookItemImg,
-  TicketbookAddButton,
-  CheckCircleImg,
-  MoreDropdown,
-} from './style';
+import { Container, TicketbookListContainer, EditContainer, TicketbookAddButton } from './style';
 
 interface Props {
-  ticketbooks: TicketbookType[];
-  setTicketbooks: React.Dispatch<React.SetStateAction<TicketbookType[]>>;
+  ticketbooks: TicketbookListType;
+  setTicketbooks: React.Dispatch<React.SetStateAction<TicketbookListType>>;
   deleteTicketbook: (id: number) => void;
   addTicketbook: () => void;
   currTicketbook: TicketbookType;
@@ -43,31 +31,13 @@ const TicketbookTemplate: React.FC<Props> = ({
     <Layout>
       <Container>
         <TicketbookListContainer>
-          <List
-            values={ticketbooks}
-            onChange={({ oldIndex, newIndex }) => setTicketbooks(arrayMove(ticketbooks, oldIndex, newIndex))}
-            renderList={({ children, props }) => <ul {...props}>{children}</ul>}
-            renderItem={({ value, props }) => (
-              <TicketbookItem {...props} focus={value.id === currTicketbook.id}>
-                <TicketbookItemImg src={value.ticketbookImg ?? undefined} alt="" />
-                <span>{value.name}</span>
-                <button type="button" onClick={() => {}}>
-                  <img src={moreImg} alt="옵션 더보기" />
-                </button>
-                {value.id === ticketbooks[0].id && <CheckCircleImg src={checkImg} />}
-                <MoreDropdown>
-                  <button type="button" onClick={() => changeDefaultTicketbook(value.id)}>
-                    <span>대표북 설정</span>
-                  </button>
-                  <button type="button" onClick={() => changeCurrTicketbook(value.id)}>
-                    <span>편집하기</span>
-                  </button>
-                  <button type="button" onClick={() => deleteTicketbook(value.id)}>
-                    <span>삭제하기</span>
-                  </button>
-                </MoreDropdown>
-              </TicketbookItem>
-            )}
+          <TicketBookItemList
+            ticketbooks={ticketbooks}
+            setTicketbooks={setTicketbooks}
+            deleteTicketbook={deleteTicketbook}
+            currTicketbook={currTicketbook}
+            changeCurrTicketbook={changeCurrTicketbook}
+            changeDefaultTicketbook={changeDefaultTicketbook}
           />
           <TicketbookAddButton type="button" onClick={() => addTicketbook()}>
             <img src={plusImg} alt="추가" />
@@ -75,12 +45,7 @@ const TicketbookTemplate: React.FC<Props> = ({
           </TicketbookAddButton>
         </TicketbookListContainer>
         <EditContainer>
-          <Ticketbook
-            backgroundImg={currTicketbook.ticketbookImg as string}
-            name={currTicketbook.name}
-            description={currTicketbook.description}
-            size="small"
-          />
+          <TicketbookEditor currTicketbook={currTicketbook} />
         </EditContainer>
       </Container>
     </Layout>

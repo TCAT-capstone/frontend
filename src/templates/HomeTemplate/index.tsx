@@ -2,7 +2,7 @@ import React from 'react';
 
 import ProfileBox from '@components/Common/Profile/ProfileBox';
 import BasicButton from '@components/Common/BasicButton';
-import TicketbookList from '@components/TicketbookList';
+import TicketbookSlider from '@src/components/Ticketbook/TicketbookSlider';
 import TicketList from '@components/TicketList';
 import { TicketListType } from '@src/types/ticket';
 import { TicketbookListType } from '@src/types/ticketbook';
@@ -53,7 +53,7 @@ const HomeTemplate: React.FC<Props> = ({
         )}
       </ButtonWrapper>
       <TicketbookListWrapper>
-        <TicketbookList ticketbooks={ticketbooks} />
+        <TicketbookSlider ticketbooks={ticketbooks} />
       </TicketbookListWrapper>
       <TicketList tickets={tickets} backgroundColor="white" isLoaded={isLoaded} setTarget={setTarget} />
       <HomeBackground />

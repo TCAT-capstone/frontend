@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import { TicketbookListType } from '@src/types/ticketbook';
 import { Container } from './style';
-import Ticketbook from './Ticketbook';
+import Ticketbook from '../Ticketbook';
 
 interface Props {
   ticketbooks: TicketbookListType;
