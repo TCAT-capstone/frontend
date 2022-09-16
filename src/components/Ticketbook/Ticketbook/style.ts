@@ -19,8 +19,8 @@ export const Container = styled.div<ContainerProps>`
   margin: auto;
   h3 {
     position: absolute;
-    top: 3.5rem;
-    left: 2.8rem;
+    top: 18%;
+    left: 15%;
     font-size: ${(props) => (props.size === 'medium' ? '1.3rem' : '1rem')};
     font-weight: 600;
     color: ${ColorCode.WHITE2};
@@ -28,8 +28,8 @@ export const Container = styled.div<ContainerProps>`
   span {
     position: absolute;
     bottom: 10%;
-    right: 1.6rem;
-    font-size: 0.875rem;
+    right: 8%;
+    font-size: ${(props) => (props.size === 'medium' ? '0.875rem' : '0.7rem')};
     font-weight: 600;
     color: ${ColorCode.WHITE2};
   }
