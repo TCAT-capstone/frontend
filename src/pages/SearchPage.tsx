@@ -37,7 +37,9 @@ const SearchPage: React.FC = () => {
     ticketSeat: string | null,
     ticketLocation: string | null,
   ) => {
-    if (!hasNotTicket) {
+    if (keyword === '' && ticketTitle === '' && ticketDate === '' && ticketLocation === '' && ticketSeat === '') {
+      setIsLoaded(false);
+    } else if (!hasNotTicket) {
       setIsLoaded(true);
       const data = await getSearchTickets(cursorId, keyword, ticketTitle, ticketDate, ticketLocation, ticketSeat);
       if (data) {
