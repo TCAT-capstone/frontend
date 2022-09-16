@@ -1,23 +1,25 @@
 import React from 'react';
 
 import Layout from '@styles/Layout';
-import SearchBox from '@components/Common/SearchBox';
+import SearchBox from '@src/components/SearchBox';
+import SearchFilter from '@src/components/SearchBox/SearchFilter';
 import TicketList from '@components/TicketList';
 
 import { TicketListType } from '@src/types/ticket';
 
 interface Props {
   tickets: TicketListType;
-  option: string;
-  handleOptionChange: (e: React.ChangeEvent<HTMLButtonElement>) => void;
   isLoaded: boolean;
   setTarget: any;
+  condition: any;
+  search: any;
 }
 
-const SearchTemplate: React.FC<Props> = ({ tickets, option, handleOptionChange, isLoaded, setTarget }) => {
+const SearchTemplate: React.FC<Props> = ({ tickets, isLoaded, setTarget, condition, search }) => {
   return (
     <Layout>
-      <SearchBox option={option} handleOptionChange={handleOptionChange} />
+      <SearchBox condition={condition} search={search} />
+      <SearchFilter />
       <TicketList tickets={tickets} backgroundColor="purple" isLoaded={isLoaded} setTarget={setTarget} />
     </Layout>
   );
