@@ -19,7 +19,7 @@ interface LocationStateType {
   post: TicketType;
 }
 
-const initialTicketbook = { id: -1, name: '기본 티켓북', ticketbookImg: null, description: '' };
+const initialTicketbook = { id: -1, name: '기본 티켓북', ticketbookImg: '', description: '' };
 
 const WritePage: React.FC = () => {
   const navigate = useNavigate();

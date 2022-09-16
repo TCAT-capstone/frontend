@@ -8,8 +8,8 @@ interface ContainerProps {
 
 export const Container = styled.div<ContainerProps>`
   position: relative;
-  width: ${(props) => (props.size === 'medium' ? '15rem' : '11.8rem')};
-  height: ${(props) => (props.size === 'medium' ? '19rem' : '16.8rem')};
+  width: ${(props) => (props.size === 'medium' ? '15rem' : '12rem')};
+  height: ${(props) => (props.size === 'medium' ? '19rem' : '15.2rem')};
   background-image: url(${(props) => props.backgroundImg});
   background-size: cover;
   background-repeat: no-repeat;
@@ -36,7 +36,7 @@ export const Container = styled.div<ContainerProps>`
   div {
     position: absolute;
     top: 5%;
-    left: 1.3rem;
+    left: 7%;
     width: 1px;
     height: 90%;
     background-color: ${ColorCode.WHITE2};

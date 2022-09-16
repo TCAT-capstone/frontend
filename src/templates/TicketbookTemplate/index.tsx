@@ -16,6 +16,12 @@ interface Props {
   currTicketbook: TicketbookType;
   changeCurrTicketbook: (id: number) => void;
   changeDefaultTicketbook: (id: number) => void;
+  newName: string;
+  newDescription: string;
+  newImageUrl: string;
+  handleNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleDescriptionChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleFile: (file: File) => void;
 }
 
 const TicketbookTemplate: React.FC<Props> = ({
@@ -26,6 +32,12 @@ const TicketbookTemplate: React.FC<Props> = ({
   currTicketbook,
   changeCurrTicketbook,
   changeDefaultTicketbook,
+  newName,
+  newDescription,
+  newImageUrl,
+  handleNameChange,
+  handleDescriptionChange,
+  handleFile,
 }) => {
   return (
     <Layout>
@@ -45,7 +57,15 @@ const TicketbookTemplate: React.FC<Props> = ({
           </TicketbookAddButton>
         </TicketbookListContainer>
         <EditContainer>
-          <TicketbookEditor currTicketbook={currTicketbook} />
+          <TicketbookEditor
+            currTicketbook={currTicketbook}
+            newName={newName}
+            newDescription={newDescription}
+            newImageUrl={newImageUrl}
+            handleNameChange={handleNameChange}
+            handleDescriptionChange={handleDescriptionChange}
+            handleFile={handleFile}
+          />
         </EditContainer>
       </Container>
     </Layout>
