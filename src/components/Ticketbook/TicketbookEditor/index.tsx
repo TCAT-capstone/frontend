@@ -29,11 +29,12 @@ const TicketbookEditor: React.FC<Props> = ({
     inputRef.current?.click();
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
       setImageName(e.target.files[0].name);
-      handleFile(e.target.files[0]);
+      await handleFile(e.target.files[0]);
+      e.target.value = '';
     }
   };
 
