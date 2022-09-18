@@ -14,6 +14,7 @@ export const Container = styled.div<ContainerProps>`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: ${ColorCode.LIGHT_PURPLE};
   border-radius: 0.3rem 1rem 1rem 0.3rem;
   cursor: pointer;
   margin: auto;

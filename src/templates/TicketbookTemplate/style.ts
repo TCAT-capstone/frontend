@@ -36,4 +36,27 @@ export const TicketbookAddButton = styled.button`
     font-weight: 500;
     text-align: left;
   }
+  :hover {
+    img,
+    span {
+      opacity: 0.7;
+    }
+  }
+`;
+
+export const ButtonWrapper = styled.div`
+  margin-top: 3rem;
+  text-align: right;
+`;
+
+export const DeleteButton = styled.button`
+  margin-right: 2rem;
+  span {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: ${ColorCode.GRAY1};
+    :hover {
+      opacity: 0.8;
+    }
+  }
 `;

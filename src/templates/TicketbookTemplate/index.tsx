@@ -3,19 +3,26 @@ import React from 'react';
 import TicketBookItemList from '@components/Ticketbook/TicketbookItemList';
 import TicketbookEditor from '@components/Ticketbook/TicketbookEditor';
 import { TicketbookType, TicketbookListType } from '@src/types/ticketbook';
+import BasicButton from '@components/Common/BasicButton';
 
 import plusImg from '@images/plus-rounded.svg';
 import Layout from '@styles/Layout';
-import { Container, TicketbookListContainer, EditContainer, TicketbookAddButton } from './style';
+import {
+  Container,
+  TicketbookListContainer,
+  EditContainer,
+  TicketbookAddButton,
+  ButtonWrapper,
+  DeleteButton,
+} from './style';
 
 interface Props {
   ticketbooks: TicketbookListType;
   setTicketbooks: React.Dispatch<React.SetStateAction<TicketbookListType>>;
-  deleteTicketbook: (id: number) => void;
+  deleteTicketbook: () => void;
   addTicketbook: () => void;
   currTicketbook: TicketbookType;
   changeCurrTicketbook: (id: number) => void;
-  changeDefaultTicketbook: (id: number) => void;
   newName: string;
   newDescription: string;
   newImageUrl: string;
@@ -31,7 +38,6 @@ const TicketbookTemplate: React.FC<Props> = ({
   addTicketbook,
   currTicketbook,
   changeCurrTicketbook,
-  changeDefaultTicketbook,
   newName,
   newDescription,
   newImageUrl,
@@ -46,10 +52,8 @@ const TicketbookTemplate: React.FC<Props> = ({
           <TicketBookItemList
             ticketbooks={ticketbooks}
             setTicketbooks={setTicketbooks}
-            deleteTicketbook={deleteTicketbook}
             currTicketbook={currTicketbook}
             changeCurrTicketbook={changeCurrTicketbook}
-            changeDefaultTicketbook={changeDefaultTicketbook}
           />
           <TicketbookAddButton type="button" onClick={() => addTicketbook()}>
             <img src={plusImg} alt="추가" />
@@ -66,6 +70,12 @@ const TicketbookTemplate: React.FC<Props> = ({
             handleDescriptionChange={handleDescriptionChange}
             handleFile={handleFile}
           />
+          <ButtonWrapper>
+            <DeleteButton type="button" onClick={() => deleteTicketbook()}>
+              <span>삭제하기</span>
+            </DeleteButton>
+            <BasicButton text="모두 저장하기" handler={() => {}} />
+          </ButtonWrapper>
         </EditContainer>
       </Container>
     </Layout>

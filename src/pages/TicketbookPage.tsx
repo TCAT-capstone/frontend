@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import TicketbookTemplate from '@templates/TicketbookTemplate';
 import { TicketbookListType, TicketbookType } from '@src/types/ticketbook';
 import { exampleTicketbooks } from '@stores/user';
-import { uploadImage } from '@src/apis/image';
+import { uploadImage } from '@apis/image';
 
 const TicketbookPage: React.FC = () => {
   const [ticketbooks, setTicketbooks] = useState<TicketbookListType>(exampleTicketbooks);
@@ -20,14 +21,19 @@ const TicketbookPage: React.FC = () => {
     }
   };
 
-  const changeDefaultTicketbook = (id: number) => {
-    setTicketbooks((prev) => {
-      return [prev.find((v) => v.id === id) as TicketbookType, ...prev.filter((v) => v.id !== id)];
-    });
-  };
-
-  const deleteTicketbook = (id: number) => {
-    setTicketbooks((prev) => prev.filter((v) => v.id !== id));
+  const deleteTicketbook = () => {
+    if (ticketbooks.length === 1) {
+      toast.error('티켓북은 반드시 1개 이상이어야 합니다!');
+    } else {
+      let ticketbook;
+      setTicketbooks((prev) => {
+        ticketbook = prev.find((v) => v.id !== currTicketbook.id);
+        if (ticketbook) {
+          setCurrTicketbook(ticketbook);
+        }
+        return prev.filter((v) => v.id !== currTicketbook.id);
+      });
+    }
   };
 
   const addTicketbook = () => {
@@ -96,7 +102,6 @@ const TicketbookPage: React.FC = () => {
       addTicketbook={addTicketbook}
       currTicketbook={currTicketbook}
       changeCurrTicketbook={changeCurrTicketbook}
-      changeDefaultTicketbook={changeDefaultTicketbook}
       newName={newName}
       newDescription={newDescription}
       newImageUrl={newImageUrl}
