@@ -8,19 +8,56 @@ import TicketList from '@components/TicketList';
 import { TicketListType } from '@src/types/ticket';
 
 interface Props {
-  tickets: TicketListType;
+  searchedTickets: TicketListType;
   isLoaded: boolean;
   setTarget: any;
-  condition: any;
-  search: any;
+  keyword: string;
+  title: string;
+  date: string;
+  location: string;
+  seat: string;
+  search: () => void;
+  handleKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleDateChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleLocationChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSeatChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchTemplate: React.FC<Props> = ({ tickets, isLoaded, setTarget, condition, search }) => {
+const SearchTemplate: React.FC<Props> = ({
+  searchedTickets,
+  isLoaded,
+  setTarget,
+  keyword,
+  title,
+  date,
+  location,
+  seat,
+  search,
+  handleKeywordChange,
+  handleTitleChange,
+  handleDateChange,
+  handleLocationChange,
+  handleSeatChange,
+}) => {
   return (
     <Layout>
-      <SearchBox condition={condition} search={search} />
-      <SearchFilter />
-      <TicketList tickets={tickets} backgroundColor="purple" isLoaded={isLoaded} setTarget={setTarget} />
+      <SearchBox
+        keyword={keyword}
+        search={search}
+        handleKeywordChange={handleKeywordChange}
+      />
+      <SearchFilter
+        title={title}
+        date={date}
+        location={location}
+        seat={seat}
+        handleTitleChange={handleTitleChange}
+        handleDateChange={handleDateChange}
+        handleLocationChange={handleLocationChange}
+        handleSeatChange={handleSeatChange}
+      />
+      <TicketList tickets={searchedTickets} backgroundColor="purple" isLoaded={isLoaded} setTarget={setTarget} />
     </Layout>
   );
 };

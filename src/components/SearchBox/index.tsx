@@ -4,27 +4,22 @@ import searchImg from '@images/search.svg';
 import { Container, SearchContent, SearchButton } from './style';
 
 interface Props {
-  condition: any;
-  search: any;
+  keyword: string;
+  search: () => void;
+  handleKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchBox: React.FC<Props> = ({ condition, search }) => {
-  const [keyword, setKeyword] = useState(condition.keyword);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyword(e.target.value);
-  };
-
+const SearchBox: React.FC<Props> = ({ keyword, handleKeywordChange, search }) => {
   const onSubmitSearch = ({ target }: { target: any }) => {
     if (target.key === 'Enter') {
-      search(condition.keyword, condition.title, condition.date, condition.place, condition.seat);
+      search();
     }
   };
 
   return (
     <Container>
       <SearchContent
-        onChange={handleChange}
+        onChange={handleKeywordChange}
         value={keyword}
         placeholder="검색어를 입력하세요"
         onKeyPress={onSubmitSearch}
