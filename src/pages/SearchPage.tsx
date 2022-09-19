@@ -61,7 +61,6 @@ const SearchPage: React.FC = () => {
   };
 
   const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    resetTickets();
     setKeyword(e.target.value);
   };
 
