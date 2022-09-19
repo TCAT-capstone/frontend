@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { KeyboardEvent } from 'react';
 
 import Layout from '@styles/Layout';
 import SearchBox from '@src/components/SearchBox';
@@ -17,6 +17,7 @@ interface Props {
   location: string;
   seat: string;
   search: () => void;
+  onSubmitSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
   handleKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleDateChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -34,6 +35,7 @@ const SearchTemplate: React.FC<Props> = ({
   location,
   seat,
   search,
+  onSubmitSearch,
   handleKeywordChange,
   handleTitleChange,
   handleDateChange,
@@ -45,6 +47,7 @@ const SearchTemplate: React.FC<Props> = ({
       <SearchBox
         keyword={keyword}
         search={search}
+        onSubmitSearch={onSubmitSearch}
         handleKeywordChange={handleKeywordChange}
       />
       <SearchFilter

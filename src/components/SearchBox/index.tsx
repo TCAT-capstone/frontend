@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { KeyboardEvent } from 'react';
 
 import searchImg from '@images/search.svg';
 import { Container, SearchContent, SearchButton } from './style';
@@ -6,16 +6,11 @@ import { Container, SearchContent, SearchButton } from './style';
 interface Props {
   keyword: string;
   search: () => void;
+  onSubmitSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
   handleKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchBox: React.FC<Props> = ({ keyword, handleKeywordChange, search }) => {
-  const onSubmitSearch = ({ target }: { target: any }) => {
-    if (target.key === 'Enter') {
-      search();
-    }
-  };
-
+const SearchBox: React.FC<Props> = ({ keyword, search, onSubmitSearch, handleKeywordChange }) => {
   return (
     <Container>
       <SearchContent

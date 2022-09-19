@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, KeyboardEvent } from 'react';
 
 import SearchTemplate from '@templates/SearchTemplate';
 
@@ -55,6 +55,12 @@ const SearchPage: React.FC = () => {
     getSearchedTickets(cursorId, keyword, title, date, location, seat);
   };
 
+  const onSubmitSearch = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      search();
+    }
+  };
+
   const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
   };
@@ -101,6 +107,7 @@ const SearchPage: React.FC = () => {
       location={location}
       seat={seat}
       search={search}
+      onSubmitSearch={onSubmitSearch}
       handleKeywordChange={handleKeywordChange}
       handleTitleChange={handleTitleChange}
       handleDateChange={handleDateChange}
