@@ -1,4 +1,5 @@
 import { atom, selector } from 'recoil';
+import { TicketbookListType } from '@src/types/ticketbook';
 
 export const userProfileState = atom({
   key: 'userProfileState',
@@ -11,6 +12,11 @@ export const isLoggedInState = selector({
     const { email } = get(userProfileState);
     return email !== '';
   },
+});
+
+export const userTicketbooksState = atom({
+  key: 'userTicketbooksState',
+  default: [] as TicketbookListType,
 });
 
 export const exampleTicketbooks = [
