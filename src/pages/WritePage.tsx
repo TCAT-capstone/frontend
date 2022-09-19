@@ -1,17 +1,16 @@
 import React, { MouseEvent, useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { ticketState } from '@stores/editor';
-import { userProfileState } from '@stores/user';
-import { getTicketbooks } from '@apis/ticketbook';
+import { userTicketbooksState } from '@stores/user';
 import { createTicket, updateTicket } from '@apis/ticket';
 import { uploadImage } from '@apis/image';
 
 import WriteTemplate from '@templates/WriteTemplate';
 import { TicketType } from '@src/types/ticket';
-import { TicketbookListType, TicketbookType } from '@src/types/ticketbook';
-import { toast } from 'react-toastify';
+import { TicketbookType } from '@src/types/ticketbook';
 
 interface LocationStateType {
   imgObj: { file: File; url: string };
@@ -26,11 +25,10 @@ const WritePage: React.FC = () => {
   const location = useLocation();
   const state = location.state as LocationStateType;
   const ticketInfo = useRecoilValue(ticketState);
-  const { homeId } = useRecoilValue(userProfileState);
+  const userTicketbooks = useRecoilValue(userTicketbooksState);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [ticketbook, setTicketbook] = useState<TicketbookType>(initialTicketbook);
-  const [ticketbooks, setTicketbooks] = useState<TicketbookListType>([]);
   const [onTicketbook, setOnTicketbook] = useState(false);
   const [onDropdown, setOnDropdown] = useState(false);
   const TicketbookContainerRef = useRef<HTMLDivElement>(null);
@@ -104,21 +102,13 @@ const WritePage: React.FC = () => {
     }
   };
 
-  const getMyTicketbookList = async () => {
-    const ticketbookList = await getTicketbooks(homeId);
-    setTicketbooks(ticketbookList);
-    if (isUpdateMode) {
-      setTicketbook(ticketbookList.filter((book) => book.id === state.post.ticketbookId)[0]);
-    } else {
-      setTicketbook(ticketbookList[0]);
-    }
-  };
-
   useEffect(() => {
-    getMyTicketbookList();
     if (isUpdateMode) {
       setTitle(state.post.title);
       setContent(state.post.content);
+      setTicketbook(userTicketbooks.filter((book) => book.id === state.post.ticketbookId)[0]);
+    } else {
+      setTicketbook(userTicketbooks[0]);
     }
   }, []);
 
@@ -139,7 +129,6 @@ const WritePage: React.FC = () => {
       handlePostSubmit={handlePostSubmit}
       onTicketbook={onTicketbook}
       handleTicketbookOpen={handleTicketbookOpen}
-      ticketbooks={ticketbooks}
       ticketbook={ticketbook}
       handleTicketbookChange={handleTicketbookChange}
       onDropdown={onDropdown}

@@ -23,3 +23,7 @@ export const Container = styled.div`
     transition: 0.8s;
   }
 `;
+
+export const TicketbookWrapper = styled.div`
+  cursor: pointer;
+`;

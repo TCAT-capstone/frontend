@@ -23,6 +23,7 @@ interface Props {
   ticketbooks: TicketbookListType;
   setTarget: any;
   handlePageNavigate: () => void;
+  changeCurrTicketbookId: (idx: number) => void;
 }
 
 const HomeTemplate: React.FC<Props> = ({
@@ -33,6 +34,7 @@ const HomeTemplate: React.FC<Props> = ({
   ticketbooks,
   setTarget,
   handlePageNavigate,
+  changeCurrTicketbookId,
 }) => {
   return (
     <Layout>
@@ -53,7 +55,7 @@ const HomeTemplate: React.FC<Props> = ({
         )}
       </ButtonWrapper>
       <TicketbookListWrapper>
-        <TicketbookSlider ticketbooks={ticketbooks} />
+        <TicketbookSlider ticketbooks={ticketbooks} changeCurrTicketbookId={changeCurrTicketbookId} />
       </TicketbookListWrapper>
       <TicketList tickets={tickets} backgroundColor="white" isLoaded={isLoaded} setTarget={setTarget} />
       <HomeBackground />

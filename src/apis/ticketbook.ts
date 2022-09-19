@@ -17,7 +17,7 @@ export const updateTicketbooks = async (
 ): Promise<TicketbookListType | false> => {
   try {
     const res = await fetchApi.put(`/api/ticketbooks`, updateTicketReqType);
-    if (res.status !== 200) throw new Error('error');
+    if (res.status !== 201) throw new Error('error');
     const { ticketbooks } = await res.json();
     return ticketbooks;
   } catch (err) {

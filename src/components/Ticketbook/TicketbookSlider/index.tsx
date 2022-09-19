@@ -1,19 +1,21 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import { TicketbookListType } from '@src/types/ticketbook';
-import { Container } from './style';
+import { Container, TicketbookWrapper } from './style';
 import Ticketbook from '../Ticketbook';
 
 interface Props {
   ticketbooks: TicketbookListType;
+  changeCurrTicketbookId: (idx: number) => void;
 }
 
-const TicketbookList: React.FC<Props> = ({ ticketbooks }) => {
+const TicketbookSlider: React.FC<Props> = ({ ticketbooks, changeCurrTicketbookId }) => {
   const ticketbookCount = ticketbooks.length;
+
   const settings = {
     className: 'center',
     centerMode: true,
@@ -34,21 +36,29 @@ const TicketbookList: React.FC<Props> = ({ ticketbooks }) => {
         },
       },
     ],
+    afterChange: (index: any) => {
+      changeCurrTicketbookId(index);
+    },
   };
+
   return (
     <Container>
-      <Slider {...settings}>
-        {ticketbooks.map((ticketbook) => (
-          <Ticketbook
-            backgroundImg={ticketbook.ticketbookImg as string}
-            size="medium"
-            name={ticketbook.name}
-            description={ticketbook.description}
-          />
-        ))}
-      </Slider>
+      {ticketbooks.length > 0 && (
+        <Slider {...settings}>
+          {ticketbooks.map((ticketbook) => (
+            <TicketbookWrapper key={`ticketbook${ticketbook.id}`}>
+              <Ticketbook
+                backgroundImg={ticketbook.ticketbookImg as string}
+                size="medium"
+                name={ticketbook.name}
+                description={ticketbook.description}
+              />
+            </TicketbookWrapper>
+          ))}
+        </Slider>
+      )}
     </Container>
   );
 };
 
-export default TicketbookList;
+export default TicketbookSlider;

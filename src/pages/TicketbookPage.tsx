@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 
 import TicketbookTemplate from '@templates/TicketbookTemplate';
 import { TicketbookListType, TicketbookType } from '@src/types/ticketbook';
-import { userProfileState } from '@stores/user';
+import { userTicketbooksState } from '@stores/user';
 import { uploadImage } from '@apis/image';
-import { getTicketbooks, updateTicketbooks } from '@apis/ticketbook';
-import { useRecoilValue } from 'recoil';
+import { updateTicketbooks } from '@apis/ticketbook';
 
 const initialTicketbook = {
   id: -1,
@@ -16,21 +16,13 @@ const initialTicketbook = {
 };
 
 const TicketbookPage: React.FC = () => {
-  const [originalTicketbooks, setOriginalTicketbooks] = useState<TicketbookListType>([]);
+  const [userTicketbooks, setUserTicketbooks] = useRecoilState(userTicketbooksState);
   const [ticketbooks, setTicketbooks] = useState<TicketbookListType>([]);
   const [currTicketbook, setCurrTicketbook] = useState<TicketbookType>(initialTicketbook);
   const [newIndex, setNewIndex] = useState(-1);
   const [newName, setNewName] = useState('');
   const [newDescription, setNewDescription] = useState('');
   const [newImageUrl, setNewImageUrl] = useState('');
-  const { homeId } = useRecoilValue(userProfileState);
-
-  const getTicketbooksInfo = async () => {
-    const ticketbookList = await getTicketbooks(homeId);
-    setTicketbooks(ticketbookList);
-    setCurrTicketbook(ticketbookList[0]);
-    setOriginalTicketbooks([...ticketbookList]);
-  };
 
   const validateTicketbooks = () => {
     return !ticketbooks.find((t) => t.name === '');
@@ -43,9 +35,9 @@ const TicketbookPage: React.FC = () => {
     }
     const sequence = ticketbooks.map((t) => t.id).join(',');
     const appendTicketbooks = ticketbooks.filter((t) => t.id < 0);
-    const deleteTicketboooks = originalTicketbooks.filter((t) => !ticketbooks.find((ot) => ot.id === t.id));
+    const deleteTicketboooks = userTicketbooks.filter((t) => !ticketbooks.find((ot) => ot.id === t.id));
     const updateTicketboooks = ticketbooks.filter((ot) =>
-      originalTicketbooks.find(
+      userTicketbooks.find(
         (t) =>
           ot.id === t.id &&
           (ot.name !== t.name || ot.description !== t.description || ot.ticketbookImg !== t.ticketbookImg),
@@ -59,7 +51,7 @@ const TicketbookPage: React.FC = () => {
     };
     const updatedTicketbooks = await updateTicketbooks(request);
     if (updatedTicketbooks) {
-      setTicketbooks(updatedTicketbooks);
+      setUserTicketbooks(ticketbooks);
     }
   };
 
@@ -137,8 +129,9 @@ const TicketbookPage: React.FC = () => {
   };
 
   useEffect(() => {
-    getTicketbooksInfo();
-  }, []);
+    setTicketbooks(userTicketbooks);
+    setCurrTicketbook(userTicketbooks[0]);
+  }, [userTicketbooks]);
 
   useEffect(() => {
     if (currTicketbook) {
