@@ -29,6 +29,7 @@ interface Props {
   handleNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleDescriptionChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleFile: (file: File) => void;
+  updateAllTicketbooks: () => void;
 }
 
 const TicketbookTemplate: React.FC<Props> = ({
@@ -44,6 +45,7 @@ const TicketbookTemplate: React.FC<Props> = ({
   handleNameChange,
   handleDescriptionChange,
   handleFile,
+  updateAllTicketbooks,
 }) => {
   return (
     <Layout>
@@ -74,7 +76,7 @@ const TicketbookTemplate: React.FC<Props> = ({
             <DeleteButton type="button" onClick={() => deleteTicketbook()}>
               <span>삭제하기</span>
             </DeleteButton>
-            <BasicButton text="모두 저장하기" handler={() => {}} />
+            <BasicButton text="모두 저장하기" handler={updateAllTicketbooks} />
           </ButtonWrapper>
         </EditContainer>
       </Container>

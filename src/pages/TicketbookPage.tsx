@@ -3,16 +3,65 @@ import { toast } from 'react-toastify';
 
 import TicketbookTemplate from '@templates/TicketbookTemplate';
 import { TicketbookListType, TicketbookType } from '@src/types/ticketbook';
-import { exampleTicketbooks } from '@stores/user';
+import { userProfileState } from '@stores/user';
 import { uploadImage } from '@apis/image';
+import { getTicketbooks, updateTicketbooks } from '@apis/ticketbook';
+import { useRecoilValue } from 'recoil';
+
+const initialTicketbook = {
+  id: -1,
+  name: '',
+  ticketbookImg: '',
+  description: '',
+};
 
 const TicketbookPage: React.FC = () => {
-  const [ticketbooks, setTicketbooks] = useState<TicketbookListType>(exampleTicketbooks);
-  const [currTicketbook, setCurrTicketbook] = useState<TicketbookType>(ticketbooks[0]);
+  const [originalTicketbooks, setOriginalTicketbooks] = useState<TicketbookListType>([]);
+  const [ticketbooks, setTicketbooks] = useState<TicketbookListType>([]);
+  const [currTicketbook, setCurrTicketbook] = useState<TicketbookType>(initialTicketbook);
   const [newIndex, setNewIndex] = useState(-1);
   const [newName, setNewName] = useState('');
   const [newDescription, setNewDescription] = useState('');
   const [newImageUrl, setNewImageUrl] = useState('');
+  const { homeId } = useRecoilValue(userProfileState);
+
+  const getTicketbooksInfo = async () => {
+    const ticketbookList = await getTicketbooks(homeId);
+    setTicketbooks(ticketbookList);
+    setCurrTicketbook(ticketbookList[0]);
+    setOriginalTicketbooks([...ticketbookList]);
+  };
+
+  const validateTicketbooks = () => {
+    return !ticketbooks.find((t) => t.name === '');
+  };
+
+  const updateAllTicketbooks = async () => {
+    if (!validateTicketbooks()) {
+      toast.error('티켓북 제목이 비어있습니다!');
+      return;
+    }
+    const sequence = ticketbooks.map((t) => t.id).join(',');
+    const appendTicketbooks = ticketbooks.filter((t) => t.id < 0);
+    const deleteTicketboooks = originalTicketbooks.filter((t) => !ticketbooks.find((ot) => ot.id === t.id));
+    const updateTicketboooks = ticketbooks.filter((ot) =>
+      originalTicketbooks.find(
+        (t) =>
+          ot.id === t.id &&
+          (ot.name !== t.name || ot.description !== t.description || ot.ticketbookImg !== t.ticketbookImg),
+      ),
+    );
+    const request = {
+      append: appendTicketbooks,
+      update: updateTicketboooks,
+      delete: deleteTicketboooks,
+      sequence,
+    };
+    const updatedTicketbooks = await updateTicketbooks(request);
+    if (updatedTicketbooks) {
+      setTicketbooks(updatedTicketbooks);
+    }
+  };
 
   const changeCurrTicketbook = (id: number) => {
     const ticketbook = ticketbooks.find((v) => v.id === id);
@@ -40,9 +89,8 @@ const TicketbookPage: React.FC = () => {
     const newTicketbook = {
       id: newIndex,
       name: '새로운 티켓북',
-      ticketbookImg:
-        'https://image.fmkorea.com/files/attach/new2/20220329/3655109/2889212861/4478307323/6090b3178e5b2bbc3476308bc475a3fb.jpg',
-      description: '설명',
+      ticketbookImg: '',
+      description: '',
     };
     setTicketbooks((prev) => [...prev, newTicketbook]);
     setCurrTicketbook(newTicketbook);
@@ -89,9 +137,15 @@ const TicketbookPage: React.FC = () => {
   };
 
   useEffect(() => {
-    setNewName(currTicketbook.name);
-    setNewDescription(currTicketbook.description);
-    setNewImageUrl(currTicketbook.ticketbookImg);
+    getTicketbooksInfo();
+  }, []);
+
+  useEffect(() => {
+    if (currTicketbook) {
+      setNewName(currTicketbook.name);
+      setNewDescription(currTicketbook.description);
+      setNewImageUrl(currTicketbook.ticketbookImg);
+    }
   }, [currTicketbook]);
 
   return (
@@ -108,6 +162,7 @@ const TicketbookPage: React.FC = () => {
       handleNameChange={handleNameChange}
       handleDescriptionChange={handleDescriptionChange}
       handleFile={handleFile}
+      updateAllTicketbooks={updateAllTicketbooks}
     />
   );
 };

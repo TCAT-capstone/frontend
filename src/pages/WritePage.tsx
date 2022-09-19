@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ticketState } from '@stores/editor';
 import { userProfileState } from '@stores/user';
-import { getTicketbookList } from '@apis/ticketbook';
+import { getTicketbooks } from '@apis/ticketbook';
 import { createTicket, updateTicket } from '@apis/ticket';
 import { uploadImage } from '@apis/image';
 
@@ -105,7 +105,7 @@ const WritePage: React.FC = () => {
   };
 
   const getMyTicketbookList = async () => {
-    const ticketbookList = await getTicketbookList(homeId);
+    const ticketbookList = await getTicketbooks(homeId);
     setTicketbooks(ticketbookList);
     if (isUpdateMode) {
       setTicketbook(ticketbookList.filter((book) => book.id === state.post.ticketbookId)[0]);

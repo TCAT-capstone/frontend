@@ -19,7 +19,7 @@ export const TicketbookItem = styled.li<TicketbookItemProps>`
   padding: 0 0.5rem 0 2rem;
   margin: 0.5rem 0;
   span {
-    width: 13rem;
+    width: 12rem;
     color: ${ColorCode.PRIMARY};
     font-weight: 500;
   }
@@ -34,7 +34,6 @@ export const TicketbookItem = styled.li<TicketbookItemProps>`
 export const TicketbookItemImg = styled.img`
   width: 2rem;
   height: 2rem;
-  background-color: ${ColorCode.GRAY1};
   object-fit: cover;
   border-radius: 50%;
   margin-right: 0.5rem;

@@ -23,7 +23,7 @@ const TicketBookItemList: React.FC<Props> = ({ ticketbooks, setTicketbooks, curr
       renderList={({ children, props }) => <ul {...props}>{children}</ul>}
       renderItem={({ value, props }) => (
         <TicketbookItem {...props} focus={value.id === currTicketbook.id}>
-          <TicketbookItemImg src={value.ticketbookImg ?? undefined} alt="" />
+          <TicketbookItemImg src={value.ticketbookImg === null ? '' : value.ticketbookImg} alt="" />
           <span>{value.name}</span>
           <button type="button" onClick={() => changeCurrTicketbook(value.id)}>
             <img src={editImg} alt="수정하기" />

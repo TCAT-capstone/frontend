@@ -13,6 +13,7 @@ export enum ColorCode {
   PURPLE2 = '#5F3CCB',
   LIGHT_PURPLE = '#F5F7FF',
   LIGHT_PURPLE2 = '#E7EDFF',
+  LIGHT_PURPLE3 = '#DED2FF',
   BACKGROUND_PURPLE = '#EFEEFD',
 }
 
