@@ -28,24 +28,19 @@ const SearchPage: React.FC = () => {
   ) => {
     if (keyword === '' && ticketTitle === '' && ticketDate === '' && ticketLocation === '' && ticketSeat === '') {
       setIsLoaded(false);
-      console.log('완전 초기');
     } else if (!hasNotTicket) {
       setIsLoaded(true);
       const data = await getSearchTickets(cursorId, keyword, ticketTitle, ticketDate, ticketLocation, ticketSeat);
       if (data) {
         if (data.hasNotTicket) {
           setHasNoTicket(true);
-          console.log('티켓이 없습니다');
         } else {
           setSearchedTickets((prev) => [...prev, ...data.tickets]);
           setCursorId(data.tickets[data.tickets.length - 1].ticketId);
-          console.log('티켓이 있습니다');
         }
       }
       setIsLoaded(false);
-      console.log('서치 끝');
     }
-    console.log('함수 완료');
   };
 
   const resetTickets = () => {
