@@ -2,11 +2,10 @@ import React from 'react';
 
 import ProfileBox from '@components/Common/Profile/ProfileBox';
 import BasicButton from '@components/Common/BasicButton';
-import TicketbookList from '@components/TicketbookList';
+import TicketbookSlider from '@src/components/Ticketbook/TicketbookSlider';
 import TicketList from '@components/TicketList';
-import TicketbookExample from '@components/TicketbookList/TicketbookExample';
 import { TicketListType } from '@src/types/ticket';
-
+import { TicketbookListType } from '@src/types/ticketbook';
 import Layout from '@styles/Layout';
 import { ProfileWrapper, ButtonWrapper, TicketbookListWrapper, HomeBackground } from './style';
 
@@ -21,11 +20,22 @@ interface Props {
   };
   tickets: TicketListType;
   isLoaded: boolean;
+  ticketbooks: TicketbookListType;
   setTarget: any;
   handlePageNavigate: () => void;
+  changeCurrTicketbookId: (idx: number) => void;
 }
 
-const HomeTemplate: React.FC<Props> = ({ isMyHome, profile, tickets, isLoaded, setTarget, handlePageNavigate }) => {
+const HomeTemplate: React.FC<Props> = ({
+  isMyHome,
+  profile,
+  tickets,
+  isLoaded,
+  ticketbooks,
+  setTarget,
+  handlePageNavigate,
+  changeCurrTicketbookId,
+}) => {
   return (
     <Layout>
       <ProfileWrapper>
@@ -45,10 +55,10 @@ const HomeTemplate: React.FC<Props> = ({ isMyHome, profile, tickets, isLoaded, s
         )}
       </ButtonWrapper>
       <TicketbookListWrapper>
-        <TicketbookExample />
+        <TicketbookSlider ticketbooks={ticketbooks} changeCurrTicketbookId={changeCurrTicketbookId} />
       </TicketbookListWrapper>
       <TicketList tickets={tickets} backgroundColor="white" isLoaded={isLoaded} setTarget={setTarget} />
-      <HomeBackground color="PURPLE" />
+      <HomeBackground />
     </Layout>
   );
 };

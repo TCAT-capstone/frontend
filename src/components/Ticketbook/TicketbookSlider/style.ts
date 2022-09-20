@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   position: relative;
-  height: 19rem;
   .slick-list {
     height: 25rem;
   }
@@ -22,4 +21,8 @@ export const Container = styled.div`
     transform: scale(1.15) translateY(-1.2rem);
     transition: 0.8s;
   }
+`;
+
+export const TicketbookWrapper = styled.div`
+  cursor: pointer;
 `;

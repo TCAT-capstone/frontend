@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { deleteTicket, getLike, getTicket, updatelike } from '@apis/ticket';
+import { toast } from 'react-toastify';
 
 import PostTemplate from '@templates/PostTemplate';
-import { userProfileState } from '@stores/user';
+import { deleteTicket, getLike, getTicket, updatelike } from '@apis/ticket';
+import { isLoggedInState, userProfileState } from '@stores/user';
 import { TicketLikeType, TicketType } from '@src/types/ticket';
+import ErrorPage from './ErrorPage';
 
 const PostPage: React.FC = () => {
   const navigate = useNavigate();
   const { ticketId, homeId } = useParams();
   const myProfile = useRecoilValue(userProfileState);
+  const isLoggedIn = useRecoilValue(isLoggedInState);
   const [post, setPost] = useState<TicketType>();
   const [like, setLike] = useState<TicketLikeType>({ count: 0, status: false });
+  const [noSuchPost, setNoSuchPost] = useState(false);
 
   const isMyHome = homeId === myProfile.homeId;
 
   const getPost = async () => {
     const ticket = await getTicket(Number(ticketId));
     if (ticket) {
-      setPost(ticket);
+      if (ticket.memberHomeId !== homeId) {
+        setNoSuchPost(true);
+      } else {
+        setPost(ticket);
+      }
+    } else {
+      setNoSuchPost(true);
     }
   };
 
@@ -42,6 +52,10 @@ const PostPage: React.FC = () => {
   };
 
   const handleLike = async () => {
+    if (!isLoggedIn) {
+      toast.error('로그인이 필요합니다!');
+      return;
+    }
     const like = await updatelike(Number(ticketId));
     if (like) {
       setLike(like);
@@ -53,7 +67,9 @@ const PostPage: React.FC = () => {
     getLikeInfo();
   }, []);
 
-  return (
+  return noSuchPost ? (
+    <ErrorPage />
+  ) : (
     <PostTemplate
       post={post}
       isMyHome={isMyHome}
