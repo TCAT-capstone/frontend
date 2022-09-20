@@ -15,12 +15,12 @@ export const ButtonWrapper = styled.div`
 export const TicketbookListWrapper = styled.div`
   width: 100%;
   margin-top: 3.5rem;
-  margin-bottom: 13rem;
+  margin-bottom: 5rem;
 `;
 
 export const HomeBackground = styled.div`
   position: absolute;
-  top: 59rem;
+  top: 60rem;
   bottom: 0;
   left: 0;
   right: 0;

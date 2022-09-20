@@ -14,32 +14,107 @@ interface Props {
 }
 
 const TicketbookSlider: React.FC<Props> = ({ ticketbooks, changeCurrTicketbookId }) => {
-  const ticketbookCount = ticketbooks.length;
+  const [settings, setSettings] = useState({});
 
-  const settings = {
-    className: 'center',
-    centerMode: true,
-    centerPadding: '0',
-    infinite: ticketbookCount > 5,
-    dots: false,
-    arrows: false,
-    focusOnSelect: true,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    speed: 800,
-    responsive: [
-      {
-        breakpoint: 1610,
-        settings: {
-          infinite: ticketbookCount > 3,
-          slidesToShow: 3,
+  useEffect(() => {
+    const ticketbookCount = ticketbooks.length;
+    console.log('ticketbookCount', ticketbookCount);
+    if (ticketbookCount >= 5) {
+      setSettings({
+        className: 'center',
+        centerMode: true,
+        centerPadding: '0',
+        infinite: ticketbookCount > 5,
+        dots: false,
+        arrows: false,
+        focusOnSelect: true,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        speed: 800,
+        responsive: [
+          {
+            breakpoint: 1610,
+            settings: {
+              infinite: ticketbookCount > 3,
+              slidesToShow: 3,
+            },
+          },
+        ],
+        beforeChange: (current: any, next: any) => {
+          console.log(next);
+          changeCurrTicketbookId(next);
         },
-      },
-    ],
-    afterChange: (index: any) => {
-      changeCurrTicketbookId(index);
-    },
-  };
+      });
+    } else if (ticketbookCount === 4) {
+      setSettings({
+        className: 'center',
+        centerMode: true,
+        centerPadding: '0',
+        infinite: true,
+        dots: false,
+        arrows: false,
+        focusOnSelect: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        speed: 800,
+        beforeChange: (current: any, next: any) => {
+          console.log(next);
+          changeCurrTicketbookId(next);
+        },
+      });
+    } else if (ticketbookCount === 3) {
+      setSettings({
+        className: 'center',
+        centerMode: true,
+        centerPadding: '0',
+        infinite: true,
+        dots: false,
+        arrows: false,
+        focusOnSelect: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        speed: 800,
+        beforeChange: (current: any, next: any) => {
+          console.log(next);
+          changeCurrTicketbookId(next);
+        },
+      });
+    } else if (ticketbookCount === 2) {
+      setSettings({
+        className: 'center',
+        centerMode: true,
+        centerPadding: '0',
+        infinite: true,
+        dots: false,
+        arrows: false,
+        focusOnSelect: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        speed: 800,
+        beforeChange: (current: any, next: any) => {
+          console.log(next);
+          changeCurrTicketbookId(next);
+        },
+      });
+    } else {
+      setSettings({
+        className: 'center',
+        centerMode: true,
+        centerPadding: '0',
+        infinite: true,
+        dots: false,
+        arrows: false,
+        focusOnSelect: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        speed: 800,
+        beforeChange: (current: any, next: any) => {
+          console.log(next);
+          changeCurrTicketbookId(next);
+        },
+      });
+    }
+  }, [ticketbooks]);
 
   return (
     <Container>

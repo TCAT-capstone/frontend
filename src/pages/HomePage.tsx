@@ -11,7 +11,7 @@ import { getMemberProfile } from '@apis/member';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { TicketListType } from '@src/types/ticket';
 import { TicketbookListType } from '@src/types/ticketbook';
-import { getTicketbooks } from '@src/apis/ticketbook';
+import { getTicketbooks } from '@apis/ticketbook';
 
 interface HomeProfileType {
   img: string;
@@ -105,6 +105,7 @@ const HomePage: React.FC = () => {
   }, [homeId, myProfile.homeId]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     setTickets([]);
     setHasNoTicket(false);
     setCursorId(null);
