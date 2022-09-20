@@ -51,7 +51,7 @@ const TicketbookPage: React.FC = () => {
     };
     const updatedTicketbooks = await updateTicketbooks(request);
     if (updatedTicketbooks) {
-      setUserTicketbooks(ticketbooks);
+      setUserTicketbooks(updatedTicketbooks);
     }
   };
 
