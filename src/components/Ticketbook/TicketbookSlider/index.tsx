@@ -15,16 +15,31 @@ interface Props {
 
 const TicketbookSlider: React.FC<Props> = ({ ticketbooks, changeCurrTicketbookId }) => {
   const [settings, setSettings] = useState({});
+  const [duplicateTicketbooks, setDuplicateTicketbooks] = useState(ticketbooks);
+  let ticketbookCount = ticketbooks.length;
+
+  const cloneTicketbooks = () => {
+    const addedLast = [];
+    let index = 0;
+    while (index < ticketbooks.length) {
+      addedLast.push(ticketbooks[index % ticketbooks.length]);
+      index += 1;
+    }
+    setDuplicateTicketbooks([...ticketbooks, ...addedLast]);
+  };
 
   useEffect(() => {
-    const ticketbookCount = ticketbooks.length;
+    if (ticketbookCount <= 5 && ticketbookCount > 1) {
+      cloneTicketbooks();
+    }
+    ticketbookCount = duplicateTicketbooks.length;
     console.log('ticketbookCount', ticketbookCount);
     if (ticketbookCount >= 5) {
       setSettings({
         className: 'center',
         centerMode: true,
         centerPadding: '0',
-        infinite: ticketbookCount > 5,
+        infinite: true,
         dots: false,
         arrows: false,
         focusOnSelect: true,
@@ -33,19 +48,23 @@ const TicketbookSlider: React.FC<Props> = ({ ticketbooks, changeCurrTicketbookId
         speed: 800,
         responsive: [
           {
-            breakpoint: 1610,
+            breakpoint: 1024,
             settings: {
-              infinite: ticketbookCount > 3,
               slidesToShow: 3,
             },
           },
         ],
         beforeChange: (current: any, next: any) => {
-          console.log(next);
-          changeCurrTicketbookId(next);
+          console.log('current', current);
+          console.log('next', next);
+          if (next > ticketbooks.length - 1) {
+            changeCurrTicketbookId(next % ticketbooks.length);
+          } else {
+            changeCurrTicketbookId(next);
+          }
         },
       });
-    } else if (ticketbookCount === 4) {
+    } else if (ticketbookCount > 1 && ticketbookCount < 5) {
       setSettings({
         className: 'center',
         centerMode: true,
@@ -58,42 +77,13 @@ const TicketbookSlider: React.FC<Props> = ({ ticketbooks, changeCurrTicketbookId
         slidesToScroll: 1,
         speed: 800,
         beforeChange: (current: any, next: any) => {
-          console.log(next);
-          changeCurrTicketbookId(next);
-        },
-      });
-    } else if (ticketbookCount === 3) {
-      setSettings({
-        className: 'center',
-        centerMode: true,
-        centerPadding: '0',
-        infinite: true,
-        dots: false,
-        arrows: false,
-        focusOnSelect: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        speed: 800,
-        beforeChange: (current: any, next: any) => {
-          console.log(next);
-          changeCurrTicketbookId(next);
-        },
-      });
-    } else if (ticketbookCount === 2) {
-      setSettings({
-        className: 'center',
-        centerMode: true,
-        centerPadding: '0',
-        infinite: true,
-        dots: false,
-        arrows: false,
-        focusOnSelect: true,
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        speed: 800,
-        beforeChange: (current: any, next: any) => {
-          console.log(next);
-          changeCurrTicketbookId(next);
+          console.log('current', current);
+          console.log('next', next);
+          if (next > ticketbooks.length - 1) {
+            changeCurrTicketbookId(next % ticketbooks.length);
+          } else {
+            changeCurrTicketbookId(next);
+          }
         },
       });
     } else {
@@ -101,17 +91,13 @@ const TicketbookSlider: React.FC<Props> = ({ ticketbooks, changeCurrTicketbookId
         className: 'center',
         centerMode: true,
         centerPadding: '0',
-        infinite: true,
+        infinite: false,
         dots: false,
         arrows: false,
         focusOnSelect: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         speed: 800,
-        beforeChange: (current: any, next: any) => {
-          console.log(next);
-          changeCurrTicketbookId(next);
-        },
       });
     }
   }, [ticketbooks]);
@@ -120,7 +106,7 @@ const TicketbookSlider: React.FC<Props> = ({ ticketbooks, changeCurrTicketbookId
     <Container>
       {ticketbooks.length > 0 && (
         <Slider {...settings}>
-          {ticketbooks.map((ticketbook) => (
+          {duplicateTicketbooks.map((ticketbook) => (
             <TicketbookWrapper key={`ticketbook${ticketbook.id}`}>
               <Ticketbook
                 backgroundImg={ticketbook.ticketbookImg as string}
