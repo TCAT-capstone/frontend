@@ -10,7 +10,7 @@ interface Props {
   focus: 'first' | 'second';
 }
 
-const SubscribeTab: React.FC<Props> = ({ firstText, secondText, handleFirstLink, handleSecondLink, focus }) => {
+const FollowTab: React.FC<Props> = ({ firstText, secondText, handleFirstLink, handleSecondLink, focus }) => {
   return (
     <Container>
       <LinkWrapper focus={focus === 'first'}>
@@ -28,4 +28,4 @@ const SubscribeTab: React.FC<Props> = ({ firstText, secondText, handleFirstLink,
   );
 };
 
-export default SubscribeTab;
+export default FollowTab;

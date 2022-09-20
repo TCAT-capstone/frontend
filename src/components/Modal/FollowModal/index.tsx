@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
 
 import ModalFrame from '@components/Modal/ModalFrame';
-import SubscribeTab from '@components/Common/Tab/SubscribeTab';
+import FollowTab from '@components/Common/Tab/FollowTab';
 import { Container } from './style';
 
 interface Props {
-  handleSubscribeModalClose: () => void;
+  handleFollowModalClose: () => void;
 }
 
-const SubscribeModal: React.FC<Props> = ({ handleSubscribeModalClose }) => {
-  const [isSubscribing, setIsSubscribing] = useState(true);
+const FollowModal: React.FC<Props> = ({ handleFollowModalClose }) => {
+  const [isFollowing, setIsFollowing] = useState(true);
 
   const handleFirstLink = () => {};
   const handleSecondLink = () => {};
 
   return (
-    <ModalFrame w={32} h={33.5} handleModalClose={handleSubscribeModalClose}>
+    <ModalFrame w={32} h={33.5} handleModalClose={handleFollowModalClose}>
       <Container>
-        <SubscribeTab
+        <FollowTab
           firstText="구독중"
           secondText="구독자"
           handleFirstLink={handleFirstLink}
           handleSecondLink={handleSecondLink}
-          focus={isSubscribing ? 'first' : 'second'}
+          focus={isFollowing ? 'first' : 'second'}
         />
       </Container>
     </ModalFrame>
   );
 };
 
-export default SubscribeModal;
+export default FollowModal;
