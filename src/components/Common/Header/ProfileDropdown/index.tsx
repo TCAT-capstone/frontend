@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { Link } from 'react-router-dom';
 
 import { userProfileState } from '@stores/user';
 import { ACCESS_TOKEN } from '@utils/constants';
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
-import SubscribeModal from '@components/Modal/SubscribeModal';
 import { Container, ProfileContainer, ProfileLinkContainer, LinkContainer } from './style';
 
-const ProfileDropdown: React.FC = () => {
+interface Props {
+  handleSubscribeModalOpen: () => void;
+}
+
+const ProfileDropdown: React.FC<Props> = ({ handleSubscribeModalOpen }) => {
   const myProfile = useRecoilValue(userProfileState);
-  const [onSubscribeModal, setOnSubscribeModal] = useState(false);
   const resetUserProfileState = useResetRecoilState(userProfileState);
 
-  const handleSubscribeModalOpen = () => {
-    setOnSubscribeModal(true);
-  };
 
-  const handleSubscribeModalClose = () => {
-    setOnSubscribeModal(false);
-  };
 
   const handleLogout = () => {
     resetUserProfileState();
@@ -51,7 +47,6 @@ const ProfileDropdown: React.FC = () => {
           <span>로그아웃</span>
         </button>
       </LinkContainer>
-      {onSubscribeModal && <SubscribeModal handleSubscribeModalClose={handleSubscribeModalClose} />}
     </Container>
   );
 };

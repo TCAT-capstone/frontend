@@ -9,6 +9,7 @@ import searchImg from '@images/search.svg';
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
 import BasicButton from '@components/Common/BasicButton';
 import LoginModal from '@components/Modal/LoginModal';
+import SubscribeModal from '@components/Modal/SubscribeModal';
 import ProfileDropdown from './ProfileDropdown';
 
 import { Container, ButtonContainer, SearchButton, ProfileContainer, ProfileButton } from './style';
@@ -18,6 +19,7 @@ const Header: React.FC = () => {
   const userProfile = useRecoilValue(userProfileState);
   const [onLoginModal, setOnLoginModal] = useState(false);
   const [onProfileDropdown, setOnProfileDropdown] = useState(false);
+  const [onSubscribeModal, setOnSubscribeModal] = useState(false);
   const ProfileContainerRef = useRef<HTMLDivElement>(null);
 
   const handleLoginModalOpen = () => {
@@ -34,6 +36,15 @@ const Header: React.FC = () => {
 
   const handleProfileDropdownToggle = () => {
     setOnProfileDropdown((prev) => !prev);
+  };
+
+  const handleSubscribeModalOpen = () => {
+    setOnSubscribeModal(true);
+    setOnProfileDropdown(false);
+  };
+
+  const handleSubscribeModalClose = () => {
+    setOnSubscribeModal(false);
   };
 
   const handleClickOutside = ({ target }: { target: any }) => {
@@ -65,13 +76,14 @@ const Header: React.FC = () => {
             <ProfileButton onClick={handleProfileDropdownToggle}>
               <ProfileIcon size={2.2} profileImg={userProfile.memberImg} />
             </ProfileButton>
-            {onProfileDropdown && <ProfileDropdown />}
+            {onProfileDropdown && <ProfileDropdown handleSubscribeModalOpen={handleSubscribeModalOpen} />}
           </ProfileContainer>
         ) : (
           <BasicButton text="로그인" handler={handleLoginModalOpen} />
         )}
       </ButtonContainer>
       {onLoginModal && <LoginModal handleLoginModalClose={handleLoginModalClose} />}
+      {onSubscribeModal && <SubscribeModal handleSubscribeModalClose={handleSubscribeModalClose} />}
     </Container>
   );
 };
