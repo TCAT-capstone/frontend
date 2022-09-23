@@ -98,7 +98,7 @@ const WritePage: React.FC = () => {
       }
     }
     if (newTicket) {
-      navigate(`/~${newTicket.memberHomeId}/${newTicket.ticketId}`, { replace: true });
+      navigate(`/@${newTicket.memberHomeId}/${newTicket.ticketId}`, { replace: true });
     }
   };
 

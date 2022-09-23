@@ -16,7 +16,7 @@ const SearchBox: React.FC<Props> = ({ keyword, search, onSubmitSearch, handleKey
       <SearchContent
         onChange={handleKeywordChange}
         value={keyword}
-        placeholder="검색어를 입력하세요"
+        placeholder="검색어를 입력하세요"
         onKeyPress={onSubmitSearch}
       />
       <SearchButton onClick={search}>

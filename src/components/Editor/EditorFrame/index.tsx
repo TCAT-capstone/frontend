@@ -16,7 +16,7 @@ const EditorFrame: React.FC<Props> = ({ children }) => {
   const navigate = useNavigate();
 
   const handlePageNavigate = () => {
-    navigate(`/~${myProfile.homeId}`);
+    navigate(`/@${myProfile.homeId}`);
   };
 
   return (

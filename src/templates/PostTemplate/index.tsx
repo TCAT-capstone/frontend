@@ -51,9 +51,13 @@ const PostTemplate: React.FC<Props> = ({ post, isMyHome, like, handlePostDelete,
         <>
           <PostContainer>
             <SmallProfileContainer>
-              <ProfileIcon size={2.8} profileImg={post.memberImg} />
+              <Link to={`/@${post.memberHomeId}`}>
+                <ProfileIcon size={2.8} profileImg={post.memberImg} />
+              </Link>
               <div>
-                <b>{post.memberName}</b>
+                <Link to={`/@${post.memberHomeId}`}>
+                  <b>{post.memberName}</b>
+                </Link>
                 <span>{getDateString(new Date(post.date))}</span>
               </div>
             </SmallProfileContainer>
@@ -97,7 +101,7 @@ const PostTemplate: React.FC<Props> = ({ post, isMyHome, like, handlePostDelete,
               )}
             </ButtonContainer>
             <MediumProfileContainer>
-              <Link to={`/~${post.memberHomeId}`}>
+              <Link to={`/@${post.memberHomeId}`}>
                 <ProfileIcon size={3.75} profileImg={post.memberImg} />
                 <div>
                   <b>{post.memberName}</b>
