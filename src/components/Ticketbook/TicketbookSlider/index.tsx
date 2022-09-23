@@ -10,17 +10,23 @@ import Ticketbook from '../Ticketbook';
 
 interface Props {
   ticketbooks: TicketbookListType;
+  initialTicketbookCount: number;
   cloneTicketbooks: () => void;
   changeCurrTicketbookId: (idx: number) => void;
 }
 
-const TicketbookSlider: React.FC<Props> = ({ ticketbooks, cloneTicketbooks, changeCurrTicketbookId }) => {
+const TicketbookSlider: React.FC<Props> = ({
+  ticketbooks,
+  initialTicketbookCount,
+  cloneTicketbooks,
+  changeCurrTicketbookId,
+}) => {
   const [settings, setSettings] = useState({});
   const ticketbookCount = ticketbooks.length;
 
   useEffect(() => {
     cloneTicketbooks();
-    if (ticketbookCount >= 5) {
+    if (initialTicketbookCount >= 4) {
       setSettings({
         className: 'center',
         centerMode: true,
@@ -47,7 +53,7 @@ const TicketbookSlider: React.FC<Props> = ({ ticketbooks, cloneTicketbooks, chan
           }
         },
       });
-    } else if (ticketbookCount > 1 && ticketbookCount < 5) {
+    } else if (initialTicketbookCount > 1 && initialTicketbookCount < 4) {
       setSettings({
         className: 'center',
         centerMode: true,
@@ -82,7 +88,7 @@ const TicketbookSlider: React.FC<Props> = ({ ticketbooks, cloneTicketbooks, chan
   }, [ticketbooks]);
 
   return (
-    <Container>
+    <Container initialTicketbookCount={initialTicketbookCount}>
       {ticketbookCount > 0 && (
         <Slider {...settings}>
           {ticketbooks.map((ticketbook) => (

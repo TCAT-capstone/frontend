@@ -147,6 +147,7 @@ const HomePage: React.FC = () => {
       tickets={tickets}
       isLoaded={isLoaded}
       ticketbooks={ticketbooks}
+      initialTicketbookCount={initialTicketbookCount}
       cloneTicketbooks={cloneTicketbooks}
       setTarget={setTarget}
       handlePageNavigate={handlePageNavigate}

@@ -21,6 +21,7 @@ interface Props {
   tickets: TicketListType;
   isLoaded: boolean;
   ticketbooks: TicketbookListType;
+  initialTicketbookCount: number;
   cloneTicketbooks: () => void;
   setTarget: any;
   handlePageNavigate: () => void;
@@ -33,6 +34,7 @@ const HomeTemplate: React.FC<Props> = ({
   tickets,
   isLoaded,
   ticketbooks,
+  initialTicketbookCount,
   cloneTicketbooks,
   setTarget,
   handlePageNavigate,
@@ -59,6 +61,7 @@ const HomeTemplate: React.FC<Props> = ({
       <TicketbookListWrapper>
         <TicketbookSlider
           ticketbooks={ticketbooks}
+          initialTicketbookCount={initialTicketbookCount}
           cloneTicketbooks={cloneTicketbooks}
           changeCurrTicketbookId={changeCurrTicketbookId}
         />

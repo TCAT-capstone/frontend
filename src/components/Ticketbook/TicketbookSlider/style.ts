@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+interface ContainerProps {
+  initialTicketbookCount: number;
+}
+
+export const Container = styled.div<ContainerProps>`
   position: relative;
+  width: ${(props) => (props.initialTicketbookCount <= 3 ? '70rem' : '100rem')};
   .slick-list {
     height: 25rem;
   }

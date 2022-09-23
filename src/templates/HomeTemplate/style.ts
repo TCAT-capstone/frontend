@@ -13,7 +13,9 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const TicketbookListWrapper = styled.div`
+  display: flex;
   width: 100%;
+  justify-content: center;
   margin-top: 3.5rem;
   margin-bottom: 5rem;
 `;
