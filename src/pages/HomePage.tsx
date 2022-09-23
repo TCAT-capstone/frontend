@@ -49,6 +49,16 @@ const HomePage: React.FC = () => {
     navigate('/editor/new');
   };
 
+  const cloneTicketbooks = () => {
+    const addedLast = [];
+    let index = 0;
+    while (index < ticketbooks.length) {
+      addedLast.push(ticketbooks[index % ticketbooks.length]);
+      index += 1;
+    }
+    setTicketbooks([...ticketbooks, ...addedLast]);
+  };
+
   const getProfileAndTicketbooks = async () => {
     if (isMyHome) {
       setProfile({
@@ -103,6 +113,12 @@ const HomePage: React.FC = () => {
     setIsMyhome(homeId === myProfile.homeId);
     getProfileAndTicketbooks();
   }, [homeId, myProfile.homeId]);
+
+  useEffect(() => {
+    if (ticketbooks.length <= 5 && ticketbooks.length > 1) {
+      cloneTicketbooks();
+    }
+  }, [ticketbooks]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

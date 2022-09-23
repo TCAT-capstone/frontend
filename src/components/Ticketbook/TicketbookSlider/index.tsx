@@ -15,25 +15,9 @@ interface Props {
 
 const TicketbookSlider: React.FC<Props> = ({ ticketbooks, changeCurrTicketbookId }) => {
   const [settings, setSettings] = useState({});
-  const [duplicateTicketbooks, setDuplicateTicketbooks] = useState(ticketbooks);
-  let ticketbookCount = ticketbooks.length;
-
-  const cloneTicketbooks = () => {
-    const addedLast = [];
-    let index = 0;
-    while (index < ticketbooks.length) {
-      addedLast.push(ticketbooks[index % ticketbooks.length]);
-      index += 1;
-    }
-    setDuplicateTicketbooks([...ticketbooks, ...addedLast]);
-  };
+  const ticketbookCount = ticketbooks.length;
 
   useEffect(() => {
-    if (ticketbookCount <= 5 && ticketbookCount > 1) {
-      cloneTicketbooks();
-    }
-    ticketbookCount = duplicateTicketbooks.length;
-    console.log('ticketbookCount', ticketbookCount);
     if (ticketbookCount >= 5) {
       setSettings({
         className: 'center',
@@ -44,7 +28,6 @@ const TicketbookSlider: React.FC<Props> = ({ ticketbooks, changeCurrTicketbookId
         arrows: false,
         focusOnSelect: true,
         slidesToShow: 5,
-        slidesToScroll: 1,
         speed: 800,
         responsive: [
           {
@@ -55,10 +38,8 @@ const TicketbookSlider: React.FC<Props> = ({ ticketbooks, changeCurrTicketbookId
           },
         ],
         beforeChange: (current: any, next: any) => {
-          console.log('current', current);
-          console.log('next', next);
-          if (next > ticketbooks.length - 1) {
-            changeCurrTicketbookId(next % ticketbooks.length);
+          if (next > ticketbookCount - 1) {
+            changeCurrTicketbookId(next % ticketbookCount);
           } else {
             changeCurrTicketbookId(next);
           }
@@ -74,13 +55,10 @@ const TicketbookSlider: React.FC<Props> = ({ ticketbooks, changeCurrTicketbookId
         arrows: false,
         focusOnSelect: true,
         slidesToShow: 3,
-        slidesToScroll: 1,
         speed: 800,
         beforeChange: (current: any, next: any) => {
-          console.log('current', current);
-          console.log('next', next);
-          if (next > ticketbooks.length - 1) {
-            changeCurrTicketbookId(next % ticketbooks.length);
+          if (next > ticketbookCount - 1) {
+            changeCurrTicketbookId(next % ticketbookCount);
           } else {
             changeCurrTicketbookId(next);
           }
@@ -95,8 +73,7 @@ const TicketbookSlider: React.FC<Props> = ({ ticketbooks, changeCurrTicketbookId
         dots: false,
         arrows: false,
         focusOnSelect: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
+        slidesToShow: 5,
         speed: 800,
       });
     }
@@ -104,9 +81,9 @@ const TicketbookSlider: React.FC<Props> = ({ ticketbooks, changeCurrTicketbookId
 
   return (
     <Container>
-      {ticketbooks.length > 0 && (
+      {ticketbookCount > 0 && (
         <Slider {...settings}>
-          {duplicateTicketbooks.map((ticketbook) => (
+          {ticketbooks.map((ticketbook) => (
             <TicketbookWrapper key={`ticketbook${ticketbook.id}`}>
               <Ticketbook
                 backgroundImg={ticketbook.ticketbookImg as string}
