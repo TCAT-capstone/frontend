@@ -10,14 +10,16 @@ import Ticketbook from '../Ticketbook';
 
 interface Props {
   ticketbooks: TicketbookListType;
+  cloneTicketbooks: () => void;
   changeCurrTicketbookId: (idx: number) => void;
 }
 
-const TicketbookSlider: React.FC<Props> = ({ ticketbooks, changeCurrTicketbookId }) => {
+const TicketbookSlider: React.FC<Props> = ({ ticketbooks, cloneTicketbooks, changeCurrTicketbookId }) => {
   const [settings, setSettings] = useState({});
   const ticketbookCount = ticketbooks.length;
 
   useEffect(() => {
+    cloneTicketbooks();
     if (ticketbookCount >= 5) {
       setSettings({
         className: 'center',

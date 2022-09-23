@@ -39,6 +39,8 @@ const HomePage: React.FC = () => {
   const [tickets, setTickets] = useState<TicketListType>([]);
   const [cursorId, setCursorId] = useState<number | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [initialTicketbookCount, setInitialTicketbookCount] = useState(0);
+  const [isDuplicated, setIsDuplicated] = useState(false);
   const [hasNotTicket, setHasNoTicket] = useState(false);
   const [noSuchUser, setNoSuchUser] = useState(false);
   const [ticketbooks, setTicketbooks] = useState<TicketbookListType>([]);
@@ -50,13 +52,16 @@ const HomePage: React.FC = () => {
   };
 
   const cloneTicketbooks = () => {
-    const addedLast = [];
-    let index = 0;
-    while (index < ticketbooks.length) {
-      addedLast.push(ticketbooks[index % ticketbooks.length]);
-      index += 1;
+    if (!isDuplicated && initialTicketbookCount <= 5 && initialTicketbookCount > 1) {
+      const addedLast = [];
+      let index = 0;
+      while (index < ticketbooks.length) {
+        addedLast.push(ticketbooks[index % ticketbooks.length]);
+        index += 1;
+      }
+      setTicketbooks([...ticketbooks, ...addedLast]);
+      setIsDuplicated(true);
     }
-    setTicketbooks([...ticketbooks, ...addedLast]);
   };
 
   const getProfileAndTicketbooks = async () => {
@@ -68,6 +73,8 @@ const HomePage: React.FC = () => {
         ticketCount: myProfile.ticketCount,
         likeCount: myProfile.likeCount,
       });
+      setIsDuplicated(false);
+      setInitialTicketbookCount(myTicketbooks.length);
       setTicketbooks(myTicketbooks);
       setCurrTicketbookId(myTicketbooks[0].id);
     } else if (homeId) {
@@ -81,6 +88,8 @@ const HomePage: React.FC = () => {
           likeCount: userProfile.likeCount,
         });
         const userTicketbooks = await getTicketbooks(homeId);
+        setIsDuplicated(false);
+        setInitialTicketbookCount(userTicketbooks.length);
         setTicketbooks(userTicketbooks);
         setCurrTicketbookId(userTicketbooks[0].id);
       } else {
@@ -115,12 +124,6 @@ const HomePage: React.FC = () => {
   }, [homeId, myProfile.homeId]);
 
   useEffect(() => {
-    if (ticketbooks.length <= 5 && ticketbooks.length > 1) {
-      cloneTicketbooks();
-    }
-  }, [ticketbooks]);
-
-  useEffect(() => {
     window.scrollTo(0, 0);
     setTickets([]);
     setHasNoTicket(false);
@@ -144,6 +147,7 @@ const HomePage: React.FC = () => {
       tickets={tickets}
       isLoaded={isLoaded}
       ticketbooks={ticketbooks}
+      cloneTicketbooks={cloneTicketbooks}
       setTarget={setTarget}
       handlePageNavigate={handlePageNavigate}
       changeCurrTicketbookId={changeCurrTicketbookId}
