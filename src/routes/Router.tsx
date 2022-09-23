@@ -33,16 +33,16 @@ const Router: React.FC = () => {
         <Route path="/" element={<RegisterRoute />}>
           <Route path="" element={<MainPage isTrend />} />
           <Route path="feed" element={<MainPage isTrend={false} />} />
-          <Route path="~:homeId" element={<HomePage />} />
-          <Route path="~:homeId/:ticketId" element={<PostPage />} />
+          <Route path="@:homeId" element={<HomePage />} />
+          <Route path="@:homeId/:ticketId" element={<PostPage />} />
           <Route path="oauth2/redirect" element={<OAuthRedirectPage />} />
           <Route path="search" element={<SearchPage />} />
           <Route element={<PrivateRoute />}>
             <Route path="write" element={<WritePage />} />
             <Route path="editor/new" element={<NewPage />} />
             <Route path="editor/edit" element={<EditPage />} />
-            <Route path="~:homeId/profile" element={<ProfilePage />} />
-            <Route path="~:homeId/ticketbook" element={<TicketbookPage />} />
+            <Route path="@:homeId/profile" element={<ProfilePage />} />
+            <Route path="@:homeId/ticketbook" element={<TicketbookPage />} />
           </Route>
           <Route path="*" element={<ErrorPage />} />
         </Route>
