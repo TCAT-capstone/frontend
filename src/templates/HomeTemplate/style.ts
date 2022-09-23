@@ -1,10 +1,6 @@
 import styled from 'styled-components';
-import { BookColorCode } from '@utils/constants';
 import { media } from '@styles/media';
-
-interface TicketBackgroundProps {
-  color: 'PURPLE' | 'GREEN' | 'BLUE' | 'RED';
-}
+import { ColorCode } from '@utils/constants';
 
 export const ProfileWrapper = styled.div`
   width: 23rem;
@@ -17,18 +13,20 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const TicketbookListWrapper = styled.div`
+  display: flex;
   width: 100%;
+  justify-content: center;
   margin-top: 3.5rem;
-  margin-bottom: 13rem;
+  margin-bottom: 5rem;
 `;
 
-export const HomeBackground = styled.div<TicketBackgroundProps>`
+export const HomeBackground = styled.div`
   position: absolute;
-  top: 59rem;
+  top: 60rem;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: ${(props) => BookColorCode[props.color].background};
+  background-color: ${ColorCode.BACKGROUND_PURPLE};
   z-index: -10;
   border-radius: 3.75rem 3.75rem 0 0;
   transition: 0.3s;

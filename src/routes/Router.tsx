@@ -1,10 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-import { userProfileState } from '@stores/user';
-import { getMyProfile } from '@apis/member';
-import { ACCESS_TOKEN } from '@utils/constants';
 
 import MainPage from '@pages/MainPage';
 import HomePage from '@pages/HomePage';
@@ -18,24 +13,18 @@ import NewPage from '@pages/Editor/NewPage';
 import EditPage from '@pages/Editor/EditPage';
 import SearchPage from '@pages/SearchPage';
 
+import { ACCESS_TOKEN } from '@utils/constants';
+import useGetUserInfo from '@hooks/useGetUserInfo';
+
 import PrivateRoute from './PrivateRoute';
 import RegisterRoute from './RegisterRoute';
 
 const Router: React.FC = () => {
   const token = localStorage.getItem(ACCESS_TOKEN);
-  const setUserProfile = useSetRecoilState(userProfileState);
-
-  const getUser = async () => {
-    if (token) {
-      const profile = await getMyProfile();
-      if (profile) {
-        setUserProfile(profile);
-      }
-    }
-  };
+  const { getUserInfo } = useGetUserInfo(token);
 
   useEffect(() => {
-    getUser();
+    getUserInfo();
   }, []);
 
   return (
