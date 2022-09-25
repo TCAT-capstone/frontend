@@ -23,7 +23,7 @@ const ProfileBox: React.FC<Props> = ({ img, name, bio, ticketCount, likeCount })
       <p>{bio}</p>
       <CountContainer>
         <div>
-          <img src={TicketIcon} alt="티켓 아이콘" />
+          <img src={TicketIcon} alt="" />
           <span>{ticketCount}</span>
         </div>
         <div>

@@ -25,9 +25,24 @@ export const getTrendTickets = async (
   }
 };
 
-export const getSearchTickets = async (): Promise<TicketListResType | false> => {
+export const getSearchTickets = async (
+  cursorId: number | null,
+  keyword: string | null,
+  ticketTitle: string | null,
+  ticketDate: string | null,
+  ticketSeat: string | null,
+  ticketLocation: string | null,
+): Promise<TicketListResType | false> => {
   try {
-    const res = await fetchApi.get('/api/tickets');
+    const res = await fetchApi.get(
+      `/api/search?cursorId=${cursorId === null ? '' : cursorId}&keyword=${
+        keyword === null ? '' : keyword
+      }&ticketTitle=${ticketTitle === null ? '' : ticketTitle}&ticketDate=${
+        ticketDate === null ? '' : ticketDate
+      }&ticketSeat=${ticketSeat === null ? '' : ticketSeat}&ticketLocation=${
+        ticketLocation === null ? '' : ticketLocation
+      }`,
+    );
     if (res.status !== 200) throw new Error('error');
     return await res.json();
   } catch (err) {

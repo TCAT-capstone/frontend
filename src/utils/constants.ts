@@ -3,6 +3,7 @@ export enum ColorCode {
   GREEN = '#5BA04D',
   BLACK = '#212121',
   WHITE = '#FFFFFF',
+  WHITE2 = 'rgba(242, 242, 242, 0.97)',
   PRIMARY = '#794DFD',
   GRAY1 = '#878787',
   GRAY2 = '#C4C4C4',
@@ -11,29 +12,9 @@ export enum ColorCode {
   PURPLE1 = '#F5F5FF',
   PURPLE2 = '#5F3CCB',
   LIGHT_PURPLE = '#F5F7FF',
+  LIGHT_PURPLE2 = '#E7EDFF',
+  LIGHT_PURPLE3 = '#DED2FF',
+  BACKGROUND_PURPLE = '#EFEEFD',
 }
-
-export const BookColorCode = {
-  PURPLE: {
-    background: '#EFEEFD',
-    font: '#14008E',
-    line: 'rgba(121, 77, 253, 0.7)',
-  },
-  GREEN: {
-    background: '#ECFFE8',
-    font: '#003A22',
-    line: 'rgba(21, 119, 0, 0.7)',
-  },
-  BLUE: {
-    background: '#EEFDFF',
-    font: '#005864',
-    line: 'rgba(0, 150, 170, 0.7)',
-  },
-  RED: {
-    background: '#FFE1E3',
-    font: '#721B00',
-    line: 'rgba(215, 0, 13, 0.7)',
-  },
-};
 
 export const ACCESS_TOKEN = 'access_token';
