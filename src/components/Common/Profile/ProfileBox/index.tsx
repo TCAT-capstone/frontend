@@ -8,7 +8,7 @@ import ProfileIcon from '../ProfileIcon';
 import { Container, CountContainer } from './style';
 
 interface Props {
-  img: string;
+  img: string | undefined;
   name: string;
   bio: string;
   ticketCount: number;
