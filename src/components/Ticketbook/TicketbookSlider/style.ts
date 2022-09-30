@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '@styles/media';
 
 interface ContainerProps {
   initialTicketbookCount: number;
@@ -9,6 +10,9 @@ export const Container = styled.div<ContainerProps>`
   width: ${(props) => (props.initialTicketbookCount <= 3 ? '70rem' : '100rem')};
   .slick-list {
     height: 25rem;
+    ${media.large`
+      width: 65rem;
+    `}
   }
   .slick-track {
     display: flex;
