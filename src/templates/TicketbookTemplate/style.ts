@@ -44,14 +44,20 @@ export const TicketbookAddButton = styled.button`
   }
 `;
 
-export const ButtonWrapper = styled.div`
+export const ButtonContainer = styled.div`
   margin-top: 3rem;
-  text-align: right;
+  display: flex;
+  justify-content: right;
+  height: 2.2rem;
+  div,
+  button {
+    width: 7rem;
+  }
 `;
 
 export const DeleteButton = styled.button`
-  margin-right: 2rem;
   span {
+    padding: 0.2rem 1rem;
     font-size: 0.875rem;
     font-weight: 600;
     color: ${ColorCode.GRAY1};

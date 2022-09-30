@@ -14,7 +14,7 @@ import { TicketbookListType } from '@src/types/ticketbook';
 import { getTicketbooks } from '@apis/ticketbook';
 
 interface HomeProfileType {
-  img: string;
+  img: string | undefined;
   name: string;
   bio: string;
   ticketCount: number;
@@ -22,7 +22,7 @@ interface HomeProfileType {
 }
 
 const initialProfile = {
-  img: '',
+  img: undefined,
   name: '',
   bio: '',
   ticketCount: 0,

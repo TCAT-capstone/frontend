@@ -12,7 +12,7 @@ import { ProfileWrapper, ButtonWrapper, TicketbookListWrapper, HomeBackground } 
 interface Props {
   isMyHome: boolean;
   profile: {
-    img: string;
+    img: string | undefined;
     name: string;
     bio: string;
     ticketCount: number;

@@ -73,16 +73,26 @@ export const TicketInfoContainer = styled.div<TicketInfoContainerProps>`
 `;
 
 export const ButtonContainer = styled.div`
-  text-align: right;
+  display: flex;
+  justify-content: right;
   margin-top: 3.5rem;
+  height: 2.2rem;
   a,
   a:visited {
     font-size: 0.875rem;
+    line-height: 2.2rem;
     font-weight: 600;
     color: ${ColorCode.PURPLE2};
-    margin-right: 4rem;
+    padding: 0 1rem;
     :hover {
       opacity: 0.8;
     }
   }
+`;
+
+export const NextButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 6.5rem;
+  margin-left: 1.5rem;
 `;
