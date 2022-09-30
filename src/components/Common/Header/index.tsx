@@ -9,7 +9,7 @@ import searchImg from '@images/search.svg';
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
 import BasicButton from '@components/Common/BasicButton';
 import LoginModal from '@components/Modal/LoginModal';
-import FollowModal from '@src/components/Modal/FollowModal';
+import FollowModal from '@src/components/Modal/FollowModal';
 import ProfileDropdown from './ProfileDropdown';
 
 import { Container, ButtonContainer, SearchButton, ProfileContainer, ProfileButton } from './style';
