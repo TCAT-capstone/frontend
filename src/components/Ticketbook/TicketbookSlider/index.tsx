@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -21,70 +21,38 @@ const TicketbookSlider: React.FC<Props> = ({
   cloneTicketbooks,
   changeCurrTicketbookId,
 }) => {
-  const [settings, setSettings] = useState({});
   const ticketbookCount = ticketbooks.length;
+  const isInfinite = initialTicketbookCount !== 1;
+  const mySlidesToShow = initialTicketbookCount >= 2 && initialTicketbookCount <= 3 ? 3 : 5;
+  const settings = {
+    className: 'center',
+    centerMode: true,
+    centerPadding: '0',
+    infinite: isInfinite,
+    dots: false,
+    arrows: false,
+    focusOnSelect: true,
+    slidesToShow: mySlidesToShow,
+    speed: 800,
+    responsive: [
+      {
+        breakpoint: 1610,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+    ],
+    beforeChange: (current: any, next: any) => {
+      if (next > ticketbookCount - 1) {
+        changeCurrTicketbookId(next % ticketbookCount);
+      } else {
+        changeCurrTicketbookId(next);
+      }
+    },
+  };
 
   useEffect(() => {
     cloneTicketbooks();
-    if (initialTicketbookCount >= 4) {
-      setSettings({
-        className: 'center',
-        centerMode: true,
-        centerPadding: '0',
-        infinite: true,
-        dots: false,
-        arrows: false,
-        focusOnSelect: true,
-        slidesToShow: 5,
-        speed: 800,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 3,
-            },
-          },
-        ],
-        beforeChange: (current: any, next: any) => {
-          if (next > ticketbookCount - 1) {
-            changeCurrTicketbookId(next % ticketbookCount);
-          } else {
-            changeCurrTicketbookId(next);
-          }
-        },
-      });
-    } else if (initialTicketbookCount > 1 && initialTicketbookCount < 4) {
-      setSettings({
-        className: 'center',
-        centerMode: true,
-        centerPadding: '0',
-        infinite: true,
-        dots: false,
-        arrows: false,
-        focusOnSelect: true,
-        slidesToShow: 3,
-        speed: 800,
-        beforeChange: (current: any, next: any) => {
-          if (next > ticketbookCount - 1) {
-            changeCurrTicketbookId(next % ticketbookCount);
-          } else {
-            changeCurrTicketbookId(next);
-          }
-        },
-      });
-    } else {
-      setSettings({
-        className: 'center',
-        centerMode: true,
-        centerPadding: '0',
-        infinite: false,
-        dots: false,
-        arrows: false,
-        focusOnSelect: true,
-        slidesToShow: 5,
-        speed: 800,
-      });
-    }
   }, [ticketbooks]);
 
   return (
