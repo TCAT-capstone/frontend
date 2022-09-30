@@ -7,9 +7,15 @@ import { ACCESS_TOKEN } from '@utils/constants';
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
 import { Container, ProfileContainer, ProfileLinkContainer, LinkContainer } from './style';
 
-const ProfileDropdown: React.FC = () => {
+interface Props {
+  handleFollowModalOpen: () => void;
+}
+
+const ProfileDropdown: React.FC<Props> = ({ handleFollowModalOpen }) => {
   const myProfile = useRecoilValue(userProfileState);
   const resetUserProfileState = useResetRecoilState(userProfileState);
+
+
 
   const handleLogout = () => {
     resetUserProfileState();
@@ -31,9 +37,9 @@ const ProfileDropdown: React.FC = () => {
         <Link to={`/@${myProfile.homeId}`}>
           <span>나의 티켓 홈</span>
         </Link>
-        <Link to="/">
+        <button type="button" onClick={handleFollowModalOpen}>
           <span>나의 구독</span>
-        </Link>
+        </button>
         <Link to={`/@${myProfile.homeId}/ticketbook`}>
           <span>티켓북 관리</span>
         </Link>
