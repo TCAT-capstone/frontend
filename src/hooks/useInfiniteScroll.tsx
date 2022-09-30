@@ -19,7 +19,7 @@ const useInfiniteScroll = () => {
     return () => observer && observer.disconnect();
   }, [target]);
 
-  return { apiTrigger, setTarget };
+  return { apiTrigger, setApiTrigger, setTarget };
 };
 
 export default useInfiniteScroll;

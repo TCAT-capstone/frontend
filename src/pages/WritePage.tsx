@@ -1,17 +1,16 @@
 import React, { MouseEvent, useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { ticketState } from '@stores/editor';
-import { userProfileState } from '@stores/user';
-import { getTicketbookList } from '@apis/ticketbook';
+import { userTicketbooksState } from '@stores/user';
 import { createTicket, updateTicket } from '@apis/ticket';
 import { uploadImage } from '@apis/image';
 
 import WriteTemplate from '@templates/WriteTemplate';
 import { TicketType } from '@src/types/ticket';
-import { TicketbookListType, TicketbookType } from '@src/types/ticketbook';
-import { toast } from 'react-toastify';
+import { TicketbookType } from '@src/types/ticketbook';
 
 interface LocationStateType {
   imgObj: { file: File; url: string };
@@ -19,18 +18,17 @@ interface LocationStateType {
   post: TicketType;
 }
 
-const initialTicketbook = { id: -1, name: '기본 티켓북', ticketbookImg: null, description: '' };
+const initialTicketbook = { id: -1, name: '기본 티켓북', ticketbookImg: '', description: '' };
 
 const WritePage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state as LocationStateType;
   const ticketInfo = useRecoilValue(ticketState);
-  const { homeId } = useRecoilValue(userProfileState);
+  const userTicketbooks = useRecoilValue(userTicketbooksState);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [ticketbook, setTicketbook] = useState<TicketbookType>(initialTicketbook);
-  const [ticketbooks, setTicketbooks] = useState<TicketbookListType>([]);
   const [onTicketbook, setOnTicketbook] = useState(false);
   const [onDropdown, setOnDropdown] = useState(false);
   const TicketbookContainerRef = useRef<HTMLDivElement>(null);
@@ -100,25 +98,17 @@ const WritePage: React.FC = () => {
       }
     }
     if (newTicket) {
-      navigate(`/~${newTicket.memberHomeId}/${newTicket.ticketId}`, { replace: true });
-    }
-  };
-
-  const getMyTicketbookList = async () => {
-    const ticketbookList = await getTicketbookList(homeId);
-    setTicketbooks(ticketbookList);
-    if (isUpdateMode) {
-      setTicketbook(ticketbookList.filter((book) => book.id === state.post.ticketbookId)[0]);
-    } else {
-      setTicketbook(ticketbookList[0]);
+      navigate(`/@${newTicket.memberHomeId}/${newTicket.ticketId}`, { replace: true });
     }
   };
 
   useEffect(() => {
-    getMyTicketbookList();
     if (isUpdateMode) {
       setTitle(state.post.title);
       setContent(state.post.content);
+      setTicketbook(userTicketbooks.filter((book) => book.id === state.post.ticketbookId)[0]);
+    } else {
+      setTicketbook(userTicketbooks[0]);
     }
   }, []);
 
@@ -139,7 +129,6 @@ const WritePage: React.FC = () => {
       handlePostSubmit={handlePostSubmit}
       onTicketbook={onTicketbook}
       handleTicketbookOpen={handleTicketbookOpen}
-      ticketbooks={ticketbooks}
       ticketbook={ticketbook}
       handleTicketbookChange={handleTicketbookChange}
       onDropdown={onDropdown}

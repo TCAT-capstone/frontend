@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import Header from '@components/Common/Header';
 import EditorFrame from '@components/Editor/EditorFrame';
 import BasicButton from '@components/Common/BasicButton';
+import Spinner from '@components/Common/Spinner';
 import SideMenu from '@components/Editor/SideMenu';
 import Loading from '@components/Editor/Loading';
 
@@ -19,16 +20,24 @@ import {
   ImageContainer,
   TicketInfoContainer,
   ButtonContainer,
+  NextButtonWrapper,
 } from './style';
 
 interface Props {
-  isLoading: boolean;
+  ticketInfoIsLoaded: boolean;
+  templateIsLoaded: boolean;
   handlePageNavigate: () => void;
   templates: TicketTemplateListType;
   addTemplate: (url: string) => void;
 }
 
-const EditTemplate: React.FC<Props> = ({ isLoading, handlePageNavigate, templates, addTemplate }) => {
+const EditTemplate: React.FC<Props> = ({
+  ticketInfoIsLoaded,
+  templateIsLoaded,
+  handlePageNavigate,
+  templates,
+  addTemplate,
+}) => {
   const ticketInfo = useRecoilValue(ticketState);
   const templateInfo = useRecoilValue(templateState);
 
@@ -41,7 +50,7 @@ const EditTemplate: React.FC<Props> = ({ isLoading, handlePageNavigate, template
     <Layout>
       <Header />
       <EditorFrame>
-        {isLoading ? (
+        {ticketInfoIsLoaded ? (
           <Loading />
         ) : (
           <EditorContainer>
@@ -66,7 +75,13 @@ const EditTemplate: React.FC<Props> = ({ isLoading, handlePageNavigate, template
                 <Link to="/editor/new" replace>
                   이전으로
                 </Link>
-                <BasicButton text="글 작성하기" handler={handlePageNavigate} />
+                <NextButtonWrapper>
+                  {templateIsLoaded ? (
+                    <Spinner size={1.5} />
+                  ) : (
+                    <BasicButton text="글 작성하기" handler={handlePageNavigate} />
+                  )}
+                </NextButtonWrapper>
               </ButtonContainer>
             </RightContainer>
           </EditorContainer>

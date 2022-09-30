@@ -2,12 +2,11 @@ import React from 'react';
 import dompurify from 'dompurify';
 import { Link } from 'react-router-dom';
 
-import shareImg from '@images/share.svg';
-
 import Layout from '@styles/Layout';
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
 import CheckMark from '@components/Common/CheckMark';
 import TicketInfoBox from '@components/Common/TicketInfoBox';
+import ShareButton from '@components/Common/ShareButton';
 import Like from '@components/Common/Like';
 import BasicButton from '@components/Common/BasicButton';
 import Spinner from '@src/components/Common/Spinner';
@@ -51,9 +50,13 @@ const PostTemplate: React.FC<Props> = ({ post, isMyHome, like, handlePostDelete,
         <>
           <PostContainer>
             <SmallProfileContainer>
-              <ProfileIcon size={2.8} profileImg={post.memberImg} />
+              <Link to={`/@${post.memberHomeId}`}>
+                <ProfileIcon size={2.8} profileImg={post.memberImg} />
+              </Link>
               <div>
-                <b>{post.memberName}</b>
+                <Link to={`/@${post.memberHomeId}`}>
+                  <b>{post.memberName}</b>
+                </Link>
                 <span>{getDateString(new Date(post.date))}</span>
               </div>
             </SmallProfileContainer>
@@ -76,9 +79,7 @@ const PostTemplate: React.FC<Props> = ({ post, isMyHome, like, handlePostDelete,
             </div>
             <ButtonContainer>
               <ShareLikeContainer>
-                <button type="button">
-                  <img src={shareImg} alt="공유 아이콘" />
-                </button>
+                <ShareButton />
                 <button type="button" onClick={handleLike}>
                   <Like size={1.125} fill={like.status} />
                   <span>{like.count}</span>
@@ -97,7 +98,7 @@ const PostTemplate: React.FC<Props> = ({ post, isMyHome, like, handlePostDelete,
               )}
             </ButtonContainer>
             <MediumProfileContainer>
-              <Link to={`/~${post.memberHomeId}`}>
+              <Link to={`/@${post.memberHomeId}`}>
                 <ProfileIcon size={3.75} profileImg={post.memberImg} />
                 <div>
                   <b>{post.memberName}</b>

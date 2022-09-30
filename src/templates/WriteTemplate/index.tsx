@@ -1,12 +1,14 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { MouseEvent } from 'react';
+import { useRecoilValue } from 'recoil';
+import { userTicketbooksState } from '@stores/user';
 
 import Layout from '@styles/Layout';
 import TextEditor from '@components/TextEditor';
 import BasicButton from '@components/Common/BasicButton';
 
-import { TicketbookListType, TicketbookType } from '@src/types/ticketbook';
+import { TicketbookType } from '@src/types/ticketbook';
 import arrowImg from '@images/down-arrow.svg';
 
 import {
@@ -30,7 +32,6 @@ interface Props {
   handlePostSubmit: () => void;
   onTicketbook: boolean;
   handleTicketbookOpen: (e: MouseEvent) => void;
-  ticketbooks: TicketbookListType;
   ticketbook: TicketbookType;
   handleTicketbookChange: (e: MouseEvent, ticketbook: TicketbookType) => void;
   onDropdown: boolean;
@@ -47,13 +48,14 @@ const WriteTemplate: React.FC<Props> = ({
   handlePostSubmit,
   onTicketbook,
   handleTicketbookOpen,
-  ticketbooks,
   ticketbook,
   handleTicketbookChange,
   onDropdown,
   handleDropdownOpen,
   TicketbookContainerRef,
 }) => {
+  const userTicketbooks = useRecoilValue(userTicketbooksState);
+
   return (
     <Layout>
       <PostContainer>
@@ -69,7 +71,7 @@ const WriteTemplate: React.FC<Props> = ({
               <ArrowImg src={arrowImg} alt="화살표" onDropdown={onDropdown} />
               {onDropdown && (
                 <SelectTicketbookContainer>
-                  {ticketbooks.map((book) => (
+                  {userTicketbooks.map((book) => (
                     <div key={book.id} onClick={(e) => handleTicketbookChange(e, book)}>
                       {book.name}
                     </div>

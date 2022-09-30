@@ -3,12 +3,14 @@ import { useSetRecoilState } from 'recoil';
 
 import RegisterTemplate from '@templates/RegisterTemplate';
 import { checkDuplicateHomeId, signup } from '@apis/member';
-import { userProfileState } from '@stores/user';
+import { getTicketbooks } from '@apis/ticketbook';
+import { userProfileState, userTicketbooksState } from '@stores/user';
 
 type ErrorType = { state: 'error' | 'valid'; message: string };
 
 const RegisterPage: React.FC = () => {
   const setUserProfile = useSetRecoilState(userProfileState);
+  const setUserTicketbooks = useSetRecoilState(userTicketbooksState);
   const [name, setName] = useState('');
   const [homeId, setHomeId] = useState('');
   const [nameError, setNameError] = useState<ErrorType>({ state: 'error', message: '' });
@@ -37,6 +39,10 @@ const RegisterPage: React.FC = () => {
       setUserProfile((prev) => {
         return { ...prev, name: newUserProfile.name, homeId: newUserProfile.homeId };
       });
+      const ticketbookList = await getTicketbooks(newUserProfile.homeId);
+      if (ticketbookList) {
+        setUserTicketbooks(ticketbookList);
+      }
     }
   };
 

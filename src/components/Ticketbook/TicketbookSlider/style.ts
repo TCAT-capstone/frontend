@@ -1,10 +1,18 @@
 import styled from 'styled-components';
+import { media } from '@styles/media';
 
-export const Container = styled.div`
+interface ContainerProps {
+  initialTicketbookCount: number;
+}
+
+export const Container = styled.div<ContainerProps>`
   position: relative;
-  height: 19rem;
+  width: ${(props) => (props.initialTicketbookCount <= 3 ? '70rem' : '100rem')};
   .slick-list {
     height: 25rem;
+    ${media.large`
+      width: 65rem;
+    `}
   }
   .slick-track {
     display: flex;
@@ -22,4 +30,8 @@ export const Container = styled.div`
     transform: scale(1.15) translateY(-1.2rem);
     transition: 0.8s;
   }
+`;
+
+export const TicketbookWrapper = styled.div`
+  cursor: pointer;
 `;
