@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import ModalFrame from '@components/Modal/ModalFrame';
@@ -43,13 +43,16 @@ const FollowModal: React.FC<Props> = ({ handleFollowModalClose }) => {
 
   const handleFirstLink = () => {
     setIsFollowing(true);
-    getFollowingProfiles();
   };
 
   const handleSecondLink = () => {
     setIsFollowing(false);
-    getFollowerProfiles();
   };
+
+  useEffect(() => {
+    getFollowingProfiles();
+    getFollowerProfiles();
+  }, []);
 
   return (
     <ModalFrame w={43} h={48} handleModalClose={handleFollowModalClose}>
