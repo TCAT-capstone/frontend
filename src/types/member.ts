@@ -10,7 +10,7 @@ export interface ProfileType {
 }
 
 export interface SimpleProfileType {
-  homeId: number;
+  targetHomeId: string;
   memberImg: string;
   name: string;
   bio: string;

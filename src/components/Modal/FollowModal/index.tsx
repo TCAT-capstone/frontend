@@ -67,10 +67,22 @@ const FollowModal: React.FC<Props> = ({ handleFollowModalClose }) => {
         <FollowList>
           {isFollowing
             ? followingProfiles.map((t) => (
-                <SimpleProfile key={t.homeId} homeId={t.homeId} memberImg={t.memberImg} name={t.name} bio={t.bio} />
+                <SimpleProfile
+                  key={t.targetHomeId}
+                  targetHomeId={t.targetHomeId}
+                  memberImg={t.memberImg}
+                  name={t.name}
+                  bio={t.bio}
+                />
               ))
             : followerProfiles.map((t) => (
-                <SimpleProfile key={t.homeId} homeId={t.homeId} memberImg={t.memberImg} name={t.name} bio={t.bio} />
+                <SimpleProfile
+                  key={t.targetHomeId}
+                  targetHomeId={t.targetHomeId}
+                  memberImg={t.memberImg}
+                  name={t.name}
+                  bio={t.bio}
+                />
               ))}
         </FollowList>
       </Container>
