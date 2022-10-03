@@ -10,7 +10,7 @@ interface LineProps {
 }
 
 export const Container = styled.div`
-  position: relative;
+  position: fixed;
   display: flex;
   width: 13.4rem;
   span {
