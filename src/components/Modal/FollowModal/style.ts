@@ -6,4 +6,8 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 3.6rem;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
