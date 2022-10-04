@@ -134,7 +134,6 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     if (apiTrigger > 0) {
       getTickets();
-      console.log('api');
     }
   }, [apiTrigger]);
 

@@ -7,16 +7,16 @@ import BasicButton from '@components/Common/BasicButton';
 import { Container, ButtonWrapper } from './style';
 
 interface Props {
-  homeId: number;
+  targetHomeId: string;
   memberImg: string;
   name: string;
   bio: string;
 }
 
-const SimpleProfile: React.FC<Props> = ({ homeId, memberImg, name, bio }) => {
+const SimpleProfile: React.FC<Props> = ({ targetHomeId, memberImg, name, bio }) => {
   return (
     <Container>
-      <Link to={`/~${homeId}`}>
+      <Link to={`/@${targetHomeId}`}>
         <ProfileIcon size={3.75} profileImg={memberImg} />
         <div>
           <b>{name}</b>
