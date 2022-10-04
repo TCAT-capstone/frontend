@@ -3,17 +3,20 @@ import { useSetRecoilState } from 'recoil';
 
 import RegisterTemplate from '@templates/RegisterTemplate';
 import { checkDuplicateHomeId, signup } from '@apis/member';
-import { userProfileState } from '@stores/user';
+import { getTicketbooks } from '@apis/ticketbook';
+import { userProfileState, userTicketbooksState } from '@stores/user';
 
 type ErrorType = { state: 'error' | 'valid'; message: string };
 
 const RegisterPage: React.FC = () => {
   const setUserProfile = useSetRecoilState(userProfileState);
+  const setUserTicketbooks = useSetRecoilState(userTicketbooksState);
   const [name, setName] = useState('');
   const [homeId, setHomeId] = useState('');
   const [nameError, setNameError] = useState<ErrorType>({ state: 'error', message: '' });
   const [homeIdError, setHomeIdError] = useState<ErrorType>({ state: 'error', message: '' });
   const [isButtonActive, setIsButtonActive] = useState(false);
+  const [timer, setTimer] = useState<any>(0);
 
   useEffect(() => {
     if (nameError.state === 'valid' && homeIdError.state === 'valid') {
@@ -23,20 +26,16 @@ const RegisterPage: React.FC = () => {
     }
   }, [nameError, homeIdError]);
 
-  useEffect(() => {
-    validateName();
-  }, [name]);
-
-  useEffect(() => {
-    validateHomeId();
-  }, [homeId]);
-
   const handleSignUp = async () => {
     const newUserProfile = await signup({ name, homeId });
     if (newUserProfile) {
       setUserProfile((prev) => {
         return { ...prev, name: newUserProfile.name, homeId: newUserProfile.homeId };
       });
+      const ticketbookList = await getTicketbooks(newUserProfile.homeId);
+      if (ticketbookList) {
+        setUserTicketbooks(ticketbookList);
+      }
     }
   };
 
@@ -55,39 +54,50 @@ const RegisterPage: React.FC = () => {
     return false;
   }
 
-  const validateName = () => {
-    if (name.length > 12 || name.length < 1) {
+  const validateName = (newName: string) => {
+    if (newName.length > 12 || newName.length < 1) {
       setNameError({ state: 'error', message: '닉네임은 1자 이상, 12자 이내 이어야 해요.' });
     } else {
       setNameError({ state: 'valid', message: '' });
     }
   };
 
-  const validateHomeId = async () => {
+  const validateHomeId = async (newHomeId: string) => {
     let valid = true;
     if (homeId.length > 12 || homeId.length < 6) {
       setHomeIdError({ state: 'error', message: '아이디는 6자 이상, 12자 이내 이어야 해요.' });
       valid = false;
     }
-    if (valid && (!checkEng(homeId) || checkSpace(homeId))) {
+    if (valid && (!checkEng(newHomeId) || checkSpace(newHomeId))) {
       setHomeIdError({ state: 'error', message: '아이디는 영문 + 숫자 조합만 가능해요.' });
       valid = false;
     }
-    if (valid && !(await checkDuplicateHomeId({ homeId }))) {
-      setHomeIdError({ state: 'error', message: '이미 사용중인 아이디에요.' });
-      valid = false;
-    }
     if (valid) {
-      setHomeIdError({ state: 'valid', message: '' });
+      if (timer) {
+        clearTimeout(timer);
+      }
+      const newTimer = setTimeout(async () => {
+        const result = await checkDuplicateHomeId({ homeId: newHomeId });
+        if (!result) {
+          setHomeIdError({ state: 'error', message: '이미 사용중인 아이디에요.' });
+          valid = false;
+        } else {
+          setHomeIdError({ state: 'valid', message: '' });
+        }
+      }, 800);
+      setTimer(newTimer);
     }
   };
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
+    validateName(e.target.value);
   };
 
   const handleHomeIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHomeId(e.target.value);
+    setHomeIdError({ state: 'error', message: '' });
+    validateHomeId(e.target.value);
   };
 
   return (

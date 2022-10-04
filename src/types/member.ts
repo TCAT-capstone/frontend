@@ -9,6 +9,15 @@ export interface ProfileType {
   homeId: string;
 }
 
+export interface SimpleProfileType {
+  targetHomeId: string;
+  memberImg: string;
+  name: string;
+  bio: string;
+}
+
+export type SimpleProfileListType = SimpleProfileType[];
+
 export interface SignUpType {
   name: string;
   homeId: string;

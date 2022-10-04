@@ -23,6 +23,7 @@ const TicketbookPage: React.FC = () => {
   const [newName, setNewName] = useState('');
   const [newDescription, setNewDescription] = useState('');
   const [newImageUrl, setNewImageUrl] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const validateTicketbooks = () => {
     return !ticketbooks.find((t) => t.name === '');
@@ -33,6 +34,7 @@ const TicketbookPage: React.FC = () => {
       toast.error('티켓북 제목이 비어있습니다!');
       return;
     }
+    setIsLoaded(true);
     const sequence = ticketbooks.map((t) => t.id).join(',');
     const appendTicketbooks = ticketbooks.filter((t) => t.id < 0);
     const deleteTicketboooks = userTicketbooks.filter((t) => !ticketbooks.find((ot) => ot.id === t.id));
@@ -53,6 +55,7 @@ const TicketbookPage: React.FC = () => {
     if (updatedTicketbooks) {
       setUserTicketbooks(updatedTicketbooks);
     }
+    setIsLoaded(false);
   };
 
   const changeCurrTicketbook = (id: number) => {
@@ -156,6 +159,7 @@ const TicketbookPage: React.FC = () => {
       handleDescriptionChange={handleDescriptionChange}
       handleFile={handleFile}
       updateAllTicketbooks={updateAllTicketbooks}
+      isLoaded={isLoaded}
     />
   );
 };

@@ -16,8 +16,6 @@ interface Props {
   date: string;
   location: string;
   seat: string;
-  search: () => void;
-  onSubmitSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
   handleKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleDateChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -34,8 +32,6 @@ const SearchTemplate: React.FC<Props> = ({
   date,
   location,
   seat,
-  search,
-  onSubmitSearch,
   handleKeywordChange,
   handleTitleChange,
   handleDateChange,
@@ -44,12 +40,7 @@ const SearchTemplate: React.FC<Props> = ({
 }) => {
   return (
     <Layout>
-      <SearchBox
-        keyword={keyword}
-        search={search}
-        onSubmitSearch={onSubmitSearch}
-        handleKeywordChange={handleKeywordChange}
-      />
+      <SearchBox keyword={keyword} handleKeywordChange={handleKeywordChange} />
       <SearchFilter
         title={title}
         date={date}

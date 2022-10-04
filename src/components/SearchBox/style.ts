@@ -22,11 +22,8 @@ export const SearchContent = styled.input`
   margin-left: 0.5rem;
 `;
 
-export const SearchButton = styled.button`
+export const SearchIcon = styled.div`
   display: flex;
   align-items: center;
   margin-right: 0.5rem;
-  :hover {
-    opacity: 0.7;
-  }
 `;

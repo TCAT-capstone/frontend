@@ -2,9 +2,10 @@ import React from 'react';
 
 import TicketBookItemList from '@components/Ticketbook/TicketbookItemList';
 import TicketbookEditor from '@components/Ticketbook/TicketbookEditor';
-import { TicketbookType, TicketbookListType } from '@src/types/ticketbook';
 import BasicButton from '@components/Common/BasicButton';
+import Spinner from '@components/Common/Spinner';
 
+import { TicketbookType, TicketbookListType } from '@src/types/ticketbook';
 import plusImg from '@images/plus-rounded.svg';
 import Layout from '@styles/Layout';
 import {
@@ -12,7 +13,7 @@ import {
   TicketbookListContainer,
   EditContainer,
   TicketbookAddButton,
-  ButtonWrapper,
+  ButtonContainer,
   DeleteButton,
 } from './style';
 
@@ -30,6 +31,7 @@ interface Props {
   handleDescriptionChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleFile: (file: File) => void;
   updateAllTicketbooks: () => void;
+  isLoaded: boolean;
 }
 
 const TicketbookTemplate: React.FC<Props> = ({
@@ -46,6 +48,7 @@ const TicketbookTemplate: React.FC<Props> = ({
   handleDescriptionChange,
   handleFile,
   updateAllTicketbooks,
+  isLoaded,
 }) => {
   return (
     <Layout>
@@ -72,12 +75,12 @@ const TicketbookTemplate: React.FC<Props> = ({
             handleDescriptionChange={handleDescriptionChange}
             handleFile={handleFile}
           />
-          <ButtonWrapper>
+          <ButtonContainer>
             <DeleteButton type="button" onClick={() => deleteTicketbook()}>
               <span>삭제하기</span>
             </DeleteButton>
-            <BasicButton text="모두 저장하기" handler={updateAllTicketbooks} />
-          </ButtonWrapper>
+            {isLoaded ? <Spinner size={1.5} /> : <BasicButton text="모두 저장하기" handler={updateAllTicketbooks} />}
+          </ButtonContainer>
         </EditContainer>
       </Container>
     </Layout>

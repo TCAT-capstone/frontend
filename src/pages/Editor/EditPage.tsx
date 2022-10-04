@@ -19,7 +19,8 @@ const EditPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state as LocationStateType;
-  const [isLoading, setIsLoading] = useState(state !== null);
+  const [ticketInfoIsLoaded, setTicketInfoIsLoaded] = useState(state !== null);
+  const [templateIsLoaded, setTemplateIsLoaded] = useState(false);
   const [ticketInfo, setTicketInfo] = useRecoilState(ticketState);
   const [templates, setTemplates] = useState<TicketTemplateListType>(templateList);
 
@@ -36,7 +37,7 @@ const EditPage: React.FC = () => {
           };
         });
       }
-      setIsLoading(false);
+      setTicketInfoIsLoaded(false);
     }
   };
 
@@ -60,6 +61,7 @@ const EditPage: React.FC = () => {
 
   const handlePageNavigate = async () => {
     if (!validateTicketInfo()) return;
+    setTemplateIsLoaded(true);
     const imgObj = await getTicketImage();
     navigate('/write', { state: { imgObj }, replace: true });
   };
@@ -83,7 +85,8 @@ const EditPage: React.FC = () => {
 
   return (
     <EditTemplate
-      isLoading={isLoading}
+      ticketInfoIsLoaded={ticketInfoIsLoaded}
+      templateIsLoaded={templateIsLoaded}
       handlePageNavigate={handlePageNavigate}
       templates={templates}
       addTemplate={addTemplate}
