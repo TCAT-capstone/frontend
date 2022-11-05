@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '@styles/media';
 import { ColorCode } from '@utils/constants';
 
 interface ContainerProps {
@@ -20,6 +21,13 @@ export const Container = styled.div<ContainerProps>`
   &:hover {
     transform: translateY(-0.5rem);
   }
+  ${media.large`
+    width: 20.94rem;
+    height: 17.19rem;
+    a {
+      flex-direction: column;
+    }
+  `}
 `;
 
 export const TicketImage = styled.img`
@@ -28,6 +36,10 @@ export const TicketImage = styled.img`
   border-radius: 0.5rem;
   object-fit: cover;
   flex-shrink: 0;
+  ${media.large`
+    width: 20.94rem;
+    height: 12rem;
+  `}
 `;
 
 export const InfoContainer = styled.div`
@@ -42,6 +54,10 @@ export const InfoContainer = styled.div`
     letter-spacing: -0.03em;
     word-break: keep-all;
   }
+  ${media.large`
+    width: 20.94rem;
+    margin: 0.93rem;
+  `}
 `;
 
 export const SubInfoContainer = styled.div`
@@ -55,6 +71,18 @@ export const SubInfoContainer = styled.div`
     font-size: 0.88rem;
     text-align: right;
   }
+  ${media.large`
+    margin-top: 1rem;
+    top: 1rem;
+    left: 0;
+    div {
+      margin-top: 0.5rem;
+    }
+    span {
+      display: inline-block;
+      margin-right: 0.3rem;
+    }
+  `}
 `;
 
 export const LikeContainer = styled.div`
@@ -62,6 +90,12 @@ export const LikeContainer = styled.div`
   align-items: center;
   justify-content: right;
   span {
+    margin-right: 0;
     padding-right: 0.2rem;
   }
+  ${media.large`
+    position: absolute;
+    right: 1.7rem;
+    top: -0.5rem;
+  `}
 `;
