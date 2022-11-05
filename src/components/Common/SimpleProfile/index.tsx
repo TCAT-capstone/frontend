@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
-import BasicButton from '@components/Common/BasicButton';
+import FollowButton from '@components/Common/FollowButton';
 
 import { Container, ButtonWrapper } from './style';
 
@@ -24,7 +24,7 @@ const SimpleProfile: React.FC<Props> = ({ targetHomeId, memberImg, name, bio }) 
         </div>
       </Link>
       <ButtonWrapper>
-        <BasicButton text="구독하기" handler={() => {}} />
+        <FollowButton followingHomeId={targetHomeId} />
       </ButtonWrapper>
     </Container>
   );
