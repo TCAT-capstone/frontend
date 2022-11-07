@@ -2,7 +2,7 @@ import fetchApi from '@utils/fetch';
 
 import { SimpleProfileListType, UpdateFollowingType } from '@src/types/member';
 
-export const getFollowingProfile = async (homeId: string): Promise<SimpleProfileListType | false> => {
+export const getFollowingProfile = async (homeId: string | undefined): Promise<SimpleProfileListType | false> => {
   try {
     const res = await fetchApi.get(`/api/member/${homeId}/following`);
     if (res.status !== 200) throw new Error('error');
@@ -37,7 +37,7 @@ export const updateFollowing = async (
   }
 };
 
-export const deleteFollowing = async (homeId: string, targetHomeId: string): Promise<boolean> => {
+export const deleteFollowing = async (homeId: string, targetHomeId: string | undefined): Promise<boolean> => {
   try {
     const res = await fetchApi.delete(`/api/member/${homeId}/following/${targetHomeId}`);
     if (res.status !== 200) throw new Error('error');

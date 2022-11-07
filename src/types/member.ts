@@ -33,8 +33,8 @@ export interface HomeIdType {
 }
 
 export interface UpdateFollowingType {
-  targetHomeId: string;
+  targetHomeId: string | undefined;
   name: string;
-  memberImg: string;
+  memberImg: string | undefined;
   bio: string;
 }
