@@ -54,6 +54,11 @@ const FollowModal: React.FC<Props> = ({ handleFollowModalClose }) => {
     getFollowerProfiles();
   }, []);
 
+  useEffect(() => {
+    getFollowingProfiles();
+    getFollowerProfiles();
+  }, [isFollowing]);
+
   return (
     <ModalFrame w={43} h={48} handleModalClose={handleFollowModalClose}>
       <Container>
@@ -73,6 +78,7 @@ const FollowModal: React.FC<Props> = ({ handleFollowModalClose }) => {
                   memberImg={t.memberImg}
                   name={t.name}
                   bio={t.bio}
+                  followingProfiles={followingProfiles}
                 />
               ))
             : followerProfiles.map((t) => (
@@ -82,6 +88,7 @@ const FollowModal: React.FC<Props> = ({ handleFollowModalClose }) => {
                   memberImg={t.memberImg}
                   name={t.name}
                   bio={t.bio}
+                  followingProfiles={followingProfiles}
                 />
               ))}
         </FollowList>

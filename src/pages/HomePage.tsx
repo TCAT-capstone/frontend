@@ -7,10 +7,12 @@ import HomeTemplate from '@templates/HomeTemplate';
 
 import { userProfileState, userTicketbooksState } from '@stores/user';
 import { getTicketbookTickets } from '@apis/ticket';
+import { getFollowingProfile } from '@apis/follow';
 import { getMemberProfile } from '@apis/member';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { TicketListType } from '@src/types/ticket';
 import { TicketbookListType } from '@src/types/ticketbook';
+import { SimpleProfileListType } from '@src/types/member';
 import { getTicketbooks } from '@apis/ticketbook';
 
 interface HomeProfileType {
@@ -44,6 +46,7 @@ const HomePage: React.FC = () => {
   const [hasNotTicket, setHasNoTicket] = useState(false);
   const [noSuchUser, setNoSuchUser] = useState(false);
   const [ticketbooks, setTicketbooks] = useState<TicketbookListType>([]);
+  const [followingProfiles, setFollowingProfiles] = useState<SimpleProfileListType>([]);
   const [currTicketbookId, setCurrTicketbookId] = useState(-1);
   const { apiTrigger, setApiTrigger, setTarget } = useInfiniteScroll();
 
@@ -87,6 +90,14 @@ const HomePage: React.FC = () => {
           ticketCount: userProfile.ticketCount,
           likeCount: userProfile.likeCount,
         });
+        if (myProfile.homeId) {
+          const following = await getFollowingProfile(myProfile.homeId);
+          if (following) {
+            setFollowingProfiles(following);
+          } else {
+            setFollowingProfiles([]);
+          }
+        }
         const userTicketbooks = await getTicketbooks(homeId);
         setIsDuplicated(false);
         setInitialTicketbookCount(userTicketbooks.length);
@@ -142,7 +153,10 @@ const HomePage: React.FC = () => {
   ) : (
     <HomeTemplate
       isMyHome={isMyHome}
+      homeId={myProfile.homeId}
+      targetHomeId={homeId}
       profile={profile}
+      following={followingProfiles}
       tickets={tickets}
       isLoaded={isLoaded}
       ticketbooks={ticketbooks}
