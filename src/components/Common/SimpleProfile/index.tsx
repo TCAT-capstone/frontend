@@ -7,7 +7,7 @@ import FollowButton from '@components/Common/FollowButton';
 
 import { updateFollowing, deleteFollowing } from '@src/apis/follow';
 import { userProfileState } from '@stores/user';
-import { SimpleProfileListType, SimpleProfileType } from '@src/types/member';
+import { SimpleProfileListType } from '@src/types/member';
 
 import { Container, ButtonWrapper } from './style';
 
@@ -22,12 +22,10 @@ interface Props {
 const SimpleProfile: React.FC<Props> = ({ targetHomeId, memberImg, name, bio, followingProfiles }) => {
   const myProfile = useRecoilValue(userProfileState);
   const [buttonText, setButtonText] = useState('...');
-  const [followProfile, setFollowProfile] = useState<SimpleProfileType>();
 
   const changeText = () => {
     if (followingProfiles) {
-      setFollowProfile(followingProfiles.find((f) => f.targetHomeId === targetHomeId));
-      if (followProfile) {
+      if (followingProfiles.find((f) => f.targetHomeId === targetHomeId)) {
         setButtonText('구독 중');
       } else {
         setButtonText('구독하기');
@@ -56,7 +54,7 @@ const SimpleProfile: React.FC<Props> = ({ targetHomeId, memberImg, name, bio, fo
 
   useEffect(() => {
     changeText();
-  }, [followProfile]);
+  }, [followingProfiles]);
 
   return (
     <Container>
