@@ -41,10 +41,6 @@ export const Container = styled.div`
   }
   button {
     display: block;
-    ${media.medium`
-      font-size: 0.4rem;
-      width: 4.5rem;
-    `}
   }
 `;
 

@@ -30,7 +30,6 @@ export const Container = styled.div<ContainerProps>`
   ${media.small`
     width: 20rem;
     height: 30rem;
-    transform: translate(-55%, -50%);
   `}
 `;
 
