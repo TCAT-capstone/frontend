@@ -36,6 +36,8 @@ const EditPage: React.FC = () => {
             location: ticketInfo.ticketLocation,
           };
         });
+      } else {
+        toast.error('OCR 서버 연결에 실패하였습니다!😭');
       }
       setTicketInfoIsLoaded(false);
     }
