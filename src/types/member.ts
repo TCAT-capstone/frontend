@@ -34,7 +34,7 @@ export interface HomeIdType {
 
 export interface UpdateFollowingType {
   targetHomeId: string | undefined;
-  name: string;
+  name: string | undefined;
   memberImg: string | undefined;
-  bio: string;
+  bio: string | undefined;
 }
