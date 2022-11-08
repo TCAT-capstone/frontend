@@ -9,7 +9,7 @@ export const PostContainer = styled.div`
   @media (max-width: 49rem) {
     width: 95%;
   }
-  ${media.large`
+  ${media.small`
     margin-top: 3.6rem;
   `}
 `;
@@ -37,7 +37,7 @@ export const SmallProfileContainer = styled.div`
     font-size: 0.75rem;
     color: ${ColorCode.GRAY1};
   }
-  ${media.large`
+  ${media.small`
     margin-left: 1rem;
     margin-bottom: 10.875rem;
   `}
@@ -49,7 +49,7 @@ export const Title = styled.h1`
   font-size: 2.5rem;
   letter-spacing: -0.02em;
   margin-bottom: 3rem;
-  ${media.large`
+  ${media.small`
     position: absolute;
     top: -3rem;
     left: 1rem;
@@ -82,7 +82,7 @@ export const TicketInfoWrapper = styled.div`
   width: 15rem;
   position: absolute;
   right: -19rem;
-  ${media.large`
+  ${media.small`
     left: 0;
     top: 4.5rem;
   `}
@@ -102,7 +102,7 @@ export const ButtonContainer = styled.div`
       opacity: 0.8;
     }
   }
-  ${media.large`
+  ${media.small`
     margin-left: 1rem;
   `}
 `;
@@ -149,7 +149,7 @@ export const MediumProfileContainer = styled.div`
   button {
     display: block;
   }
-  ${media.large`
+  ${media.small`
     flex-direction: column;
     align-items: center;
     a {
@@ -187,7 +187,7 @@ export const PostBackground = styled.div`
   background: rgba(121, 77, 253, 0.07);
   border-top: 1px solid rgba(20, 0, 142, 0.7);
   z-index: -10;
-  ${media.large`
+  ${media.small`
     height: 38rem;
   `}
 `;

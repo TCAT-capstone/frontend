@@ -21,7 +21,7 @@ export const Container = styled.div<ContainerProps>`
   &:hover {
     transform: translateY(-0.5rem);
   }
-  ${media.large`
+  ${media.small`
     width: 20.94rem;
     height: 17.19rem;
     a {
@@ -36,7 +36,7 @@ export const TicketImage = styled.img`
   border-radius: 0.5rem;
   object-fit: cover;
   flex-shrink: 0;
-  ${media.large`
+  ${media.small`
     width: 20.94rem;
     height: 12rem;
   `}
@@ -54,7 +54,7 @@ export const InfoContainer = styled.div`
     letter-spacing: -0.03em;
     word-break: keep-all;
   }
-  ${media.large`
+  ${media.small`
     width: 20.94rem;
     margin: 0.93rem;
   `}
@@ -71,7 +71,7 @@ export const SubInfoContainer = styled.div`
     font-size: 0.88rem;
     text-align: right;
   }
-  ${media.large`
+  ${media.small`
     margin-top: 1rem;
     top: 1rem;
     left: 0;
@@ -93,7 +93,7 @@ export const LikeContainer = styled.div`
     margin-right: 0;
     padding-right: 0.2rem;
   }
-  ${media.large`
+  ${media.small`
     position: absolute;
     right: 1.7rem;
     top: -0.5rem;
