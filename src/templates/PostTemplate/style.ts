@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '@styles/media';
 import { ColorCode } from '@utils/constants';
 
 export const PostContainer = styled.div`
@@ -8,6 +9,9 @@ export const PostContainer = styled.div`
   @media (max-width: 49rem) {
     width: 95%;
   }
+  ${media.small`
+    margin-top: 3.6rem;
+  `}
 `;
 
 export const SmallProfileContainer = styled.div`
@@ -33,6 +37,10 @@ export const SmallProfileContainer = styled.div`
     font-size: 0.75rem;
     color: ${ColorCode.GRAY1};
   }
+  ${media.small`
+    margin-left: 1rem;
+    margin-bottom: 10.875rem;
+  `}
 `;
 
 export const Title = styled.h1`
@@ -41,6 +49,13 @@ export const Title = styled.h1`
   font-size: 2.5rem;
   letter-spacing: -0.02em;
   margin-bottom: 3rem;
+  ${media.small`
+    position: absolute;
+    top: -3rem;
+    left: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+  `}
 `;
 
 export const TicketContainer = styled.div`
@@ -67,9 +82,10 @@ export const TicketInfoWrapper = styled.div`
   width: 15rem;
   position: absolute;
   right: -19rem;
-  @media (max-width: 85rem) {
-    display: none;
-  }
+  ${media.small`
+    left: 0;
+    top: 4.5rem;
+  `}
 `;
 
 export const ButtonContainer = styled.div`
@@ -86,6 +102,9 @@ export const ButtonContainer = styled.div`
       opacity: 0.8;
     }
   }
+  ${media.small`
+    margin-left: 1rem;
+  `}
 `;
 
 export const ShareLikeContainer = styled.div`
@@ -130,6 +149,21 @@ export const MediumProfileContainer = styled.div`
   button {
     display: block;
   }
+  ${media.small`
+    flex-direction: column;
+    align-items: center;
+    a {
+      flex-direction: column;
+      align-items: center;
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        margin: 1rem 0;
+      }
+    }
+  `}
 `;
 
 export const ButtonWrapper = styled.div`
@@ -153,6 +187,9 @@ export const PostBackground = styled.div`
   background: rgba(121, 77, 253, 0.07);
   border-top: 1px solid rgba(20, 0, 142, 0.7);
   z-index: -10;
+  ${media.small`
+    height: 38rem;
+  `}
 `;
 
 export const SpinnerWrapper = styled.div`

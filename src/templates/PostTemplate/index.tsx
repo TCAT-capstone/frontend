@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import dompurify from 'dompurify';
 import { Link } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
 import Layout from '@styles/Layout';
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
+import FollowButton from '@components/Common/FollowButton';
 import CheckMark from '@components/Common/CheckMark';
 import TicketInfoBox from '@components/Common/TicketInfoBox';
 import ShareButton from '@components/Common/ShareButton';
 import Like from '@components/Common/Like';
-import BasicButton from '@components/Common/BasicButton';
 import Spinner from '@src/components/Common/Spinner';
 
+import { userProfileState } from '@stores/user';
+import { SimpleProfileListType } from '@src/types/member';
 import { TicketLikeType, TicketType } from '@src/types/ticket';
 import { getDateString } from '@utils/string';
+
+import { getFollowingProfile, updateFollowing, deleteFollowing } from '@apis/follow';
 
 import '@styles/editor.css';
 import {
@@ -42,7 +47,62 @@ interface Props {
 }
 
 const PostTemplate: React.FC<Props> = ({ post, isMyHome, like, handlePostDelete, handlePostEdit, handleLike }) => {
+  const myProfile = useRecoilValue(userProfileState);
   const sanitizer = dompurify.sanitize;
+  const [buttonText, setButtonText] = useState('...');
+  const [followingProfiles, setFollowingProfiles] = useState<SimpleProfileListType>([]);
+
+  const getFollowingProfiles = async () => {
+    const data = await getFollowingProfile(myProfile.homeId);
+    if (data) {
+      setFollowingProfiles(data);
+    } else {
+      setFollowingProfiles([]);
+    }
+  };
+
+  const changeText = () => {
+    if (followingProfiles) {
+      if (followingProfiles.find((f) => f.targetHomeId === post?.memberHomeId)) {
+        setButtonText('구독 중');
+      } else {
+        setButtonText('구독하기');
+      }
+    }
+  };
+
+  const handleFollowButton = async () => {
+    if (buttonText === '구독 중') {
+      const result = await deleteFollowing(myProfile.homeId, post?.memberHomeId);
+      if (result) {
+        setButtonText('구독하기');
+      }
+    } else {
+      const result = await updateFollowing(myProfile.homeId, {
+        targetHomeId: post?.memberHomeId,
+        name: post?.memberName,
+        memberImg: post?.memberImg,
+        bio: post?.memberBio,
+      });
+      if (result) {
+        setButtonText('구독 중');
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (buttonText === '...') {
+      changeText();
+    }
+  });
+
+  useEffect(() => {
+    getFollowingProfiles();
+  }, []);
+
+  useEffect(() => {
+    changeText();
+  }, [followingProfiles]);
 
   return (
     <Layout>
@@ -107,7 +167,7 @@ const PostTemplate: React.FC<Props> = ({ post, isMyHome, like, handlePostDelete,
               </Link>
               {!isMyHome && (
                 <ButtonWrapper>
-                  <BasicButton text="구독하기" handler={() => {}} />
+                  <FollowButton text={buttonText} handler={handleFollowButton} />
                 </ButtonWrapper>
               )}
             </MediumProfileContainer>

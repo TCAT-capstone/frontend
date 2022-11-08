@@ -15,8 +15,6 @@ const ProfileDropdown: React.FC<Props> = ({ handleFollowModalOpen }) => {
   const myProfile = useRecoilValue(userProfileState);
   const resetUserProfileState = useResetRecoilState(userProfileState);
 
-
-
   const handleLogout = () => {
     resetUserProfileState();
     localStorage.removeItem(ACCESS_TOKEN);

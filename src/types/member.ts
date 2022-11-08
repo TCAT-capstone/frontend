@@ -31,3 +31,10 @@ export interface UpdateMyProfileType {
 export interface HomeIdType {
   homeId: string;
 }
+
+export interface UpdateFollowingType {
+  targetHomeId: string | undefined;
+  name: string | undefined;
+  memberImg: string | undefined;
+  bio: string | undefined;
+}
