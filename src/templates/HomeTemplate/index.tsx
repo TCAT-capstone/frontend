@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import ProfileBox from '@components/Common/Profile/ProfileBox';
 import BasicButton from '@components/Common/BasicButton';
+import FollowButton from '@components/Common/FollowButton';
 import TicketbookSlider from '@src/components/Ticketbook/TicketbookSlider';
 import TicketList from '@components/TicketList';
 import { TicketListType } from '@src/types/ticket';
 import { TicketbookListType } from '@src/types/ticketbook';
+import { SimpleProfileListType } from '@src/types/member';
+
+import { updateFollowing, deleteFollowing } from '@src/apis/follow';
+
 import Layout from '@styles/Layout';
 import { ProfileWrapper, ButtonWrapper, TicketbookListWrapper, HomeBackground } from './style';
 
 interface Props {
   isMyHome: boolean;
+  homeId: string;
+  targetHomeId: string | undefined;
   profile: {
     img: string | undefined;
     name: string;
@@ -18,6 +25,7 @@ interface Props {
     ticketCount: number;
     likeCount: number;
   };
+  following: SimpleProfileListType;
   tickets: TicketListType;
   isLoaded: boolean;
   ticketbooks: TicketbookListType;
@@ -30,7 +38,10 @@ interface Props {
 
 const HomeTemplate: React.FC<Props> = ({
   isMyHome,
+  homeId,
+  targetHomeId,
   profile,
+  following,
   tickets,
   isLoaded,
   ticketbooks,
@@ -40,6 +51,46 @@ const HomeTemplate: React.FC<Props> = ({
   handlePageNavigate,
   changeCurrTicketbookId,
 }) => {
+  const [buttonText, setButtonText] = useState('...');
+
+  const changeText = () => {
+    if (following.find((f) => f.targetHomeId === targetHomeId)) {
+      setButtonText('구독 중');
+    } else {
+      setButtonText('구독하기');
+    }
+    return buttonText;
+  };
+
+  const handleFollowButton = async () => {
+    if (buttonText === '구독 중') {
+      const result = await deleteFollowing(homeId, targetHomeId);
+      if (result) {
+        setButtonText('구독하기');
+      }
+    } else {
+      const result = await updateFollowing(homeId, {
+        targetHomeId,
+        name: profile.name,
+        memberImg: profile.img,
+        bio: profile.bio,
+      });
+      if (result) {
+        setButtonText('구독 중');
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (buttonText === '...') {
+      changeText();
+    }
+  });
+
+  useEffect(() => {
+    changeText();
+  }, [following]);
+
   return (
     <Layout>
       <ProfileWrapper>
@@ -55,7 +106,7 @@ const HomeTemplate: React.FC<Props> = ({
         {isMyHome ? (
           <BasicButton text="티켓추가" handler={handlePageNavigate} />
         ) : (
-          <BasicButton text="구독하기" handler={() => {}} />
+          <FollowButton text={buttonText} handler={handleFollowButton} />
         )}
       </ButtonWrapper>
       <TicketbookListWrapper>

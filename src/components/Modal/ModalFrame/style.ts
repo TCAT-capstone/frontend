@@ -38,4 +38,5 @@ export const CloseButton = styled.button`
   position: absolute;
   top: 1.7rem;
   right: 1.7rem;
+  z-index: 30;
 `;
