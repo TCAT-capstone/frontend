@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
+import { media } from '@styles/media';
 
 interface ImageProps {
   size: number;

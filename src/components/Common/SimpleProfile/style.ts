@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ColorCode } from '@utils/constants';
+import { media } from '@styles/media';
 
 export const Container = styled.div`
   display: flex;
@@ -9,6 +9,10 @@ export const Container = styled.div`
     display: flex;
     div {
       padding-left: 1.68rem;
+      ${media.medium`
+        width: 8.7rem;
+        padding-left: 0.7rem;
+      `}
     }
   }
   b {
@@ -17,6 +21,10 @@ export const Container = styled.div`
     font-weight: 700;
     line-height: 1.5rem;
     margin: 0.28rem 0;
+    ${media.medium`
+      font-size: 1rem;
+      line-height: 1rem;
+    `}
   }
   span {
     display: block;
@@ -27,6 +35,9 @@ export const Container = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    ${media.medium`
+      width: 7rem;
+    `}
   }
   button {
     display: block;

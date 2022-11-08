@@ -13,6 +13,11 @@ export const Container = styled.div<ContainerProps>`
     ${media.large`
       width: 65rem;
     `}
+    ${media.small`
+      height: 13rem;
+      width: 23rem;
+      margin: auto;
+    `}
   }
   .slick-track {
     display: flex;
@@ -29,6 +34,9 @@ export const Container = styled.div<ContainerProps>`
     -moz-transform: scale(1.15);
     transform: scale(1.15) translateY(-1.2rem);
     transition: 0.8s;
+    ${media.small`
+      transform: scale(1.15) translateY(-0.5rem);
+    `}
   }
 `;
 
