@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '@styles/media';
 
 export const Container = styled.div`
   width: 100%;
@@ -21,4 +22,11 @@ export const InfoContainer = styled.div`
     font-weight: 500;
     flex-shrink: 0;
   }
+  ${media.large`
+    padding: 0.1rem 1rem;
+    span {
+      font-size: 0.875rem;
+      font-weight: 400;
+    }
+  `}
 `;
