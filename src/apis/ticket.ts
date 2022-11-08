@@ -25,6 +25,23 @@ export const getTrendTickets = async (
   }
 };
 
+export const getFeedTickets = async (
+  cursorId: number | null,
+  cursorDate: string | null,
+): Promise<TicketListResType | false> => {
+  try {
+    const res = await fetchApi.get(
+      `/api/tickets/feed?cursorId=${cursorId === null ? '' : cursorId}&cursorDate=${
+        cursorDate === null ? '' : cursorDate
+      }`,
+    );
+    if (res.status !== 200) throw new Error('error');
+    return await res.json();
+  } catch (err) {
+    return false;
+  }
+};
+
 export const getSearchTickets = async (
   cursorId: number | null,
   keyword: string | null,

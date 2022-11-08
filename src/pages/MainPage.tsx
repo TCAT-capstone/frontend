@@ -2,46 +2,73 @@ import React, { useEffect, useState } from 'react';
 
 import MainTemplate from '@templates/MainTemplate';
 
-import { getTrendTickets } from '@apis/ticket';
+import { getFeedTickets, getTrendTickets } from '@apis/ticket';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { TicketListType } from '@src/types/ticket';
+import { cursorTo } from 'readline';
 
 interface Props {
   isTrend: boolean;
 }
 
-type CursorType = { cursorId: number | null; cursorLikeCount: number | null };
+type TrendCursorType = { cursorId: number | null; cursorLikeCount: number | null };
 
-const initialCursor = {
+type FeedCursorType = { cursorId: number | null; cursorDate: string | null };
+
+const initialTrendCursor = {
   cursorId: null,
   cursorLikeCount: null,
 };
 
+const initialFeedCursor = {
+  cursorId: null,
+  cursorDate: null,
+};
+
 const MainPage: React.FC<Props> = ({ isTrend }) => {
   const [tickets, setTickets] = useState<TicketListType>([]);
-  const [cursor, setCursor] = useState<CursorType>(initialCursor);
+  const [trendCursor, setTrendCursor] = useState<TrendCursorType>(initialTrendCursor);
+  const [feedCursor, setFeedCursor] = useState<FeedCursorType>(initialFeedCursor);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasNotTicket, setHasNoTicket] = useState(false);
-  const { apiTrigger, setTarget } = useInfiniteScroll();
+  const { apiTrigger, setApiTrigger, setTarget } = useInfiniteScroll();
 
   const getTickets = async () => {
     if (!hasNotTicket) {
       setIsLoaded(true);
-      const data = await getTrendTickets(cursor.cursorId, cursor.cursorLikeCount);
+      const data = isTrend
+        ? await getTrendTickets(trendCursor.cursorId, trendCursor.cursorLikeCount)
+        : await getFeedTickets(feedCursor.cursorId, feedCursor.cursorDate);
       if (data) {
         if (data.hasNotTicket) {
           setHasNoTicket(true);
         } else {
           setTickets((prev) => [...prev, ...data.tickets]);
-          setCursor({
-            cursorId: data.tickets[data.tickets.length - 1].ticketId,
-            cursorLikeCount: data.tickets[data.tickets.length - 1].likeCount,
-          });
+          if (isTrend) {
+            setTrendCursor({
+              cursorId: data.tickets[data.tickets.length - 1].ticketId,
+              cursorLikeCount: data.tickets[data.tickets.length - 1].likeCount,
+            });
+          } else {
+            setFeedCursor({
+              cursorId: data.tickets[data.tickets.length - 1].ticketId,
+              cursorDate: data.tickets[data.tickets.length - 1].date,
+            });
+          }
         }
       }
       setIsLoaded(false);
     }
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setTickets([]);
+    setHasNoTicket(false);
+    setTrendCursor(initialTrendCursor);
+    setFeedCursor(initialFeedCursor);
+    setApiTrigger(0);
+  }, [isTrend]);
 
   useEffect(() => {
     if (apiTrigger > 0) {
