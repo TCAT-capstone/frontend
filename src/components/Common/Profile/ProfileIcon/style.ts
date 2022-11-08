@@ -11,8 +11,4 @@ export const Image = styled.img<ImageProps>`
   height: ${(props) => `${props.size}rem`};
   border-radius: 50%;
   background-color: ${ColorCode.GRAY1};
-  ${media.medium`
-    width: 3rem;
-    height: 3rem;    
-  `}
 `;

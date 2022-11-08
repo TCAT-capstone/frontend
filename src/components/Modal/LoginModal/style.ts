@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
+import { media } from '@styles/media';
 
 export const Container = styled.div`
   display: flex;
@@ -21,4 +22,9 @@ export const Text = styled.p`
   font-weight: 600;
   color: ${ColorCode.GRAY1};
   margin-top: 13rem;
+  ${media.small`
+    text-align: center;
+    width: 16rem;
+    margin-top: 10rem;
+  `}
 `;
