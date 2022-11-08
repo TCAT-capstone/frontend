@@ -36,4 +36,7 @@ export const HomeBackground = styled.div`
   ${media.medium`
     border-radius: 1.5rem 1.5rem 0 0;
   `}
+  ${media.small`
+    top: 48rem;
+  `}
 `;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
+import { media } from '@styles/media';
 
 interface ContainerProps {
   w: number;
@@ -26,6 +27,11 @@ export const Container = styled.div<ContainerProps>`
   background-color: ${ColorCode.WHITE};
   border-radius: 1.8rem;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+  ${media.small`
+    width: 20rem;
+    height: 30rem;
+    transform: translate(-55%, -50%);
+  `}
 `;
 
 export const CloseButton = styled.button`
