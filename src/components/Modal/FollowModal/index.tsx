@@ -74,6 +74,7 @@ const FollowModal: React.FC<Props> = ({ handleFollowModalClose }) => {
             ? followingProfiles.map((t) => (
                 <SimpleProfile
                   key={t.targetHomeId}
+                  homeId={homeId}
                   targetHomeId={t.targetHomeId}
                   memberImg={t.memberImg}
                   name={t.name}
@@ -84,6 +85,7 @@ const FollowModal: React.FC<Props> = ({ handleFollowModalClose }) => {
             : followerProfiles.map((t) => (
                 <SimpleProfile
                   key={t.targetHomeId}
+                  homeId={homeId}
                   targetHomeId={t.targetHomeId}
                   memberImg={t.memberImg}
                   name={t.name}
