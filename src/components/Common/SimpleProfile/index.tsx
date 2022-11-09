@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
 
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
 import FollowButton from '@components/Common/FollowButton';
 
 import { updateFollowing, deleteFollowing } from '@src/apis/follow';
-import { userProfileState } from '@stores/user';
 import { SimpleProfileListType } from '@src/types/member';
 
 import { Container, ButtonWrapper } from './style';
 
 interface Props {
   targetHomeId: string;
+  homeId: string;
   memberImg: string;
   name: string;
   bio: string;
   followingProfiles: SimpleProfileListType;
 }
 
-const SimpleProfile: React.FC<Props> = ({ targetHomeId, memberImg, name, bio, followingProfiles }) => {
-  const myProfile = useRecoilValue(userProfileState);
+const SimpleProfile: React.FC<Props> = ({ targetHomeId, homeId, memberImg, name, bio, followingProfiles }) => {
   const [buttonText, setButtonText] = useState('...');
 
   const changeText = () => {
@@ -35,12 +33,12 @@ const SimpleProfile: React.FC<Props> = ({ targetHomeId, memberImg, name, bio, fo
 
   const handleFollowButton = async () => {
     if (buttonText === '구독 중') {
-      const result = await deleteFollowing(myProfile.homeId, targetHomeId);
+      const result = await deleteFollowing(homeId, targetHomeId);
       if (result) {
         setButtonText('구독하기');
       }
     } else {
-      const result = await updateFollowing(myProfile.homeId, {
+      const result = await updateFollowing(homeId, {
         targetHomeId,
         name,
         memberImg,
