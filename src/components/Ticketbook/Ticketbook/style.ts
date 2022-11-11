@@ -40,8 +40,10 @@ export const Container = styled.div<ContainerProps>`
     right: 8%;
     font-size: ${(props) => (props.size === 'medium' ? '0.875rem' : '0.7rem')};
     ${media.small`
+      display: inline-block;
       font-size: 0.345rem;
-      right: 5%
+      right: 5%;
+      width: 5rem;
     `}
     font-weight: 600;
     color: ${ColorCode.WHITE2};

@@ -18,6 +18,9 @@ export const Container = styled.div`
     font-size: 1.3rem;
     font-weight: 500;
     margin-bottom: 1rem;
+    ${media.small`
+      font-size: 1rem;
+    `}
   }
   h2 {
     font-size: 0.9375rem;
@@ -30,6 +33,9 @@ export const Container = styled.div`
   }
   ${media.large`
     width: 29rem;
+  `}
+  ${media.small`
+    margin: auto;
   `}
 `;
 
@@ -46,6 +52,9 @@ export const ProfileInfoContainer = styled.div`
   }
   :nth-of-type(4) > Input {
     width: 25.8rem;
+    ${media.small`
+      width: 17.4rem;
+    `}
   }
 `;
 
@@ -66,6 +75,9 @@ export const Input = styled.input<InputProps>`
   :focus {
     border-color: ${ColorCode.PURPLE2};
   }
+  ${media.small`
+    width: 10rem;
+  `}
 `;
 
 export const ErrorText = styled.span`
@@ -80,6 +92,10 @@ export const ButtonWrapper = styled.div`
   position: absolute;
   right: 2rem;
   bottom: -5.5rem;
+  ${media.small`
+    bottom: -3rem;
+    right: 0;
+  `}
 `;
 
 export const Button = styled.button<ButtonProps>`

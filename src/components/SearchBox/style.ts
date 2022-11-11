@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '@styles/media';
 
 export const Container = styled.div`
   position: relative;
@@ -11,6 +12,9 @@ export const Container = styled.div`
   padding: 0.9rem 1.3rem;
   border-radius: 1.1rem;
   background-color: rgba(248, 249, 255);
+  ${media.small`
+    width: 20rem;
+  `}
 `;
 
 export const SearchContent = styled.input`
