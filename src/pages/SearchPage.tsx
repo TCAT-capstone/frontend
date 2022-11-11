@@ -1,4 +1,4 @@
-import React, { useEffect, useState, KeyboardEvent } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import SearchTemplate from '@templates/SearchTemplate';
 
