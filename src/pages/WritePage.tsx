@@ -7,6 +7,7 @@ import { ticketState } from '@stores/editor';
 import { userTicketbooksState } from '@stores/user';
 import { createTicket, updateTicket } from '@apis/ticket';
 import { uploadImage } from '@apis/image';
+import { compressImage } from '@utils/image';
 
 import WriteTemplate from '@templates/WriteTemplate';
 import { TicketType } from '@src/types/ticket';
@@ -81,7 +82,8 @@ const WritePage: React.FC = () => {
     if (isUpdateMode) {
       newTicket = await updateTicket(state.post.ticketId, { ticketbookId: ticketbook.id, title, content });
     } else {
-      const ticketImgUrl = await uploadImage(state.imgObj.file);
+      const cfile = await compressImage(state.imgObj.file, 600);
+      const ticketImgUrl = await uploadImage(cfile);
       if (ticketImgUrl) {
         newTicket = await createTicket({
           title,
