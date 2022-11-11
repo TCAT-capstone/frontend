@@ -9,6 +9,9 @@ export const Container = styled.div`
   ${media.medium`
     justify-content: center;
   `}
+  ${media.small`
+    margin: auto;
+  `}
 `;
 
 export const SpinnerWrapper = styled.div`

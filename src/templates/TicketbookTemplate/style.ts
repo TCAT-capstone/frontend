@@ -1,16 +1,25 @@
 import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
+import { media } from '@styles/media';
 
 export const Container = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 2rem;
+  ${media.small`
+    flex-direction: column;
+    align-items: center;
+  `}
 `;
 
 export const TicketbookListContainer = styled.div``;
 
 export const EditContainer = styled.div`
   margin-left: 7.5rem;
+  ${media.small`
+    margin: auto;
+    margin-top: 2rem;
+  `}
 `;
 
 export const TicketbookAddButton = styled.button`
