@@ -7,6 +7,7 @@ import { TicketbookListType, TicketbookType } from '@src/types/ticketbook';
 import { userTicketbooksState } from '@stores/user';
 import { uploadImage } from '@apis/image';
 import { updateTicketbooks } from '@apis/ticketbook';
+import { compressImage } from '@utils/image';
 
 const initialTicketbook = {
   id: -1,
@@ -117,7 +118,8 @@ const TicketbookPage: React.FC = () => {
   };
 
   const handleFile = async (file: File) => {
-    const imgUrl = await uploadImage(file);
+    const cfile = await compressImage(file, 600);
+    const imgUrl = await uploadImage(cfile);
     if (imgUrl) {
       setNewImageUrl(imgUrl);
       setTicketbooks((prev) => {
