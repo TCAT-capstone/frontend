@@ -48,6 +48,6 @@ export const FilterInput = styled.input`
   text-overflow: ellipsis;
   white-space: nowrap;
   ${media.small`
-    width: 6.5rem;
+    width: 5rem;
   `}
 `;
