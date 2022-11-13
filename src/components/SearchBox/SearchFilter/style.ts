@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ColorCode } from '@utils/constants';
+import { media } from '@styles/media';
 
 export const Container = styled.div`
   position: relative;
@@ -9,6 +10,11 @@ export const Container = styled.div`
   margin: auto;
   margin-top: 0.8rem;
   margin-bottom: 1.6rem;
+  ${media.small`
+    display: block;
+    width: 20rem;
+    height: 3.6rem;
+  `}
 `;
 
 export const FilterContainer = styled.div`
@@ -21,6 +27,12 @@ export const FilterContainer = styled.div`
   border-radius: 1.1rem;
   font-size: 0.6rem;
   line-height: 0.7rem;
+  ${media.small`
+    display: inline-block;
+    width: 8.201rem;
+    margin-bottom: 0.3rem;
+    justify-content: space-between;
+  `}
 `;
 
 export const FilterInput = styled.input`
@@ -35,4 +47,7 @@ export const FilterInput = styled.input`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  ${media.small`
+    width: 5rem;
+  `}
 `;

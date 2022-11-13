@@ -6,6 +6,7 @@ import { RangeStatic } from 'quill';
 import CheckMark from '@components/Common/CheckMark';
 import { uploadImage } from '@apis/image';
 import { ticketState } from '@stores/editor';
+import { compressImage } from '@utils/image';
 
 import '@styles/editor.css';
 import { Container, TicketContainer, TicketImage, CheckMarkWrapper } from './style';
@@ -28,7 +29,8 @@ const TextEditor: React.FC<Props> = ({ content, setContent, ticketImg }) => {
     input.onchange = async () => {
       const { files } = input;
       if (files) {
-        const imgUrl = await uploadImage(files[0]);
+        const cfile = await compressImage(files[0], 1000);
+        const imgUrl = await uploadImage(cfile);
         if (quillRef.current && imgUrl) {
           const { index } = quillRef.current.getEditor().getSelection() as RangeStatic;
           const quillEditor = quillRef.current.getEditor();
