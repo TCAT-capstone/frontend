@@ -21,6 +21,9 @@ export const InfoContainer = styled.div`
     line-height: 1.43rem;
     font-weight: 500;
     flex-shrink: 0;
+    :hover {
+      opacity: 0.7;
+    }
   }
   ${media.small`
     padding: 0.1rem 1rem;
