@@ -1,4 +1,5 @@
-import React, { useEffect, useState, KeyboardEvent } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import SearchTemplate from '@templates/SearchTemplate';
 
@@ -6,7 +7,14 @@ import { getSearchTickets } from '@apis/ticket';
 import { TicketListType } from '@src/types/ticket';
 import useInfiniteScroll from '@src/hooks/useInfiniteScroll';
 
+interface LocationStateType {
+  type: 'title' | 'date' | 'location' | 'seat' | 'casting';
+  data: any;
+}
+
 const SearchPage: React.FC = () => {
+  const ulocation = useLocation();
+  const state = ulocation.state as LocationStateType;
   const [searchedTickets, setSearchedTickets] = useState<TicketListType>([]);
   const [cursorId, setCursorId] = useState(-1);
   const [keyword, setKeyword] = useState('');
@@ -108,6 +116,32 @@ const SearchPage: React.FC = () => {
     }, 1000);
     setTimer(newTimer);
   };
+
+  useEffect(() => {
+    if (state) {
+      switch (state.type) {
+        case 'title':
+          setTitle(state.data);
+          break;
+        case 'date':
+          setDate(state.data);
+          break;
+        case 'location':
+          setLocation(state.data);
+          break;
+        case 'seat':
+          setLocation(state.data.location);
+          setSeat(state.data.seat);
+          break;
+        case 'casting':
+          setKeyword(state.data);
+          break;
+
+        default:
+          break;
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (apiTrigger > 0) {

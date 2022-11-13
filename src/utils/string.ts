@@ -5,6 +5,13 @@ export const getDateString = (date: Date): String => {
     .padStart(2, '0')}`;
 };
 
+export const getDateStringDash = (date: Date): String => {
+  return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date
+    .getDate()
+    .toString()
+    .padStart(2, '0')}`;
+};
+
 const dayList = ['일', '월', '화', '수', '목', '금', '토'];
 
 export const getDateTimeString = (date: Date): String => {
