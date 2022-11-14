@@ -10,12 +10,21 @@ import { TabWrapper } from './style';
 
 interface Props {
   isTrend: boolean;
-  tickets: TicketListType;
+  trendTickets: TicketListType;
+  feedTickets: TicketListType;
   isLoaded: boolean;
-  setTarget: any;
+  trendSetTarget: any;
+  feedSetTarget: any;
 }
 
-const MainTemplate: React.FC<Props> = ({ isTrend, tickets, isLoaded, setTarget }) => {
+const MainTemplate: React.FC<Props> = ({
+  isTrend,
+  trendTickets,
+  feedTickets,
+  isLoaded,
+  trendSetTarget,
+  feedSetTarget,
+}) => {
   return (
     <Layout>
       <TabWrapper>
@@ -27,7 +36,11 @@ const MainTemplate: React.FC<Props> = ({ isTrend, tickets, isLoaded, setTarget }
           focus={isTrend ? 'first' : 'second'}
         />
       </TabWrapper>
-      <TicketList tickets={tickets} backgroundColor="purple" isLoaded={isLoaded} setTarget={setTarget} />
+      {isTrend ? (
+        <TicketList tickets={trendTickets} backgroundColor="purple" isLoaded={isLoaded} setTarget={trendSetTarget} />
+      ) : (
+        <TicketList tickets={feedTickets} backgroundColor="purple" isLoaded={isLoaded} setTarget={feedSetTarget} />
+      )}
     </Layout>
   );
 };
