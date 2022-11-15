@@ -11,7 +11,6 @@ import { Container, ButtonWrapper, InputContainer, Input, ErrorText, InputIcon, 
 interface Props {
   nameError: { state: 'error' | 'valid'; message: string };
   homeIdError: { state: 'error' | 'valid'; message: string };
-  isButtonActive: boolean;
   handleNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleHomeIdChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSignUp: () => void;
@@ -20,7 +19,6 @@ interface Props {
 const RegisterTemplate: React.FC<Props> = ({
   nameError,
   homeIdError,
-  isButtonActive,
   handleNameChange,
   handleHomeIdChange,
   handleSignUp,
@@ -49,7 +47,7 @@ const RegisterTemplate: React.FC<Props> = ({
         <InputIcon src={lockImg} alt="자물쇠 모양 아이콘" />
       </InputContainer>
       <ButtonWrapper>
-        <Button type="button" onClick={handleSignUp} active={isButtonActive} disabled={!isButtonActive}>
+        <Button type="button" onClick={handleSignUp}>
           <span>완료하기</span>
         </Button>
       </ButtonWrapper>

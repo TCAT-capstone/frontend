@@ -7,6 +7,7 @@ import { userTicketbooksState } from '@stores/user';
 import Layout from '@styles/Layout';
 import TextEditor from '@components/TextEditor';
 import BasicButton from '@components/Common/BasicButton';
+import Spinner from '@components/Common/Spinner';
 
 import { TicketbookType } from '@src/types/ticketbook';
 import arrowImg from '@images/down-arrow.svg';
@@ -37,6 +38,7 @@ interface Props {
   onDropdown: boolean;
   handleDropdownOpen: () => void;
   TicketbookContainerRef: React.RefObject<HTMLDivElement>;
+  isLoaded: boolean;
 }
 
 const WriteTemplate: React.FC<Props> = ({
@@ -53,6 +55,7 @@ const WriteTemplate: React.FC<Props> = ({
   onDropdown,
   handleDropdownOpen,
   TicketbookContainerRef,
+  isLoaded,
 }) => {
   const userTicketbooks = useRecoilValue(userTicketbooksState);
 
@@ -79,7 +82,8 @@ const WriteTemplate: React.FC<Props> = ({
                 </SelectTicketbookContainer>
               )}
             </DropdownContainer>
-            <ButtonWrapper>
+            <ButtonWrapper>{isLoaded && <Spinner size={1.5} />}</ButtonWrapper>
+            <ButtonWrapper style={{ display: isLoaded ? 'none' : 'block' }}>
               <BasicButton text="글 작성 완료하기" handler={handlePostSubmit} />
             </ButtonWrapper>
           </TicketbookContainer>
