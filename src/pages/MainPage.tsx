@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
 
 import MainTemplate from '@templates/MainTemplate';
 
 import { getFeedTickets, getTrendTickets } from '@apis/ticket';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
-import { isLoggedInState } from '@stores/user';
 import { TicketListType } from '@src/types/ticket';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 
 interface Props {
   isTrend: boolean;
@@ -36,14 +32,12 @@ const initialHasNoTickets = {
 };
 
 const MainPage: React.FC<Props> = ({ isTrend }) => {
-  const navigate = useNavigate();
   const [trendTickets, setTrendTickets] = useState<TicketListType>([]);
   const [feedTickets, setFeedTickets] = useState<TicketListType>([]);
   const [trendCursor, setTrendCursor] = useState<TrendCursorType>(initialTrendCursor);
   const [feedCursor, setFeedCursor] = useState<FeedCursorType>(initialFeedCursor);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasNoTicket, setHasNoTicket] = useState<HasNoTicketsType>(initialHasNoTickets);
-  const isLoggedIn = useRecoilValue(isLoggedInState);
   const { apiTrigger: trendApiTrigger, setTarget: trendSetTarget } = useInfiniteScroll();
   const { apiTrigger: feedApiTrigger, setTarget: feedSetTarget } = useInfiniteScroll();
 
@@ -69,11 +63,6 @@ const MainPage: React.FC<Props> = ({ isTrend }) => {
   };
 
   const getFeedTicketList = async () => {
-    if (!isLoggedIn) {
-      toast.error('로그인이 필요한 서비스입니다!');
-      navigate('/', { replace: true });
-      return;
-    }
     if (!hasNoTicket.feed) {
       setIsLoaded(true);
       const data = await getFeedTickets(feedCursor.cursorId, feedCursor.cursorDate);
