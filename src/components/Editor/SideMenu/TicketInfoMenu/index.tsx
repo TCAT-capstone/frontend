@@ -45,7 +45,13 @@ const TicketInfoMenu: React.FC = () => {
       </InfoContainer>
       <InfoContainer>
         <img src={CastImg} alt="사람 아이콘" />
-        <input type="text" data-type="casting" onChange={handleInputChange} value={ticketInfo.casting} maxLength={20} />
+        <input
+          type="text"
+          data-type="casting"
+          onChange={handleInputChange}
+          value={ticketInfo.casting}
+          maxLength={100}
+        />
       </InfoContainer>
     </Container>
   );

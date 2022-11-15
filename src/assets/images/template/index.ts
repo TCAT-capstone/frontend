@@ -1,6 +1,6 @@
-import interpark from '@images/template/interpark.png';
-import yes24 from '@images/template/yes24.png';
-import melon from '@images/template/melon.png';
+import interpark from '@images/template/interpark.jpg';
+import yes24 from '@images/template/yes24.jpg';
+import melon from '@images/template/melon.jpg';
 
 export const templateList = [
   {

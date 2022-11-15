@@ -32,6 +32,7 @@ const WritePage: React.FC = () => {
   const [ticketbook, setTicketbook] = useState<TicketbookType>(initialTicketbook);
   const [onTicketbook, setOnTicketbook] = useState(false);
   const [onDropdown, setOnDropdown] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const TicketbookContainerRef = useRef<HTMLDivElement>(null);
 
   const isUpdateMode = state.ticketId !== undefined;
@@ -79,6 +80,7 @@ const WritePage: React.FC = () => {
   const handlePostSubmit = async () => {
     let newTicket;
     if (!validatePost()) return;
+    setIsLoaded(true);
     if (isUpdateMode) {
       newTicket = await updateTicket(state.post.ticketId, { ticketbookId: ticketbook.id, title, content });
     } else {
@@ -136,6 +138,7 @@ const WritePage: React.FC = () => {
       onDropdown={onDropdown}
       handleDropdownOpen={handleDropdownOpen}
       TicketbookContainerRef={TicketbookContainerRef}
+      isLoaded={isLoaded}
     />
   );
 };
