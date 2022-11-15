@@ -34,6 +34,7 @@ const EditPage: React.FC = () => {
             seat: ticketInfo.ticetSeat,
             date: `${ticketInfo.ticketDate}T18:00`,
             location: ticketInfo.ticketLocation,
+            validation: true,
           };
         });
       } else {

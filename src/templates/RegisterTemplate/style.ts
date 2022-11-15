@@ -5,10 +5,6 @@ interface InputProps {
   state: 'none' | 'error' | 'valid';
 }
 
-interface ButtonProps {
-  active: boolean;
-}
-
 export const Container = styled.div`
   position: fixed;
   top: 50%;
@@ -74,10 +70,10 @@ export const ButtonWrapper = styled.div`
   text-align: right;
 `;
 
-export const Button = styled.button<ButtonProps>`
+export const Button = styled.button`
   width: 5rem;
   height: 2.5rem;
   color: ${ColorCode.WHITE};
-  background-color: ${(props) => (props.active ? ColorCode.PRIMARY : ColorCode.GRAY4)};
+  background-color: ${ColorCode.PRIMARY};
   border-radius: 100px;
 `;
