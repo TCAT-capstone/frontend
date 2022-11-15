@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 import ProfileBox from '@components/Common/Profile/ProfileBox';
 import BasicButton from '@components/Common/BasicButton';
@@ -16,6 +17,7 @@ import { ProfileWrapper, ButtonWrapper, TicketbookListWrapper, HomeBackground } 
 
 interface Props {
   isMyHome: boolean;
+  isLoggedIn: boolean;
   homeId: string;
   targetHomeId: string | undefined;
   profile: {
@@ -38,6 +40,7 @@ interface Props {
 
 const HomeTemplate: React.FC<Props> = ({
   isMyHome,
+  isLoggedIn,
   homeId,
   targetHomeId,
   profile,
@@ -63,6 +66,10 @@ const HomeTemplate: React.FC<Props> = ({
   };
 
   const handleFollowButton = async () => {
+    if (!isLoggedIn) {
+      toast.error('로그인이 필요합니다!');
+      return;
+    }
     if (buttonText === '구독 중') {
       const result = await deleteFollowing(homeId, targetHomeId);
       if (result) {
