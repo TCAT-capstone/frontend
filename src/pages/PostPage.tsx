@@ -5,7 +5,9 @@ import { toast } from 'react-toastify';
 
 import PostTemplate from '@templates/PostTemplate';
 import { deleteTicket, getLike, getTicket, updatelike } from '@apis/ticket';
+import { getFollowingProfile, updateFollowing, deleteFollowing } from '@apis/follow';
 import { isLoggedInState, userProfileState } from '@stores/user';
+import { SimpleProfileListType } from '@src/types/member';
 import { TicketLikeType, TicketType } from '@src/types/ticket';
 import ErrorPage from './ErrorPage';
 
@@ -17,6 +19,8 @@ const PostPage: React.FC = () => {
   const [post, setPost] = useState<TicketType>();
   const [like, setLike] = useState<TicketLikeType>({ count: 0, status: false });
   const [noSuchPost, setNoSuchPost] = useState(false);
+  const [buttonText, setButtonText] = useState('...');
+  const [followingProfiles, setFollowingProfiles] = useState<SimpleProfileListType>([]);
 
   const isMyHome = homeId === myProfile.homeId;
 
@@ -62,10 +66,63 @@ const PostPage: React.FC = () => {
     }
   };
 
+  const getFollowingProfiles = async () => {
+    if (isLoggedIn) {
+      const data = await getFollowingProfile(myProfile.homeId);
+      if (data) {
+        setFollowingProfiles(data);
+      } else {
+        setFollowingProfiles([]);
+      }
+    }
+  };
+
+  const changeText = () => {
+    if (followingProfiles.find((f) => f.targetHomeId === post?.memberHomeId)) {
+      setButtonText('구독 중');
+    } else {
+      setButtonText('구독하기');
+    }
+  };
+
+  const handleFollowButton = async () => {
+    if (buttonText === '구독 중') {
+      const result = await deleteFollowing(myProfile.homeId, post?.memberHomeId);
+      if (result) {
+        setButtonText('구독하기');
+      }
+    } else {
+      const result = await updateFollowing(myProfile.homeId, {
+        targetHomeId: post?.memberHomeId,
+        name: post?.memberName,
+        memberImg: post?.memberImg,
+        bio: post?.memberBio,
+      });
+      if (result) {
+        setButtonText('구독 중');
+      }
+    }
+  };
+
   useEffect(() => {
     getPost();
     getLikeInfo();
+    getFollowingProfiles();
   }, []);
+
+  useEffect(() => {
+    if (buttonText === '...') {
+      changeText();
+    }
+  });
+
+  useEffect(() => {
+    getFollowingProfiles();
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    changeText();
+  }, [followingProfiles]);
 
   return noSuchPost ? (
     <ErrorPage />
@@ -73,10 +130,13 @@ const PostPage: React.FC = () => {
     <PostTemplate
       post={post}
       isMyHome={isMyHome}
+      isLoggedIn={isLoggedIn}
       like={like}
       handlePostDelete={handlePostDelete}
       handlePostEdit={handlePostEdit}
       handleLike={handleLike}
+      buttonText={buttonText}
+      handleFollowButton={handleFollowButton}
     />
   );
 };

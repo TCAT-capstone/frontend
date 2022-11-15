@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil';
 import ErrorPage from '@pages/ErrorPage';
 import HomeTemplate from '@templates/HomeTemplate';
 
-import { userProfileState, userTicketbooksState } from '@stores/user';
+import { isLoggedInState, userProfileState, userTicketbooksState } from '@stores/user';
 import { getTicketbookTickets } from '@apis/ticket';
 import { getFollowingProfile } from '@apis/follow';
 import { getMemberProfile } from '@apis/member';
@@ -37,6 +37,7 @@ const HomePage: React.FC = () => {
   const myProfile = useRecoilValue(userProfileState);
   const myTicketbooks = useRecoilValue(userTicketbooksState);
   const [isMyHome, setIsMyhome] = useState(homeId === myProfile.homeId);
+  const isLoggedIn = useRecoilValue(isLoggedInState);
   const [profile, setProfile] = useState<HomeProfileType>(initialProfile);
   const [tickets, setTickets] = useState<TicketListType>([]);
   const [cursorId, setCursorId] = useState<number | null>(null);
@@ -153,6 +154,7 @@ const HomePage: React.FC = () => {
   ) : (
     <HomeTemplate
       isMyHome={isMyHome}
+      isLoggedIn={isLoggedIn}
       homeId={myProfile.homeId}
       targetHomeId={homeId}
       profile={profile}
