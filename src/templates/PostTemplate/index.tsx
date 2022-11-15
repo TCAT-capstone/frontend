@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import dompurify from 'dompurify';
 import { Link } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
 
 import Layout from '@styles/Layout';
 import ProfileIcon from '@components/Common/Profile/ProfileIcon';
@@ -12,12 +11,8 @@ import ShareButton from '@components/Common/ShareButton';
 import Like from '@components/Common/Like';
 import Spinner from '@src/components/Common/Spinner';
 
-import { userProfileState } from '@stores/user';
-import { SimpleProfileListType } from '@src/types/member';
 import { TicketLikeType, TicketType } from '@src/types/ticket';
 import { getDateString } from '@utils/string';
-
-import { getFollowingProfile, updateFollowing, deleteFollowing } from '@apis/follow';
 
 import '@styles/editor.css';
 import {
@@ -40,69 +35,27 @@ import {
 interface Props {
   post: TicketType | undefined;
   isMyHome: boolean;
+  isLoggedIn: boolean;
   like: TicketLikeType;
   handlePostDelete: () => void;
   handlePostEdit: () => void;
   handleLike: () => void;
+  buttonText: string;
+  handleFollowButton: () => void;
 }
 
-const PostTemplate: React.FC<Props> = ({ post, isMyHome, like, handlePostDelete, handlePostEdit, handleLike }) => {
-  const myProfile = useRecoilValue(userProfileState);
+const PostTemplate: React.FC<Props> = ({
+  post,
+  isMyHome,
+  isLoggedIn,
+  like,
+  handlePostDelete,
+  handlePostEdit,
+  handleLike,
+  buttonText,
+  handleFollowButton,
+}) => {
   const sanitizer = dompurify.sanitize;
-  const [buttonText, setButtonText] = useState('...');
-  const [followingProfiles, setFollowingProfiles] = useState<SimpleProfileListType>([]);
-
-  const getFollowingProfiles = async () => {
-    const data = await getFollowingProfile(myProfile.homeId);
-    if (data) {
-      setFollowingProfiles(data);
-    } else {
-      setFollowingProfiles([]);
-    }
-  };
-
-  const changeText = () => {
-    if (followingProfiles) {
-      if (followingProfiles.find((f) => f.targetHomeId === post?.memberHomeId)) {
-        setButtonText('구독 중');
-      } else {
-        setButtonText('구독하기');
-      }
-    }
-  };
-
-  const handleFollowButton = async () => {
-    if (buttonText === '구독 중') {
-      const result = await deleteFollowing(myProfile.homeId, post?.memberHomeId);
-      if (result) {
-        setButtonText('구독하기');
-      }
-    } else {
-      const result = await updateFollowing(myProfile.homeId, {
-        targetHomeId: post?.memberHomeId,
-        name: post?.memberName,
-        memberImg: post?.memberImg,
-        bio: post?.memberBio,
-      });
-      if (result) {
-        setButtonText('구독 중');
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (buttonText === '...') {
-      changeText();
-    }
-  });
-
-  useEffect(() => {
-    getFollowingProfiles();
-  }, []);
-
-  useEffect(() => {
-    changeText();
-  }, [followingProfiles]);
 
   return (
     <Layout>
@@ -165,7 +118,7 @@ const PostTemplate: React.FC<Props> = ({ post, isMyHome, like, handlePostDelete,
                   <span>{post.memberBio}</span>
                 </div>
               </Link>
-              {!isMyHome && (
+              {!isMyHome && isLoggedIn && (
                 <ButtonWrapper>
                   <FollowButton text={buttonText} handler={handleFollowButton} />
                 </ButtonWrapper>
