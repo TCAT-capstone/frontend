@@ -23,7 +23,7 @@ const TicketInfoMenu: React.FC = () => {
     <Container>
       <InfoContainer>
         <img src={TicketImg} alt="티켓 아이콘" />
-        <input type="text" data-type="title" onChange={handleInputChange} value={ticketInfo.title} maxLength={20} />
+        <input type="text" data-type="title" onChange={handleInputChange} value={ticketInfo.title} maxLength={30} />
       </InfoContainer>
       <InfoContainer>
         <img src={CalendarImg} alt="달력 아이콘" />
@@ -36,12 +36,12 @@ const TicketInfoMenu: React.FC = () => {
           data-type="location"
           onChange={handleInputChange}
           value={ticketInfo.location}
-          maxLength={20}
+          maxLength={30}
         />
       </InfoContainer>
       <InfoContainer>
         <img src={SeatImg} alt="좌석 아이콘" />
-        <input type="text" data-type="seat" onChange={handleInputChange} value={ticketInfo.seat} maxLength={20} />
+        <input type="text" data-type="seat" onChange={handleInputChange} value={ticketInfo.seat} maxLength={30} />
       </InfoContainer>
       <InfoContainer>
         <img src={CastImg} alt="사람 아이콘" />
