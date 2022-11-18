@@ -16,9 +16,18 @@ interface Props {
   name: string;
   bio: string;
   followingProfiles: SimpleProfileListType;
+  handleFollowModalClose: () => void;
 }
 
-const SimpleProfile: React.FC<Props> = ({ targetHomeId, homeId, memberImg, name, bio, followingProfiles }) => {
+const SimpleProfile: React.FC<Props> = ({
+  targetHomeId,
+  homeId,
+  memberImg,
+  name,
+  bio,
+  followingProfiles,
+  handleFollowModalClose,
+}) => {
   const [buttonText, setButtonText] = useState('...');
 
   const changeText = () => {
@@ -56,7 +65,7 @@ const SimpleProfile: React.FC<Props> = ({ targetHomeId, homeId, memberImg, name,
 
   return (
     <Container>
-      <Link to={`/@${targetHomeId}`}>
+      <Link to={`/@${targetHomeId}`} onClick={handleFollowModalClose}>
         <ProfileIcon size={3.75} profileImg={memberImg} />
         <div>
           <b>{name}</b>

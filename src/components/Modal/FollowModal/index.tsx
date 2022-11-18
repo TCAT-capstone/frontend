@@ -80,6 +80,7 @@ const FollowModal: React.FC<Props> = ({ handleFollowModalClose }) => {
                   name={t.name}
                   bio={t.bio}
                   followingProfiles={followingProfiles}
+                  handleFollowModalClose={handleFollowModalClose}
                 />
               ))
             : followerProfiles.map((t) => (
@@ -91,6 +92,7 @@ const FollowModal: React.FC<Props> = ({ handleFollowModalClose }) => {
                   name={t.name}
                   bio={t.bio}
                   followingProfiles={followingProfiles}
+                  handleFollowModalClose={handleFollowModalClose}
                 />
               ))}
         </FollowList>
